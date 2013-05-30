@@ -1,0 +1,62 @@
+#main-content 
+  #left_content
+    #main-block
+      .title
+        h3 =@page.title
+      .content
+        == render 'pages/pages_property', page: @page
+        == render partial: 'properties/property_in_page', collection: @page.properties
+  #right_content
+    #img-block
+      div class='slides-block carousel' id="slider_full"
+        
+        div class="carousel-inner"
+          / div class="item active" style="background-size: cover; background-image: url(#{@page.slide.url}); width: 350px; height: 250px"
+            / img src="#{@page.slide.url}"  height="100%"
+          - if @page.slides.present?  
+            - first_slide = @page.slides.shift
+            div class="item active" style="background-size: cover; background-image: url('#{first_slide.image}'); width: 350px; height: 250px"
+            == render partial: 'slides/slide_in_block', collection: @page.slides
+        ol class="carousel-indicators"
+          - if @page.slides.size >= 1
+            li data-target="#slider_full" data-slide-to="0" class="active"
+            - 1.upto @page.slides.size do |slide|
+              li data-target="#slider_full" data-slide-to="#{slide}"
+        / a class="carousel-control left" href="#slider_full" data-slide="prev"&lsaquo;
+        / a class="carousel-control right" href="#slider_full" data-slide="next"&rsaquo;
+
+      .slide-links
+        ul
+          li 
+            - if @page.city_agregation != nil && @page.city_agregation != 0
+              =link_to 'Город', '#', class: 'active'
+            - else
+              =link_to 'Город', '#'
+          li 
+            - if @page.region != nil && @page.region != 0
+              =link_to 'Округ', '#', class: 'active'
+            - else
+              =link_to 'Округ', '#'
+          li
+            - if @page.cust != nil && @page.cust != 0 
+              =link_to 'Куст', '#', class: 'active'
+            - else
+              =link_to 'Куст', '#'
+          li
+            - if @page.filial != nil && @page.filial != 0
+              =link_to 'Филиал', '#', class: 'active'
+            - else
+              =link_to 'Филиал', '#'
+
+
+    #menu-links
+      / - if @children_pages.present?
+      /   ul
+      /     == render partial: 'shared/menu_links_slide', collection: @children_pages
+      / - else
+      /     p Нет связанных страниц
+      ul
+        - @page.related_pages.uniq.each do |c|
+          - next if c.to_i == 0
+          li
+            = link_to truncate(Page.find(c.to_i).title, length: 34), page_fullscreen_path(Page.find(c.to_i)), remote: true

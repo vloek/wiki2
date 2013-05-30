@@ -1,0 +1,11 @@
+= link_to page_url(menu_item), remote: true do
+	.menu_item style="border: 1px solid ##{menu_item.color|| '#222'};box-shadow: 0 0 10px ##{menu_item.color || '#222' };"
+		.title style="margin: auto; display: table-row; height: 69px"
+			span style="color: ##{menu_item.color||'#567';}; display: table-cell"= menu_item.title
+		.arrow
+			.triangle-left style="border-left: 25px solid #323232;"
+		.arrow2
+			.triangle-left style="border-left: 17px solid ##{menu_item.color||'#567';}; border-top: 14px solid transparent; border-bottom: 14px solid transparent;"
+	.slide style=" z-index: -#{menu_item.id}; "
+		.persp id="page_#{menu_item.id}" style=" opacity: .7;  right: 0; bottom: 0; box-shadow: inset 0 0 23px ##{menu_item.color || '#222' }; border: 1px solid ##{menu_item.color|| '#222'}; background-image: url('#{ menu_item.slide.url}'); background-color: #{menu_item.color}"
+				

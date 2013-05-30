@@ -1,0 +1,8 @@
+.fields
+	= f.input :title, label: false, placeholder: 'Заголовок'
+
+	= f.input :content, as: :ckeditor, label: false, :input_html => { :toolbar => 'Basic', :namespace => ""}
+	= f.input :_destroy, as: :hidden
+	= link_to_remove_fields "- Удалить свойство", f 
+
+br

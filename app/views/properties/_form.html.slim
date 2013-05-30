@@ -1,0 +1,9 @@
+= simple_form_for [@page, @property] do |f|
+  = f.error_notification
+
+  .form-inputs
+  	= f.input :title
+  	= f.input :content, as: :ckeditor
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,11 @@
+.content {
+	ul, ol {
+		li {
+			background-image: url('/assets/blue-list.png') !important;
+			background-repeat: no-repeat !important;
+			background-position: left center !important;
+			padding: 0 0 0 20px;
+			list-style-type: none;
+		}	
+	}
+}

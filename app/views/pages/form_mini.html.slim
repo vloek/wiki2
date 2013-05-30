@@ -1,0 +1,26 @@
+br
+br
+.well
+	= link_to 'Назад', pages_path, class: 'btn'
+	br
+	br
+
+	= simple_form_for @page, html: { multipart: true } do |f|
+		= f.input :parent_id, as: :hidden
+		= f.input :title, placeholder: 'Наименование раздела', label: false
+		= f.input :show_in_menu, label: 'Отображать в главном меню?'
+		= f.input :slider, label: 'Режим слайдера?'
+		/ = f.input :slide, as: :file, label: 'Выберите файл слайда'
+		= f.input :color, input_html: { class: 'color' }, label: 'Цвет подсветки слайда'
+
+		h3 Список слайдов для слайдера
+		#nested_form_slide
+			= f.simple_fields_for :slides do |slide|
+				== render 'slide_fields', f: slide
+		= link_to_add_fields_slide "Добавить новый слайд", f, :slides
+		h3 Вложеные страницы
+		table.table
+			== render @page.children
+		= link_to 'Добавить страницу', new_page_path(parent_id: @page.id )
+		br
+			= f.submit 'Сохранить'

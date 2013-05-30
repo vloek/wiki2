@@ -1,0 +1,31 @@
+div class="fields drago"
+  = simple_form_for (hint_fields), remote: true, id: hint_fields.id, format: :js, html: { :'data-type' => 'script' } do |f|
+    / = f.error_notification
+
+    = f.input :title, label: false, placeholder: 'Заголовок'
+    = f.input :slide_id, as: :hidden, input_html: { value: @page_slide.id }
+    = f.input :_destroy, as: :hidden
+    div.pull-right
+      .btn-group
+        = f.submit "Закрепить", class: 'btn btn-warning btn-mini consolidate', remote: true
+        = link_to_remove_fields "X", f 
+
+
+
+
+
+
+/ div class="fields drago"
+
+/ 	= f.input :x, as: :hidden, input_html: { class: 'x_ord'}
+/ 	= f.input :y, as: :hidden, input_html: { class: 'y_ord'}
+/ 	= f.input :title, label: false, placeholder: 'Заголовок',input_html: { class: 'y_ord'}
+/ 	= f.input :slide_id, as: :hidden
+/ 	/ = f.input :content, as: :ckeditor
+/ 	= f.input :_destroy, as: :hidden
+/ 	= link_to_remove_fields "- Удалить подсказку", f 
+
+/ / name: "#{f.object_name.gsub!(/_attributes/, '')}[x]", id: f.object_name.gsub!(/_attributes/, ''),value: 0 
+/ / name: f.object_name.gsub!(/_attributes/, ''), id: f.object_name.gsub!(/_attributes/, ''), value: 0
+
+/ / , name: f.object_name.gsub!(/_attributes/, ''), id: f.object_name.gsub!(/_attributes/, '') 

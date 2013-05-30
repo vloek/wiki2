@@ -1,0 +1,17 @@
+h1 Listing hints
+
+table
+  tr
+    th
+    th
+    th
+
+  - @hints.each do |hint|
+    tr
+      td = link_to 'Show', hint
+      td = link_to 'Edit', edit_hint_path(hint)
+      td = link_to 'Destroy', hint, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Hint', new_hint_path

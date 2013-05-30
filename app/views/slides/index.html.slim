@@ -1,0 +1,17 @@
+h1 Listing page_slides
+
+table
+  tr
+    th
+    th
+    th
+
+  - @page_slides.each do |page_slide|
+    tr
+      td = link_to 'Show', page_slide
+      td = link_to 'Edit', edit_page_slide_path(page_slide)
+      td = link_to 'Destroy', page_slide, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Slide', new_page_slide_path

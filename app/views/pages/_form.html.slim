@@ -1,0 +1,85 @@
+br
+br
+.well
+	- if @page.parent_id.present?
+		= link_to 'Назад', edit_page_path(@page.parent), class: 'btn'
+	- else
+		= link_to 'Назад', pages_path, class: 'btn'
+	br
+	br
+	= simple_form_for @page do |f|
+		= f.input :parent_id, as: :hidden
+		= f.input :title, placeholder: 'Краткое наименование', label: false
+		/ = f.input :content, label: 'Контент', as: :ckeditor, input_html: { ckeditor: { toolbar: 'MyToolbar' } }
+		= f.input :title_full_name, input_html: { value: 'Полное наименование' }, label: false
+		= f.input :full_name, as: :ckeditor, label: false, input_html: { :ckeditor => { toolbar: 'Basic' } }
+		br
+		= f.input :semantic_load_title, label: false, input_html: { value: 'Смысловая нагрузка' }
+		= f.input :semantic_load, as: :ckeditor, label: false
+		br
+		= f.input :measure_title, label: false, input_html: { value: 'Единица измерения' }
+		= f.input :measure, as: :ckeditor, label: false
+		br
+		= f.input :count_update_title, label: false, input_html: { value: 'Период обновления' }
+		= f.input :count_update, as: :ckeditor, label: false
+		br
+		= f.input :source_recived_title, label: false, input_html: { value: 'Источник получения' }
+		= f.input :source_recived, as: :ckeditor, label: false
+		br
+		= f.input :analitic_cuts_title, label: false, input_html: { value: 'Аналитические разрезы' }
+		= f.input :analitic_cuts, as: :ckeditor, label: false
+		br
+		= f.input :formula_title, label: false, input_html: { value: 'Формула' }
+		= f.input :formula, as: :ckeditor, label: false
+		br
+		hr
+		#nested_form
+			= f.simple_fields_for :properties do |builder|
+				== render 'property_fields', f: builder
+		br
+		= link_to_add_fields "Добавить новое свойство", f, :properties
+
+		hr
+		h3 Агрегация
+		= f.input :city_agregation, as: :boolean, label: 'Город'
+		= f.input :region, as: :boolean, label: 'Округ'
+		= f.input :cust, as: :boolean,   label: 'Куст'
+		= f.input :filial, as: :boolean, label: 'Филиал'
+		br
+		hr
+
+
+
+
+
+		h3 Смежные показатели
+		button type="button" class="btn btn-mini btn-success" data-toggle="collapse" data-target="#related_pages"
+			|Показать/Скрыть
+		br
+		br
+		#related_pages class="collapse"
+			- @indicators.each do |related_page|
+				- if @page.related_pages.include?(related_page.id.to_s)
+					label.checkbox
+						= check_box_tag "page[related_pages][]", related_page.id.to_s, checked: 'checked', class: 'check_boxes optional'
+						= related_page.title
+				- else
+					label.checkbox
+						= check_box_tag "page[related_pages][]", related_page.id.to_s, false, class: 'check_boxes optional'
+						= related_page.title
+
+
+		h3 Список изображений
+		#nested_form_slide
+			= f.simple_fields_for :slides do |slide|
+				== render 'slide_fields', f: slide
+		= link_to_add_fields_slide "Добавить изображение", f, :slides
+	
+		hr
+		h3 Дополнительные свойства
+
+		= f.input :show_in_menu, label: 'Отображать в главном меню?'
+		= f.input :color, input_html: { class: 'color' }, label: 'Цвет подсветки слайда'
+		/ = f.input :slide, as: :file, label: 'Выберите файл слайда'
+		br
+		= f.submit 'Сохранить'

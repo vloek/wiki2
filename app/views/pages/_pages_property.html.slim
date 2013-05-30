@@ -1,0 +1,43 @@
+- if page.full_name.present?
+	div class="shortcode-toggle toggle-Toggle1 closed"
+		h4 class="toggle-trigger"
+			a class="hide_me" href="#"=page.title_full_name
+		div class="toggle-content"
+			= raw page.full_name.to_s
+- if page.semantic_load.present?
+	div class="shortcode-toggle toggle-Toggle1 closed"
+		h4 class="toggle-trigger"
+			a class="hide_me" href="#"=page.semantic_load_title
+		div class="toggle-content"
+			= raw page.semantic_load.to_s
+- if page.measure.present?
+	div class="shortcode-toggle toggle-Toggle1 closed"
+		h4 class="toggle-trigger"
+			a class="hide_me" href="#"=page.measure_title
+		div class="toggle-content"
+			= raw page.measure.to_s
+- if page.count_update.present?
+	div class="shortcode-toggle toggle-Toggle1 closed"
+		h4 class="toggle-trigger"
+			a class="hide_me" href="#"=page.count_update_title
+		div class="toggle-content"
+			= raw page.count_update
+- if page.source_recived.present?
+	div class="shortcode-toggle toggle-Toggle1 closed"
+		h4 class="toggle-trigger"
+			a class="hide_me" href="#"=page.source_recived_title
+		div class="toggle-content"
+			= raw page.source_recived.to_s
+- if page.analitic_cuts.present?
+	div class="shortcode-toggle toggle-Toggle1 closed"
+		h4 class="toggle-trigger"
+			a class="hide_me" href="#"=page.analitic_cuts_title
+		div class="toggle-content"
+			= raw page.analitic_cuts.to_s
+
+- if page.formula.present?
+	div class="shortcode-toggle toggle-Toggle1 closed"
+		h4 class="toggle-trigger"
+			a class="hide_me" href="#"=page.formula_title
+		div class="toggle-content"
+			= raw page.formula.to_s

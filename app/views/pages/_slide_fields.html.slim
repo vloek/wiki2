@@ -1,0 +1,11 @@
+.fields
+	.inline-block
+		.pull-left
+			- if f.object.present?
+				= f.object.image_file_name
+				|&nbsp;
+			= f.file_field :image
+		.pull-right
+			= f.input :_destroy, as: :hidden
+		= link_to_remove_fields "- Удалить изображение", f 
+	br

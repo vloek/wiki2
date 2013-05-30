@@ -1,0 +1,23 @@
+br
+br
+br
+.well
+  h1 Список разделов
+
+  table.table.table-bordered
+    tr
+      th Название
+      th
+
+    - @pages.each do |page|
+      tr
+        td = page.title
+        td 
+          .pull-right
+            = link_to 'Редактировать', edit_page_path(page), class: 'btn btn-mini'
+            |&nbsp;|&nbsp;
+            = link_to 'Удалить', page, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger btn-mini'
+
+  br
+
+  = link_to 'Добавить раздел', new_page_path

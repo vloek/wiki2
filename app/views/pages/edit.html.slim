@@ -1,0 +1,21 @@
+.well
+	h1 Редактирование страницы
+
+	== render 'form'
+
+
+	h3 Добавленные свойства
+	table.table
+		== render @page.property
+	= link_to 'Добавить свойство', new_page_property_path(@page)
+
+	h3 Вложеные страницы
+	table.table
+		== render @page.children
+	= link_to 'Добавить страницу', new_page_path(parent_id: @page.id )
+	br
+
+		= link_to 'Show', @page
+		'|
+		= link_to 'Back', pages_path
+

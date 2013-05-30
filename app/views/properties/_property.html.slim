@@ -1,0 +1,4 @@
+tr
+	td= property.title
+	td= link_to property.title, edit_page_property_path(@page, property)
+	td= link_to 'Удалить', page_property_path(@page, property), :confirm => 'Are you sure?', :method => :delete

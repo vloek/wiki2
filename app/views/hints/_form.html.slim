@@ -1,0 +1,12 @@
+div class="fields drago"
+  = simple_form_for (@hint), remote: true, id: @hint.id, format: :js, html: { :'data-type' => 'script' } do |f|
+    / = f.error_notification
+
+    = f.input :title, label: false, placeholder: 'Заголовок'
+    = f.input :slide_id, as: :hidden, input_html: { value: @page_slide.id }
+    = f.input :_destroy, as: :hidden
+    div.pull-right
+      .btn-group
+        = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true, input_html: { id: "hint_sbmt_#{@hint.id}" }
+        = link_to_remove_fields "X", f 
+
