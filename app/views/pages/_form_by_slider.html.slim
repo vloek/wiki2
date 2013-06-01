@@ -3,8 +3,11 @@
 
 br
 br
-.well style="width: 100% !important; height: 100% !important; position: fixed; top: 59px; left: 0; display: block; overflow: auto"
-	= link_to 'Назад', pages_path, class: 'btn'
+.well style="width: 100% !important; height: 100% !important; top: 59px; left: 0; display: block; overflow: auto;"
+	.span7
+		= link_to 'Назад', pages_path, class: 'btn'
+		br
+		br
 
 	.span6
 
@@ -26,7 +29,11 @@ br
 				== render @page.children
 			= link_to 'Добавить страницу', new_page_path(parent_id: @page.id )
 			br
-				= f.submit 'Сохранить'
+			hr
+			= f.submit 'Сохранить слайдер', class: 'btn btn-big btn-success'
 	.span6
+		hr
+		h3 Редактирование слайдов
 		- if @page.slides.present?
-			= render @page.slides
+			.row
+				= render @page.slides

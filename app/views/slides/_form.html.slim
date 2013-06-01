@@ -1,15 +1,17 @@
-/= simple_form_for (@page_slide), url: "/pages/#{@page_slide.page.id}/slides/#{@page_slide.id}" do |f|
-/= f.error_notification
-
-
 .form-inputs
-  #nested_form
-    == render partial: 'hint_fields', collection: @page_slide.hints
-    / = f.simple_fields_for :hints do |builder|
-    /   == render 'hint_fields', f: builder
-  br
-  = link_to "Добавить", new_page_slide_hint_path(@page_slide.page, @page_slide, Hint.new) , remote: true
+  = link_to  new_page_slide_hint_path(@page_slide.page, @page_slide, Hint.new) , remote: true, class: 'btn btn-info btn-mini' do
+    h4 
+      i.icon-plus&nbsp;
+      br
+      |Добавить
+      br
+      |подсказку
 
-/ = link_to_add_fields_hint("Добавить", f, :hints)
-.form-actions
-/ = f.button :submit, 'Сохранить'
+  / #dragable_plane
+  .pull-center
+    #nested_form style="position:relative; top: -40px; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{@page_slide.image}');"
+
+      == render partial: 'hint_fields', collection: @page_slide.hints
+  br
+  br
+  br

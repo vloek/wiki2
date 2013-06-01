@@ -1,0 +1,11 @@
+.scrolled-container style=" height: 500px !important; overflow-y: inherit; test: test;"
+    #slide_plane style="margin-top: 30px;"
+      .carousel-inner style="overflow: initial;"
+        
+        - @page.slides.each do |slide|
+          div class="item #{'active' if @page.slides.index(slide) == 0}" style="position:relative; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{slide.image}');"
+            == render partial: 'display_hint', collection: slide.hints
+      ol class="carousel-indicators" style="bottom: 100px !important"
+        - if @page.slides.size >= 1
+          - @page.slides.each do |num|
+            li data-target="#slider_plane" data-slide-to="#{@page.slides.index(num)}" class="#{ 'active' if @page.slides.index(num) == 0}"

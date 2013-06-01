@@ -56,6 +56,6 @@ class HintsController < ApplicationController
   def destroy
     @hint = Hint.find(params[:id])
     @hint.destroy
-    redirect_to hints_url 
+    # redirect_to hints_url 
   end
 end

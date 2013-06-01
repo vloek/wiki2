@@ -10,7 +10,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript' '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -27,7 +27,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -43,7 +43,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -59,7 +59,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -74,7 +74,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -89,7 +89,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -106,7 +106,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -122,7 +122,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -139,7 +139,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -156,7 +156,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -173,7 +173,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -191,7 +191,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -208,7 +208,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -226,7 +226,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -242,7 +242,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -258,7 +258,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -274,7 +274,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],
@@ -290,7 +290,7 @@ startupFocus : true,
 toolbar :
 [
 ['ajaxsave'],
-['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
 ['Cut','Copy','Paste','PasteText'],
 ['Undo','Redo','-','RemoveFormat'],
 ['TextColor','BGColor'],

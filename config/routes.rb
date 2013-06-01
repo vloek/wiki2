@@ -1,4 +1,7 @@
 Meth::Application.routes.draw do
+  resources :nested_hints
+
+
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :pages do

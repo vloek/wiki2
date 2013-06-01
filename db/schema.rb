@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523073744) do
+ActiveRecord::Schema.define(:version => 20130601145106) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -29,6 +29,26 @@ ActiveRecord::Schema.define(:version => 20130523073744) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
+  create_table "hints", :force => true do |t|
+    t.string   "x"
+    t.string   "y"
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "slide_id"
+  end
+
+  create_table "nested_hints", :force => true do |t|
+    t.string   "x"
+    t.string   "y"
+    t.integer  "hint_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "width"
+    t.string   "height"
+  end
+
 # Could not dump table "pages" because of following StandardError
 #   Unknown type 'bool' for column 'city_agregation'
 
@@ -38,6 +58,16 @@ ActiveRecord::Schema.define(:version => 20130523073744) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "slides", :force => true do |t|
+    t.integer  "page_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end

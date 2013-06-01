@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong X:
+  = @nested_hint.x
+p
+  strong Y:
+  = @nested_hint.y
+p
+  strong Hint:
+  = @nested_hint.hint_id
+
+= link_to 'Edit', edit_nested_hint_path(@nested_hint)
+'|
+= link_to 'Back', nested_hints_path

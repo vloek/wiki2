@@ -3,10 +3,17 @@ div class="fields drago"
     / = f.error_notification
 
     = f.input :title, label: false, placeholder: 'Заголовок'
-    = f.input :slide_id, as: :hidden, input_html: { value: @page_slide.id }
+    = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+    = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+    = f.input :slide_id, as: :hidden, input_html: { value: @page_slide.id  }
     = f.input :_destroy, as: :hidden
     div.pull-right
       .btn-group
-        = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true, input_html: { id: "hint_sbmt_#{@hint.id}" }
-        = link_to_remove_fields "X", f 
+        - if @hint.new_record?
+          = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true
+        - else
+          = f.submit "Закреплено", class: 'btn btn-success btn-mini'
+        / = link_to_remove_fields "X", f 
+        = link_to "X", hints_path(@hint), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+
 

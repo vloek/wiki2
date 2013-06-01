@@ -1,0 +1,23 @@
+h1 Listing nested_hints
+
+table
+  tr
+    th X
+    th Y
+    th Hint
+    th
+    th
+    th
+
+  - @nested_hints.each do |nested_hint|
+    tr
+      td = nested_hint.x
+      td = nested_hint.y
+      td = nested_hint.hint_id
+      td = link_to 'Show', nested_hint
+      td = link_to 'Edit', edit_nested_hint_path(nested_hint)
+      td = link_to 'Destroy', nested_hint, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Nested hint', new_nested_hint_path

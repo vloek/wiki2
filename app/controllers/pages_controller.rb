@@ -9,6 +9,11 @@ class PagesController < ApplicationController
   # GET /pages/1
   def show
     @page = Page.find(params[:id])
+    if @page.slider?
+      render 'show_slider'
+    else
+      render 'show'
+    end
   end
 
   # GET /pages/new

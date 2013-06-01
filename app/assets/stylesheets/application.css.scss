@@ -18,7 +18,10 @@
  *= require skin
  *= require welcome
  *= require li_styles
+ *= require hints
  *= require coda-slider
+ *= require jquery-ui
+ *= require nested_hints
  *= require bootstrap_and_overrides
  */
 
@@ -287,6 +290,18 @@ body::-webkit-scrollbar{
 	display: block;
 	width: 230px;
 	height: 60px;
+
+	background: rgba(0,0,0,0.3);
+	border: 2px solid #9b4ebe;
 }
 
 
+.well {
+	background: rgba(60,60,60, 0.7) !important;
+	color: #eee;
+	border: 2px solid #424 !important;
+	box-shadow: 0 0 12px #636 !important;
+	hr {
+		border: 1px solid #424;
+	}
+}

@@ -9,6 +9,7 @@ jQuery ->
     title_text = $(this).find('.title span').text()
     fog_color  = $(this).find('.persp').attr('background-color')
     shadow_color = 'inset 0 0 23px '+ fog_color
+    $(this).find('.slide').parent('a').attr('href', '')
 
 
     $(this).find('.persp').css('-webkit-transform', 'rotateX(0)')

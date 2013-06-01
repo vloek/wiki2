@@ -1,14 +1,23 @@
-div class="fields drago"
+div class="fields drago" style="position: absolute; left: #{hint_fields.x}; top: #{hint_fields.y};"
   = simple_form_for (hint_fields), remote: true, id: hint_fields.id, format: :js, html: { :'data-type' => 'script' } do |f|
     / = f.error_notification
 
     = f.input :title, label: false, placeholder: 'Заголовок'
     = f.input :slide_id, as: :hidden, input_html: { value: @page_slide.id }
     = f.input :_destroy, as: :hidden
+    = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+    = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+    .pull-left
+    	= link_to '+', new_nested_hint_path(hint_id: hint_fields.id), class: 'btn btn-mini btn-info', remote: true
     div.pull-right
       .btn-group
-        = f.submit "Закрепить", class: 'btn btn-warning btn-mini consolidate', remote: true
-        = link_to_remove_fields "X", f 
+        - if hint_fields.new_record?
+          = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true
+        - else
+          = f.submit "Закреплено", class: 'btn btn-success btn-mini'
+        / = link_to_remove_fields "X", f 
+        = link_to "X", hint_path(hint_fields), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+== render hint_fields.nested_hints
 
 
 
