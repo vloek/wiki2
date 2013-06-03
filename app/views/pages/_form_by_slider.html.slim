@@ -5,7 +5,9 @@ br
 br
 .well style="width: 100% !important; height: 100% !important; top: 59px; left: 0; display: block; overflow: auto;"
 	.span7
-		= link_to 'Назад', pages_path, class: 'btn'
+		= link_to pages_path, class: 'btn btn-inverse' do
+			i.icon-arrow-left&nbsp;
+			|Назад
 		br
 		br
 
@@ -30,7 +32,7 @@ br
 			= link_to 'Добавить страницу', new_page_path(parent_id: @page.id )
 			br
 			hr
-			= f.submit 'Сохранить слайдер', class: 'btn btn-big btn-success'
+			= f.submit 'Сохранить слайдер', class: 'btn btn-big btn-info'
 	.span6
 		hr
 		h3 Редактирование слайдов

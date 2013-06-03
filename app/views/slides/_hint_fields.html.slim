@@ -1,4 +1,4 @@
-div class="fields drago" style="position: absolute; left: #{hint_fields.x}; top: #{hint_fields.y};"
+div class="fields drago hint_#{hint_fields.id}" style="position: absolute; left: #{hint_fields.x}; top: #{hint_fields.y};" id="field_#{hint_fields.id}"
   = simple_form_for (hint_fields), remote: true, id: hint_fields.id, format: :js, html: { :'data-type' => 'script' } do |f|
     / = f.error_notification
 
@@ -8,16 +8,17 @@ div class="fields drago" style="position: absolute; left: #{hint_fields.x}; top:
     = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
     = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
     .pull-left
-    	= link_to '+', new_nested_hint_path(hint_id: hint_fields.id), class: 'btn btn-mini btn-info', remote: true
+      = link_to '+', new_nested_hint_path(hint_id: hint_fields.id), class: 'btn btn-mini btn-inverse', remote: true
     div.pull-right
       .btn-group
         - if hint_fields.new_record?
           = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true
         - else
-          = f.submit "Закреплено", class: 'btn btn-success btn-mini'
+          = link_to 'Редактировать', edit_hint_path(hint_fields), class: 'btn btn-info btn-mini'
+          = f.submit "Сохранить", class: 'btn btn-success btn-mini'
         / = link_to_remove_fields "X", f 
         = link_to "X", hint_path(hint_fields), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
-== render hint_fields.nested_hints
+== render partial: 'nested_hints/nested_hint_fields', collection: hint_fields.nested_hints
 
 
 
@@ -26,13 +27,13 @@ div class="fields drago" style="position: absolute; left: #{hint_fields.x}; top:
 
 / div class="fields drago"
 
-/ 	= f.input :x, as: :hidden, input_html: { class: 'x_ord'}
-/ 	= f.input :y, as: :hidden, input_html: { class: 'y_ord'}
-/ 	= f.input :title, label: false, placeholder: 'Заголовок',input_html: { class: 'y_ord'}
-/ 	= f.input :slide_id, as: :hidden
-/ 	/ = f.input :content, as: :ckeditor
-/ 	= f.input :_destroy, as: :hidden
-/ 	= link_to_remove_fields "- Удалить подсказку", f 
+/   = f.input :x, as: :hidden, input_html: { class: 'x_ord'}
+/   = f.input :y, as: :hidden, input_html: { class: 'y_ord'}
+/   = f.input :title, label: false, placeholder: 'Заголовок',input_html: { class: 'y_ord'}
+/   = f.input :slide_id, as: :hidden
+/   / = f.input :content, as: :ckeditor
+/   = f.input :_destroy, as: :hidden
+/   = link_to_remove_fields "- Удалить подсказку", f 
 
 / / name: "#{f.object_name.gsub!(/_attributes/, '')}[x]", id: f.object_name.gsub!(/_attributes/, ''),value: 0 
 / / name: f.object_name.gsub!(/_attributes/, ''), id: f.object_name.gsub!(/_attributes/, ''), value: 0

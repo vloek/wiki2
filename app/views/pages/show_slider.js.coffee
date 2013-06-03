@@ -17,6 +17,11 @@ display = ->
             window.location.hash = $(this).attr('href')
       $("#slide_plane").carousel()
       $("#slide_plane").carousel('pause')
+      $('.content a').attr('data-remote', 'true')
+      # $("#slide_plane").swiperight ->
+        # $("#slide_plane").carousel('prev')
+      # $("#slide_plane").swipeleft ->
+        # $("#slide_plane").carousel('next')
 
 
 delay 100, display

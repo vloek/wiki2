@@ -12,6 +12,10 @@ $('.current_content').animate
 
     $("#slider_full").carousel()
     $('.content a').attr('data-remote', 'true')
+    $("#slider_full").swiperight ->
+        $("#slider_full").carousel('prev')
+    $("#slider_full").swipeleft ->
+      $("#slider_full").carousel('next')
 
 
     $('a.hide_me').bind 'click', ()->

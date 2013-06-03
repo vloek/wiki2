@@ -1,4 +1,6 @@
 .hint style="position: absolute; left: #{display_hint.x}; top: #{display_hint.y};   "
   .title
     h3 = display_hint.title.upcase
+  .content
+    = raw display_hint.content
 == render display_hint.nested_hints

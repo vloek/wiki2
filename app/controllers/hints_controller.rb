@@ -19,7 +19,7 @@ class HintsController < ApplicationController
   def new
     @hint = Hint.new
     @page_slide = Slide.find(params[:slide_id]) if params[:slide_id]
-
+    render 'new'
   end
 
   # GET /hints/1/edit
@@ -32,11 +32,7 @@ class HintsController < ApplicationController
   def create
     @hint = Hint.new(params[:hint])
 
-    if @hint.save
-      redirect_to @hint, notice: 'Hint was successfully created.' 
-    else
-      render action: "new" 
-    end
+    @hint.save
   end
 
   # PUT /hints/1

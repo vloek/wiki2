@@ -1,13 +1,30 @@
-div class="nested_hint ui-widget-content"
-  = simple_form_for (@nested_hint), remote: true, format: :js, html: { :'data-type' => 'script' } do |f|
-    = f.error_notification
+- if @nested_hint.new_record?
+  div class="nested_hint ui-widget-content nested_hint_new" id="nested_hint_new"
+    = simple_form_for (@nested_hint), remote: true, format: :js, html: { :'data-type' => 'script' } do |f|
+      = f.error_notification
 
-    .form-inputs
-      = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
-      = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
-      = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
-      = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+      .form-inputs
+        = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+        = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+        = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
+        = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
 
-      = f.input :hint_id, as: :hidden
+        = f.input :hint_id, as: :hidden
 
-      = f.button :submit, 'Записать', class: 'btn btn-mini btn-danger'
+        = f.button :submit, 'Записать', class: 'btn btn-mini btn-danger'
+
+- else
+  div class="nested_hint ui-widget-content"
+
+    = simple_form_for (@nested_hint), remote: true, format: :js, html: { :'data-type' => 'script' } do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+        = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+        = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
+        = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+
+        = f.input :hint_id, as: :hidden
+
+        = f.button :submit, 'Записать', class: 'btn btn-mini btn-danger'

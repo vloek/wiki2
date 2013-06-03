@@ -1,5 +1,5 @@
 .scrolled-container style=" height: 500px !important; overflow-y: inherit; test: test;"
-    #slide_plane style="margin-top: 30px;"
+    #slide_plane style="margin-top: 40px;"
       .carousel-inner style="overflow: initial;"
         
         - @page.slides.each do |slide|
@@ -8,4 +8,4 @@
       ol class="carousel-indicators" style="bottom: 100px !important"
         - if @page.slides.size >= 1
           - @page.slides.each do |num|
-            li data-target="#slider_plane" data-slide-to="#{@page.slides.index(num)}" class="#{ 'active' if @page.slides.index(num) == 0}"
+            li data-target="#slide_plane" data-slide-to="#{@page.slides.index(num)}" class="#{ 'active' if @page.slides.index(num) == 0}"

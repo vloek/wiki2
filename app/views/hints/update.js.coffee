@@ -1,1 +1,1 @@
-$('#hint_title').disable()
+# $('#hint_title').disable()

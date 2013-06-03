@@ -14,7 +14,7 @@ br
         td = page.title
         td 
           .pull-right
-            = link_to 'Редактировать', edit_page_path(page), class: 'btn btn-mini'
+            = link_to 'Редактировать', edit_page_path(page), class: 'btn btn-mini btn-inverse'
             |&nbsp;|&nbsp;
             = link_to 'Удалить', page, :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger btn-mini'
 

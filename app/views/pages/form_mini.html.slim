@@ -1,7 +1,9 @@
 br
 br
 .well
-	= link_to 'Назад', pages_path, class: 'btn'
+	= link_to pages_path, class: 'btn btn-inverse' do 
+		i.icon-arrow-left &nbsp;
+		|Назад
 	br
 	br
 
@@ -21,6 +23,9 @@ br
 		h3 Вложеные страницы
 		table.table
 			== render @page.children
-		= link_to 'Добавить страницу', new_page_path(parent_id: @page.id )
+		= link_to new_page_path(parent_id: @page.id ), class: 'btn btn-mini btn-info' do
+			i.icon-plus&nbsp;
+			|Добавить страницу
+		br
 		br
 			= f.submit 'Сохранить'

@@ -1,0 +1,1 @@
+$("#nested_hint_<%= @nested_hint.id %>").hide()

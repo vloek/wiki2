@@ -2,9 +2,9 @@ br
 br
 .well
 	- if @page.parent_id.present?
-		= link_to 'Назад', edit_page_path(@page.parent), class: 'btn'
+		= link_to 'Назад', edit_page_path(@page.parent), class: 'btn btn-inverse'
 	- else
-		= link_to 'Назад', pages_path, class: 'btn'
+		= link_to 'Назад', pages_path, class: 'btn btn-inverse'
 	br
 	br
 	= simple_form_for @page do |f|

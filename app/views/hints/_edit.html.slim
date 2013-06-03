@@ -1,18 +1,11 @@
-= simple_form_for (@hint), remote: true, id: @hint.id, format: :js, html: { :'data-type' => 'script' } do |f|
-  / = f.error_notification
+= simple_form_for (@hint) do |f|
+   = f.error_notification
 
   = f.input :title, label: false, placeholder: 'Заголовок'
+  = f.input :content, as: :ckeditor
   = f.input :slide_id, as: :hidden
-  = f.input :_destroy, as: :hidden
   = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
   = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
-  div.pull-right
-    .btn-group
-      - if @hint.new_record?
-        = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true
-      - else
-        = f.submit "Закреплено", class: 'btn btn-success btn-mini'
-      / = link_to_remove_fields "X", f
-      = link_to "X", hint_path(@hint), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+  = f.submit "Сохранить", class: 'btn btn-mini'
 
 
