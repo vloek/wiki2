@@ -1,0 +1,35 @@
+h1 Listing lines
+
+table
+  tr
+    th Width
+    th Height
+    th X
+    th Y
+    th Top
+    th Left
+    th Right
+    th Bottom
+    th Slide
+    th
+    th
+    th
+
+  - @lines.each do |line|
+    tr
+      td = line.width
+      td = line.height
+      td = line.x
+      td = line.y
+      td = line.top
+      td = line.left
+      td = line.right
+      td = line.bottom
+      td = line.slide_id
+      td = link_to 'Show', line
+      td = link_to 'Edit', edit_line_path(line)
+      td = link_to 'Destroy', line, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Line', new_line_path

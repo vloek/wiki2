@@ -5,6 +5,7 @@ class Slide < ActiveRecord::Base
 
   has_many :hints, dependent: :destroy
   accepts_nested_attributes_for :hints, allow_destroy: true
+  has_many :lines
 
   belongs_to :page
 

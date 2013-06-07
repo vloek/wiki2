@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130601145106) do
+ActiveRecord::Schema.define(:version => 20130605173036) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -39,6 +39,20 @@ ActiveRecord::Schema.define(:version => 20130601145106) do
     t.integer  "slide_id"
   end
 
+  create_table "lines", :force => true do |t|
+    t.string   "width"
+    t.string   "height"
+    t.string   "x"
+    t.string   "y"
+    t.string   "top"
+    t.string   "left"
+    t.string   "right"
+    t.string   "bottom"
+    t.string   "slide_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "nested_hints", :force => true do |t|
     t.string   "x"
     t.string   "y"
@@ -47,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20130601145106) do
     t.datetime "updated_at", :null => false
     t.string   "width"
     t.string   "height"
+    t.string   "radius"
   end
 
 # Could not dump table "pages" because of following StandardError

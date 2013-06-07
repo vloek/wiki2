@@ -40,11 +40,15 @@ html lang="en"
     #fon
       img#bg_img src="/assets/fon.png"  height="100%"        
     .header_navigate
+      / .header_btn
+      /   .inleft
+      /     .inright
+      /       span#header_title 
+      /   / .in_color
       .header_btn
-        .inleft
-          .inright
-            span#header_title 
-        / .in_color
+        .graph
+          span#header_title
+
       .header_return onclick="location.href=('#{root_path}');"
     = link_to '', '/pages/2', remote: true, id: 'btn_return'
 

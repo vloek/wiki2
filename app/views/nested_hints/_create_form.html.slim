@@ -1,11 +1,12 @@
 = simple_form_for (@nested_hint), remote: true, format: :js, html: { :'data-type' => 'script' } do |f|
   = f.error_notification
 
-  .form-inputs
+  .form-inputs style="left: -100px; position: relative;"
     = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
     = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
     = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
     = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+    = f.input :radius, as: :integer, input_html: { class: 'input-mini' }, label: false
 
     = f.input :hint_id, as: :hidden
     .btn-gorup

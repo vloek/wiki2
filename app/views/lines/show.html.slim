@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Width:
+  = @line.width
+p
+  strong Height:
+  = @line.height
+p
+  strong X:
+  = @line.x
+p
+  strong Y:
+  = @line.y
+p
+  strong Top:
+  = @line.top
+p
+  strong Left:
+  = @line.left
+p
+  strong Right:
+  = @line.right
+p
+  strong Bottom:
+  = @line.bottom
+p
+  strong Slide:
+  = @line.slide_id
+
+= link_to 'Edit', edit_line_path(@line)
+'|
+= link_to 'Back', lines_path

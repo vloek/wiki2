@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  width: MyString
+  height: MyString
+  x: MyString
+  'y': MyString
+  top: MyString
+  left: MyString
+  right: MyString
+  bottom: MyString
+  slide_id: MyString
+
+two:
+  width: MyString
+  height: MyString
+  x: MyString
+  'y': MyString
+  top: MyString
+  left: MyString
+  right: MyString
+  bottom: MyString
+  slide_id: MyString

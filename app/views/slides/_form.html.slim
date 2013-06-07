@@ -1,17 +1,26 @@
-.form-inputs
-  = link_to  new_page_slide_hint_path(@page_slide.page, @page_slide, Hint.new) , remote: true, class: 'btn btn-info btn-mini' do
-    h4 
-      i.icon-plus&nbsp;
-      br
-      |Добавить
-      br
-      |подсказку
+.xz
+  = link_to  new_page_slide_hint_path(@page_slide.page, @page_slide, Hint.new) , remote: true, class: 'btn btn-info ' do
+    i.icon-plus
+
+  |&nbsp;
+  .btn-group
+    = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_top') , remote: true, class: 'btn btn-inverse ' do
+      |&#8722;
+    = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_top_right') , remote: true, class: 'btn btn-inverse ' do
+      |&not;
+    = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_top_left') , remote: true, class: 'btn btn-inverse ' do
+      |&not;
+    = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_bottom_left') , remote: true, class: 'btn btn-inverse ' do
+      ||_
+    = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_bottom_right') , remote: true, class: 'btn btn-inverse ' do
+      |_|
 
   / #dragable_plane
   .pull-center
     #nested_form style="position:relative; top: -40px; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{@page_slide.image}');"
 
       == render partial: 'hint_fields', collection: @page_slide.hints
+      == render partial: 'lines/line_fields', collection: @page_slide.lines
   br
   br
   br

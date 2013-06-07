@@ -1,4 +1,5 @@
 require "ckeditor/orm/active_record"
+require 'ckeditor'
 
 # Use this hook to configure ckeditor
 

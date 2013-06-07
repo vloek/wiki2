@@ -74,7 +74,7 @@ div.persp {
 }
 
 .menu {
-	overflow: auto;
+	overflow: visible;
 
 }
 
@@ -89,4 +89,8 @@ div.persp {
 .jcarousel-item {
 	width: auto;
 	height: auto;
+}
+
+ul.menu li {
+	margin-top: 50px !important;
 }

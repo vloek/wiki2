@@ -1,0 +1,16 @@
+.line style="border-top: #{@line.top.to_i}px; border-bottom: #{@line.bottom.to_i}px; border-left: #{@line.left.to_i}px; border-right: #{@line.right.to_i}px;border-color: #999; border-style: solid;  left: -50px; top: 50px"
+  = simple_form_for (@line), remote: true do |f|
+    = f.error_notification
+
+    .form-inputs style="left: -100px; position: relative;"
+      = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
+      = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+      = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+      = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+      = f.input :top, input_html: { class: 'input-mini'}, placeholder: 'Верхний бордюр',   label: false,   as: :hidden
+      = f.input :left, input_html: { class: 'input-mini'}, placeholder: 'Левый бордюр',    label: false,    as: :hidden
+      = f.input :right, input_html: { class: 'input-mini'}, placeholder: 'Правый бордюр',  label: false,  as: :hidden
+      = f.input :bottom, input_html: { class: 'input-mini'}, placeholder: 'Нижний бордюр', label: false, as: :hidden
+      = f.input :slide_id, as: :hidden
+
+      = f.button :submit, 'Закрепить', class: 'btn btn-mini btn-success'

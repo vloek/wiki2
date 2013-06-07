@@ -80,6 +80,8 @@ br
 
 		= f.input :show_in_menu, label: 'Отображать в главном меню?'
 		= f.input :color, input_html: { class: 'color' }, label: 'Цвет подсветки слайда'
+		= f.input :another_color, input_html: { class: 'color' }, label: 'Вторичный цвет подсветки'
+
 		/ = f.input :slide, as: :file, label: 'Выберите файл слайда'
 		br
 		= f.submit 'Сохранить'

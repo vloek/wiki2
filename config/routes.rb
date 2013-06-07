@@ -1,4 +1,7 @@
 Meth::Application.routes.draw do
+  resources :lines
+
+
   resources :nested_hints
 
 
@@ -8,6 +11,7 @@ Meth::Application.routes.draw do
     get 'fullscreen'
     get 'properties_all'
     resources :slides do 
+      resources :lines
       resources :hints
     end
     resources :properties

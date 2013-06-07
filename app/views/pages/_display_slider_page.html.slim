@@ -5,6 +5,7 @@
         - @page.slides.each do |slide|
           div class="item #{'active' if @page.slides.index(slide) == 0}" style="position:relative; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{slide.image}');"
             == render partial: 'display_hint', collection: slide.hints
+            == render partial: 'lines/line', collection: slide.lines
       ol class="carousel-indicators" style="bottom: 100px !important"
         - if @page.slides.size >= 1
           - @page.slides.each do |num|

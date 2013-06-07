@@ -2,7 +2,7 @@ class Page < ActiveRecord::Base
   serialize :related_pages, Array
 	
   attr_accessible :content, :parent_id, :show_in_menu, :title, :color, :slide, :title_full_name,:full_name,:count_update_title,:count_update,:semantic_load_title,:semantic_load,:measure_title,:measure,:analitic_cuts_title,:analitic_cuts,:source_recived_title,:source_recived,:formula_title,:formula, :related_pages
-  attr_accessible :city_agregation, :region, :cust, :filial, :properties_attributes, :slides_attributes, :slider
+  attr_accessible :city_agregation, :region, :cust, :filial, :properties_attributes, :slides_attributes, :slider, :another_color
 
   # Relations
   has_many   :children, class_name: 'Page', foreign_key: 'parent_id'
