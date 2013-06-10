@@ -6,6 +6,7 @@ display = ->
     opacity: 0, 'fast'
     ->
       $(this).css('background', 'url(/assets/slide_full_bg.png)')
+      $(this).stop().css('background-size', 'contain')
 
       $(this).html("<%= escape_javascript render 'pages/display_slider_page', page: @page %>")
       $(this).animate
@@ -18,10 +19,11 @@ display = ->
       $("#slide_plane").carousel()
       $("#slide_plane").carousel('pause')
       $('.content a').attr('data-remote', 'true')
-      # $("#slide_plane").swiperight ->
-        # $("#slide_plane").carousel('prev')
-      # $("#slide_plane").swipeleft ->
-        # $("#slide_plane").carousel('next')
+      # Slider
+      $("#slide_plane").on 'swiperight', ->
+        $("#slide_plane").carousel('prev')
+      $("#slide_plane").on 'swipeleft', ->
+        $("#slide_plane").carousel('next')
 
 
 delay 100, display

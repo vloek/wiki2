@@ -91,6 +91,8 @@ div.persp {
 	height: auto;
 }
 
-ul.menu li {
-	margin-top: 50px ;
+ul.menu {
+	li.drag {
+		margin-top: 50px ;
+	}
 }

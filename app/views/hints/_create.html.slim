@@ -1,19 +1,46 @@
-= simple_form_for (@hint), remote: true, id: @hint.id, format: :js, html: { :'data-type' => 'script' } do |f|
-  / = f.error_notification
+/ = simple_form_for (@hint), remote: true, id: @hint.id, format: :js, html: { :'data-type' => 'script' } do |f|
+/   / = f.error_notification
 
-  = f.input :title, label: false, placeholder: 'Заголовок'
-  = f.input :slide_id, as: :hidden
-  = f.input :_destroy, as: :hidden
-  = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
-  = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+/   = f.input :title, label: false, placeholder: 'Заголовок'
+/   = f.input :slide_id, as: :hidden
+/   = f.input :_destroy, as: :hidden
+/   = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+/   = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+/   .pull-left
+/     = link_to '+', new_nested_hint_path(hint_id: @hint.id), class: 'btn btn-mini btn-inverse', remote: true
+/   div.pull-right
+/     .btn-group
+/       - if @hint.new_record?
+/         = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true
+/       - else
+/         = link_to 'Редактировать', edit_hint_path(@hint), class: 'btn btn-info btn-mini'
+/         = f.submit "Сохранить", class: 'btn btn-success btn-mini'
+/       / = link_to_remove_fields "X", f 
+/       = link_to "X", hint_path(@hint), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+.title
   .pull-left
-    = link_to '+', new_nested_hint_path(hint_id: @hint.id), class: 'btn btn-mini btn-inverse', remote: true
-  div.pull-right
-    .btn-group
-      - if @hint.new_record?
-        = f.submit "Закрепить", class: 'btn btn-warning btn-mini', remote: true
-      - else
-        = link_to 'Редактировать', edit_hint_path(@hint), class: 'btn btn-info btn-mini'
-        = f.submit "Сохранить", class: 'btn btn-success btn-mini'
-      / = link_to_remove_fields "X", f 
-      = link_to "X", hint_path(@hint), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+    h3 = @hint.title.upcase
+  .pull-right
+    = simple_form_for (@hint), remote: true, id: @hint.id, format: :js, html: { :'data-type' => 'script'} do |f|
+      / = f.error_notification
+
+      = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+      = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+      = f.input :_destroy, as: :hidden
+      div.pull-right
+        .btn-group
+          = link_to '+', new_nested_hint_path(hint_id: @hint.id), class: 'btn btn-mini btn-inverse', remote: true
+
+          - if @hint.new_record?
+            = link_to_submit class: 'btn btn-warning btn-mini', remote: true do
+              i.icon-ok
+          - else
+            = link_to_submit  class: 'btn btn-success btn-mini' do
+              i.icon-ok
+              / = link_to_remove_fields "X", f 
+          = link_to edit_hint_path(@hint), class: 'btn btn-success btn-mini show_modal', remote: true do
+            i.icon-pencil
+          = link_to "X", hints_path(@hint), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+
+div class="content"
+  = raw @hint.content

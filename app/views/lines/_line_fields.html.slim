@@ -12,6 +12,7 @@
       = f.input :right, input_html: { class: 'input-mini'}, placeholder: 'Правый бордюр',  label: false, as: :hidden
       = f.input :bottom, input_html: { class: 'input-mini'}, placeholder: 'Нижний бордюр', label: false, as: :hidden
       = f.input :slide_id, as: :hidden
-
-      = f.button :submit, 'Закрепить', class: 'btn btn-mini btn-success'
-      = link_to 'X', line_fields, method: :delete, confirm: "Вы уверены?", class: 'btn btn-danger btn-mini', remote: true
+      .btn-group
+        = link_to_submit class: 'btn btn-mini btn-success' do
+          i.icon-ok
+        = link_to 'X', line_fields, method: :delete, confirm: "Вы уверены?", class: 'btn btn-danger btn-mini', remote: true

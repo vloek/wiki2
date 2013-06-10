@@ -7,20 +7,22 @@
     = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_top') , remote: true, class: 'btn btn-inverse ' do
       |&#8722;
     = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_top_right') , remote: true, class: 'btn btn-inverse ' do
-      |&not;
+      img src='/assets/top_right.gif'
     = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_top_left') , remote: true, class: 'btn btn-inverse ' do
-      |&not;
+      img src='/assets/top_left.gif'
+
     = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_bottom_left') , remote: true, class: 'btn btn-inverse ' do
-      ||_
+      img src='/assets/bottom_left.gif'
     = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_bottom_right') , remote: true, class: 'btn btn-inverse ' do
-      |_|
+      img src='/assets/bottom_right.gif'
 
   / #dragable_plane
   .pull-center
     #nested_form style="position:relative; top: -40px; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{@page_slide.image}');"
 
-      == render partial: 'hint_fields', collection: @page_slide.hints
-      == render partial: 'lines/line_fields', collection: @page_slide.lines
+      / == render partial: 'hint_fields', collection: @page_slide.hints
+      == render partial: 'hints/hint_on_edit', collection: @page_slide.hints
+      == render partial: 'lines/line_fields',  collection: @page_slide.lines
   br
   br
   br

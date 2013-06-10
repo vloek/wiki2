@@ -1,15 +1,13 @@
-br
-br
-.well
-	= simple_form_for (@hint) do |f|
-	  = f.error_notification
-	  = f.input :title, label: false, placeholder: 'Заголовок'
-	  = f.input :content, as: :ckeditor, label: 'Описание'
-	  = f.input :slide_id, as: :hidden
-	  = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
-	  = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
-	  br
-	  br
-	  = f.submit "Сохранить", class: 'btn btn-success'
-
-
+/ .modal-header
+/   button.close data-dismiss="modal" aria-hidden="true"x
+/   h3#oneModalLabel Редактировать подсказку
+.modal-body
+  = simple_form_for (@hint) do |f|
+  = f.error_notification
+  = f.input :title, label: false, placeholder: 'Заголовок'
+  = f.input :content, as: :ckeditor, label: 'Описание'
+  = f.input :slide_id, as: :hidden
+  = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+  = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+.modal-footer
+  = f.submit "Сохранить", class: 'btn btn-success'

@@ -51,6 +51,7 @@ jQuery ->
     $(this).css('z-index', '1200')
     $(this).off('click')
     $(this).find('.persp').addClass('current_content')
+    drag.find('a.block_a').click()
 
 display_return = (title, parent_id) ->
   window.scrollTo(0,0)

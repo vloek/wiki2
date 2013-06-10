@@ -1,1 +1,1 @@
-$(".hint_<%= @hint.id %>").hide()
+$("#hint_<%= @hint.id %>").hide()

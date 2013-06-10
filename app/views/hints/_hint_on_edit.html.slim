@@ -1,0 +1,32 @@
+div class="hint disable-select" style="position: absolute; left: #{hint_on_edit.x}; top: #{hint_on_edit.y};  z-index: 1000 "  align="justify" id="hint_#{ hint_on_edit.id }"
+  .title
+    .pull-left
+      h3 = hint_on_edit.title.upcase
+    .pull-right
+      = simple_form_for (hint_on_edit), remote: true, id: hint_on_edit.id, format: :js, html: { :'data-type' => 'script'} do |f|
+        / = f.error_notification
+
+        = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+        = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+        = f.input :_destroy, as: :hidden
+        div.pull-right
+          .btn-group
+            = link_to '+', new_nested_hint_path(hint_id: hint_on_edit.id), class: 'btn btn-mini btn-inverse', remote: true
+
+            - if hint_on_edit.new_record?
+              = link_to_submit class: 'btn btn-warning btn-mini', remote: true do
+                i.icon-ok
+            - else
+              = link_to_submit  class: 'btn btn-success btn-mini' do
+                i.icon-ok
+                / = link_to_remove_fields "X", f 
+            = link_to edit_hint_path(hint_on_edit), class: 'btn btn-success btn-mini show_modal', remote: true do
+              i.icon-pencil
+            = link_to "X", "/hints/#{hint_on_edit.id}", method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+
+  div class="content"
+    = raw hint_on_edit.content
+
+
+
+== render partial: 'nested_hints/nested_hint_fields', collection: hint_on_edit.nested_hints

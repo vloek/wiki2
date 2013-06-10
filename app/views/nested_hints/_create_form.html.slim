@@ -1,14 +1,15 @@
 = simple_form_for (@nested_hint), remote: true, format: :js, html: { :'data-type' => 'script' } do |f|
   = f.error_notification
 
-  .form-inputs style="left: -100px; position: relative;"
+  .form-inputs style="left: -40px; position: relative;"
     = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
     = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
     = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
     = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
-    = f.input :radius, as: :integer, input_html: { class: 'input-mini' }, label: false
+    /= f.input :radius, as: :integer, input_html: { class: 'input-mini' }, label: false
 
     = f.input :hint_id, as: :hidden
     .btn-gorup
-      = f.button :submit, 'Записать', class: 'btn btn-mini btn-success'
+      = link_to_submit class: 'btn btn-mini btn-success' do
+        i.icon-ok
       = link_to 'X', @nested_hint, method: :delete, confirm: "Вы уверены?", class: 'btn btn-danger btn-mini', remote: true

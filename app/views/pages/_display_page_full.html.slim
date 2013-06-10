@@ -1,9 +1,9 @@
 #main-content 
   #left_content
-    #main-block
+    div#main-block class="disable-select"
       .title
         h3 =@page.title
-      .content
+      div class="content disable-select" 
         == render 'pages/pages_property', page: @page
         == render partial: 'properties/property_in_page', collection: @page.properties
   #right_content

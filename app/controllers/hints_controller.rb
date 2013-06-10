@@ -39,12 +39,7 @@ class HintsController < ApplicationController
   # PUT /hints/1.json
   def update
     @hint = Hint.find(params[:id])
-
-    if @hint.update_attributes(params[:hint])
-      redirect_to @hint, notice: 'Hint was successfully updated.' 
-    else
-      render action: "edit" 
-    end
+    @hint.update_attributes(params[:hint])
   end
 
   # DELETE /hints/1
