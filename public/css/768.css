@@ -1,0 +1,101 @@
+div.slide {
+	left: 220px;
+}
+
+.menu_item {
+	width: 140px !important;
+	height: 58px !important;
+}
+
+.menu_item span {
+	font-size: 17px;
+}
+
+ul.menu li.drag {
+	margin-top: 80px;
+}
+
+div.persp {
+	width: 320px;
+}
+
+
+li#3 {
+	margin-left: 40px !important;
+}
+
+
+li#2 {
+	margin-left: 80px !important;
+}
+
+
+li#1 {
+	margin-left: 120px !important;
+}
+
+
+.container_normative .normative {
+	right: 0;
+	width: 400px;
+}
+
+
+.container_normative .normative .title {
+	width: 404px;
+}
+
+.scrolled-container {
+	height: 768px !important;
+}
+
+
+#main-content #right_content #img-block {
+	right: 4px;
+	width: 250px;
+	height: 150px;
+}
+
+#main-content #right_content #img-block .slides-block {
+	width: 250px;
+	height: 150px;
+}
+
+#slider_full .carousel-inner .item {
+	width: 250px !important;
+	height: 150px !important;
+}
+
+#main-content #right_content #img-block .slide-links {
+	width: 250px;
+}
+
+#main-content #right_content #menu-links {
+	margin-top: 40px !important;
+	width: 250px !important;
+	right: 4px
+}
+
+#main-content #left_content #main-block {
+	min-width: 446px;
+	min-height: 680px;
+	background-size: contain;
+}
+
+#main-content #left_content  {
+	right: 270px;
+}
+
+
+#main-content #left_content #main-block .shortcode-toggle h4 a {
+	width: 400px;
+}
+
+#main-content #left_content #main-block .shortcode-toggle .toggle-content {
+	width: 400px;
+
+}
+
+#main-content #left_content #main-block .content {
+	height: 615px;
+}

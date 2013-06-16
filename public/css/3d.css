@@ -1,0 +1,29 @@
+div.slide {
+	-webkit-perspective: 600px;
+	perspective: 600px;
+
+}
+
+div.persp {
+	-webkit-transition-duration: 0ms;
+	-webkit-transform: rotateX(36deg) perspective(600px);
+	transition-duration: 0ms;
+	-moz-transition-duration: 0ms;
+	transform: rotateX(36deg);
+
+
+	background-size: 100%;
+	padding: 10px;
+	box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+
+}
+
+.drag {
+	-webkit-perspective: 500px;
+	padding-top: -100px;
+}
+
+
+html {
+}

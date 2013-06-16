@@ -10,10 +10,10 @@ jQuery ->
     fog_color  = $(this).find('.persp').attr('background-color')
     shadow_color = 'inset 0 0 23px '+ fog_color
     $(this).find('.slide').parent('a').attr('href', '')
-
+    $('.btn_main_close').hide()
 
     $(this).find('.persp').css('-webkit-transform', 'rotateX(0)')
-    $(this).css('transform', 'perspective(1100px) rotateX(0)')
+    $(this).find('.persp').css('transform', 'perspective(1100px) rotateX(0)')
 
     sss = jQuery($(this).find('.persp')).offset()
     presp = $(this).find('.persp')
@@ -29,21 +29,25 @@ jQuery ->
     $('.to_hide').fadeOut('slow')
 
     $(this).animate
-      top: 110, 'margin-top': 60, left: 0, 'margin-left': 0
+      top: 130, 'margin-top': 56, left: 0, 'margin-left': 0, textIndent: 0
       1700
-      # ->
+     
     scrx = screen.width 
-    scry = screen.height - 70
+    scry = screen.height - 55
     $(this).find('.persp').animate
-      width: scrx, height: scry, zero: 0, r: 0, top: 0, opacity: 1, left: 0, border: 0
+      width: scrx, height: scry, zero: 0, r: 0, top: 0,  left: 0, border: 0, opacity: 1
       2600
-
        ->
         # $(this).animate({boxShadow: shadow_color})
         display_return(title_text, 1)
     $(this).find('.slide').css('right', 'auto')
     $(this).find('.slide').css('left', '0')
     $(this).find('.slide').css('width', '0')
+    $(this).find('.slide').css('margin-left', '0')
+    $(this).find('.slide').css('cursor', 'auto')
+    $(this).find('.slide').animate
+      top: -130
+
 
 
     $('.drag').draggable('destroy')
@@ -52,6 +56,8 @@ jQuery ->
     $(this).off('click')
     $(this).find('.persp').addClass('current_content')
     drag.find('a.block_a').click()
+  
+
 
 display_return = (title, parent_id) ->
   window.scrollTo(0,0)

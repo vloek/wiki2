@@ -55,6 +55,7 @@
       /     == render partial: 'shared/menu_links_slide', collection: @children_pages
       / - else
       /     p Нет связанных страниц
+      / h3 style="color: white; padding: 0 0 0 10px; margin: 0;"Смежные показатели
       ul
         - @page.related_pages.uniq.each do |c|
           - next if c.to_i == 0

@@ -44,6 +44,7 @@
 			padding: 10px;
 			left: 0px;
 			top: 32px;
+			-webkit-overflow-scrolling: auto;
 
 			color: #999;
 			a {
@@ -89,6 +90,8 @@
 	height: 520px;
 	overflow-y: scroll;
 	padding-top: 0px;
+	-webkit-overflow-scrolling: auto;
+
 	&::-webkit-scrollbar {
 		width: 12px;
 	}

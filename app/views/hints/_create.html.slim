@@ -28,7 +28,7 @@
       = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
       = f.input :_destroy, as: :hidden
       div.pull-right
-        .btn-group
+        .btn-group style="position: absolute; top: 0; right: 0;"
           = link_to '+', new_nested_hint_path(hint_id: @hint.id), class: 'btn btn-mini btn-inverse', remote: true
 
           - if @hint.new_record?

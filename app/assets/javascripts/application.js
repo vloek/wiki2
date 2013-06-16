@@ -12,11 +12,46 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require pages
+//= require jscolor
 //= require jquery.ui.all
 //= require twitter/bootstrap
 //= require ckeditor/init
 //= require jquery.mobile-1.3.1.min
 //= require_tree .
+
+
+
+
+
+function has3d(){
+   var el, has3d;
+   
+   /* Create a new element */
+   el = document.createElement('p');
+
+   /* Apply a transform */
+   el.style['transform'] = 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)';
+
+   /* 
+   Add it to the body to get the computed style (for Opera mostly).
+   Since it's empty, it shouldn't interfere with layout in modern browsers. 
+   */
+   document.body.insertBefore(el, document.body.lastChild);
+   
+   /* Get the computed value */
+   has3d = window.getComputedStyle(el).getPropertyValue('transform');
+
+   /* 
+   If it's not undefined, tell us whether it is 'none'.
+   Otherwise, return false.
+   */
+   if( has3d !== undefined ){
+      return has3d !== 'none';
+   } else {
+      return false;
+   }
+}
 
 
 $("li.drag").draggable({
@@ -81,6 +116,21 @@ if ( jQuery( '.shortcode-toggle').length ) {
     
 } // End IF Statement
 
+
+  var $ = document; // shortcut
+  var cssId = 'myCss';  // you could encode the css path itself to generate id..
+  if (has3d() == 'true')
+  {
+      var head  = $.getElementsByTagName('head')[0];
+      var link  = $.createElement('link');
+      link.id   = cssId;
+      link.rel  = 'stylesheet';
+      link.type = 'text/css';
+      link.href = '/css/menu3d.css';
+      link.media = 'all';
+      head.appendChild(link);
+  }
+
 });
 
 
@@ -114,3 +164,5 @@ $(function() {
   });
 
 });
+
+

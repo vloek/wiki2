@@ -1,14 +1,15 @@
 div.slide {
 	-webkit-perspective: 1100px;
-	transform: perspective(1100px) ;
+	perspective: 1100px;
 }
 
 div.persp {
 	-webkit-transition-duration: 350ms;
-	-webkit-transform: rotateX(50deg);
+	-webkit-transform: rotateX(50deg) perspective(1100px);
 	transition-duration: 1450ms;
-	transform: perspective(1100px) rotateX(50deg);
-	width: 580px;
+	transform: rotateX(50deg);
+
+	width: 500px;
 	height: 300px;
 	background-size: 100%;
 	padding: 10px;
@@ -22,67 +23,67 @@ div.persp {
 	padding-top: -100px;
 }
 
-.menu_item {
-	display: block;
-	// position: relative;
-	vertical-align: middle;
-	text-align: left;
-	padding-left: 15px;
-	width: 210px !important;
-	height: 67px !important;
-	border: 3px solid #343;
-	border-radius: 10px;
-	background: url('/assets/menu_item_bg.gif');
-	// margin: 10px;
+// .menu_item {
+// 	display: block;
+// 	// position: relative;
+// 	vertical-align: middle;
+// 	text-align: left;
+// 	padding-left: 15px;
+// 	width: 210px !important;
+// 	height: 67px !important;
+// 	border: 3px solid #343;
+// 	border-radius: 10px;
+// 	background: url('/assets/menu_item_bg.gif');
+// 	// margin: 10px;
 
-	.title {
-		// height: 100%;
-		vertical-align: middle !important;
-	}
+// 	.title {
+// 		// height: 100%;
+// 		vertical-align: middle !important;
+// 	}
 
-	a:hover { 
-		text-decoration: none !important;
-	}
-	span {
-		// margin: 1px;
-		vertical-align: middle !important;
-		font-family: 'pf_dindisplay_proregular';
+// 	a:hover { 
+// 		text-decoration: none !important;
+// 	}
+// 	span {
+// 		// margin: 1px;
+// 		vertical-align: middle !important;
+// 		font-family: 'pf_dindisplay_proregular';
 		
-		// line-height: 25px;
-		font-size: 20px;
-	}
-	.arrow {
-		position: absolute;
-		right: -40px;
-		top: 10px;
-	}
-	.arrow2 {
-		position: absolute;
-		right: -35px;
-		top: 22px;
-	}
-}
+// 		// line-height: 25px;
+// 		font-size: 20px;
+// 	}
+// 	.arrow {
+// 		position: absolute;
+// 		right: -40px;
+// 		top: 10px;
+// 	}
+// 	.arrow2 {
+// 		position: absolute;
+// 		right: -35px;
+// 		top: 22px;
+// 	}
+// }
 
-.back {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-}
+// .back {
+// 	position: fixed;
+// 	bottom: 0;
+// 	left: 0;
+// }
 
-.menu {
-	overflow: auto;
+// .menu {
+// 	overflow: auto;
 
-}
+// }
 
-.menu::-webkit-scrollbar{
-		width: 0;
-	}
+// .menu::-webkit-scrollbar{
+// 		width: 0;
+// 	}
 
-.menu-margin-top {
-	margin-top: 0px !important;
-}
+// .menu-margin-top {
+// 	margin-top: 0px !important;
+// }
 
-.jcarousel-item {
-	width: auto;
-	height: auto;
-}
+// .jcarousel-item {
+// 	width: auto;
+// 	height: auto;
+// }

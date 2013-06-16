@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
 	respond_to :html, :js
+  http_basic_authenticate_with :name => "admin", :password => "show_all_that_is_hidden", :except => [:new, :show, :edit, :create, :update, :destroy, :fullscreen, :properies_all]
 
   # GET /pages
   def index

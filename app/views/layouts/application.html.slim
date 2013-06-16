@@ -16,6 +16,11 @@ html lang="en"
     link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72"
     link href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed"
     link href="favicon.ico" rel="shortcut icon"
+    link rel='stylesheet' media='screen and (min-width: 1920px)' href='/css/1920.css'
+    link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 768px)' href='/css/768.css'
+    link rel='stylesheet' media='screen and (min-width: 1350px) and (max-width: 1370px)' href='/css/1360.css'
+    link rel='stylesheet' media='screen and (min-width: 1600px) and (max-width: 1600px)' href='/css/1600.css'
+    link rel='stylesheet' href='/css/3d.css'
 
   body
     #oneModal class="modal hide " tabindex="-1" role="dialog" aria-labelledby="oneModalLabel" aria-hidden="true" style="z-index: 5000"
@@ -38,15 +43,17 @@ html lang="en"
             .logo_obrm
               img#cross src="/assets/logo_cross.png" align="right"
 
-              a.logo href="#{root_path}"
+              a.logo href="#{root_path}" style="cursor: default;"
                 big ЕМИАС
                 br
                 small ЦЕНТР МОНИТОРИНГА
             .header_title
               h3 ЭНЦИКЛОПЕДИЯ ЦЕНТРА МОНИТОРИНГА ЕМИАС
+            .time
+              = Date.today.strftime("%d/%m/%Y")
 
     #fon
-      img#bg_img src="/assets/fon.png"  height="100%"        
+      img#bg_img src="/assets/fon.jpg"  height="100%"        
     .header_navigate
       / .header_btn
       /   .inleft
@@ -56,8 +63,8 @@ html lang="en"
       .header_btn
         .graph
           span#header_title
-
       .header_return onclick="location.href=('#{root_path}');"
+
     = link_to '', '/pages/2', remote: true, id: 'btn_return'
 
     /       .container.nav-collapse
@@ -89,3 +96,4 @@ html lang="en"
       \==================================================
     /! Placed at the end of the document so the pages load faster
     = javascript_include_tag "application"
+    script src="/js/close.js" type="text/javascript"

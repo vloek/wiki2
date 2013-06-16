@@ -1,17 +1,17 @@
 - if page.full_name.present?
-	div class="shortcode-toggle toggle-Toggle1 closed"
+	div class="shortcode-toggle toggle-Toggle1 open"
 		h4 class="toggle-trigger"
 			a class="hide_me" href="#"=page.title_full_name
 		div class="toggle-content"
 			= raw page.full_name.to_s
 - if page.semantic_load.present?
-	div class="shortcode-toggle toggle-Toggle1 closed"
+	div class="shortcode-toggle toggle-Toggle1 open"
 		h4 class="toggle-trigger"
 			a class="hide_me" href="#"=page.semantic_load_title
 		div class="toggle-content"
 			= raw page.semantic_load.to_s
 - if page.measure.present?
-	div class="shortcode-toggle toggle-Toggle1 closed"
+	div class="shortcode-toggle toggle-Toggle1 open"
 		h4 class="toggle-trigger"
 			a class="hide_me" href="#"=page.measure_title
 		div class="toggle-content"

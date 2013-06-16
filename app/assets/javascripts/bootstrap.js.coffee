@@ -20,3 +20,4 @@ $(document).ready ->
   #   maxLevels: 1
   # )
   $('.menu').jcarousel({ vertical: true, scroll: 3})
+

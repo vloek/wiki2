@@ -3,7 +3,7 @@ delay = (ms, func) ->
 
 display = ->
   $(".current_content").animate
-    opacity: 0, 'fast'
+    opacity: 0, 'slow'
     ->
       $(this).css('background', 'url(/assets/slide_full_bg.png)')
       $(this).stop().css('background-size', 'contain')
@@ -17,7 +17,7 @@ display = ->
           $('a').on 'click', ->
             window.location.hash = $(this).attr('href')
       $("#slide_plane").carousel()
-      $("#slide_plane").carousel('pause')
+      $("#slide_plane").stop().carousel('pause')
       $('.content a').attr('data-remote', 'true')
       # Slider
       $("#slide_plane").on 'swiperight', ->

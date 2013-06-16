@@ -3,14 +3,14 @@ delay = (ms, func) ->
 
 display = ->
   $(".current_content").animate
-    opacity: 0, 'fast'
+    opaci: 1, 'fast'
     ->
       $(this).stop().css('background', 'url(/assets/slide_full_bg.png)')
       $(this).stop().css('background-size', 'contain')
 
       $(this).stop().html('<%= escape_javascript render 'pages/display_page', page: @page %>')
       $(this).animate
-        opacity: 1
+        opaci: 1
         ->
           scry = screen.height - 290
           $('.scrolled-container').css('height', scry)
