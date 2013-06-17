@@ -5,8 +5,7 @@ display = ->
   $(".current_content").animate
     opacity: 0, 'slow'
     ->
-      $(this).css('background', 'url(/assets/slide_full_bg.png)')
-      $(this).stop().css('background-size', 'contain')
+      # $(this).stop().css('background-size', 'contain')
 
       $(this).html("<%= escape_javascript render 'pages/display_slider_page', page: @page %>")
       $(this).animate
@@ -16,8 +15,7 @@ display = ->
           $('.scrolled-container').css('height', scry)
           $('a').on 'click', ->
             window.location.hash = $(this).attr('href')
-      $("#slide_plane").carousel()
-      $("#slide_plane").stop().carousel('pause')
+      $("#slide_plane").carousel().carousel('pause')
       $('.content a').attr('data-remote', 'true')
       # Slider
       $("#slide_plane").on 'swiperight', ->

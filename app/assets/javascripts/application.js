@@ -17,7 +17,6 @@
 //= require jquery.ui.all
 //= require twitter/bootstrap
 //= require ckeditor/init
-//= require jquery.mobile-1.3.1.min
 //= require_tree .
 
 
