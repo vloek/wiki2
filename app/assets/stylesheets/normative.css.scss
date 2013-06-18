@@ -93,9 +93,14 @@
 	height: 520px;
 	overflow-y: scroll;
 	padding-top: 0px;
+	-webkit-transform: translateZ(0px);
+
 	-webkit-overflow-scrolling: auto;
+	overflow-scrolling: auto;
 
 	&::-webkit-scrollbar {
+		-webkit-overflow-scrolling: auto;
+
 		width: 12px;
 	}
 

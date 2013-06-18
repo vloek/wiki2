@@ -2,8 +2,9 @@ delay = (ms, func) ->
   setTimeout func, ms
 
 display = ->
+  $('#stat_load').text('Loading')
   $(".current_content").animate
-    opacity: 1, 'fast'
+    opacity: 1, 'slow'
     ->
       # $(this).stop().css('background-size', 'contain')
 

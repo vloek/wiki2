@@ -6,17 +6,20 @@ $('.current_content').animate
     $('#btn_return').animate
       opacity: 1
       ->
+        $("#slider_full").carousel()
+
         $('#btn_return').css('display', 'block')
+        # Slider
+        $("#slider_full").on 'swiperight', ->
+            $("#slider_full").carousel('prev')
+        $("#slider_full").on 'swipeleft', ->
+          $("#slider_full").carousel('next')
     $('a').bind 'click', ()->
       window.location.hash = $(this).attr('href')
 
-    $("#slider_full").carousel()
-    $('.content a').attr('data-remote', 'true')
-    # Slider
-    $("#slider_full").on 'swiperight', ->
-        $("#slider_full").carousel('prev')
-    $("#slider_full").on 'swipeleft', ->
-      $("#slider_full").carousel('next')
+
+      $('.content a').attr('data-remote', 'true')
+
 
 
     $('a.hide_me').bind 'click', ()->

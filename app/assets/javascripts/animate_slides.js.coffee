@@ -8,7 +8,8 @@ jQuery ->
     # Variable
     drag         = $(this)
     title_text   = $(this).find('.title span').text()
-    fog_color    = $(this).find('.persp').attr('background-color')
+    prp          = $(this).find('.persp')
+    fog_color    = prp.attr('background-color')
     shadow_color = 'inset 0 0 23px '+ fog_color
     slide_clck   = $(this).find('.slide')
 
@@ -16,6 +17,10 @@ jQuery ->
     $(this).find('.slide').parent('a').attr('href', '')
     $('.btn_main_close').hide()
 
+
+
+
+    $(this).find('.persp').css('margin-top', 55)
     # Animate rotate
     $(this).find('.persp').css('-webkit-transform','rotateX(0deg)')
     $(this).find('.persp').css('-moz-transform','rotateX(0deg)')
@@ -28,8 +33,8 @@ jQuery ->
       ->
         $(this).css('-webkit-transition-duration','0').css('-transition-duration','0')
 
-    sss = jQuery($(this).find('.persp')).offset()
-    presp = $(this).find('.persp')
+    sss       = jQuery($(this).find('.persp')).offset()
+    presp     = $(this).find('.persp')
     slide_ofs = jQuery($(this).find('.slide')).offset()
 
     # $(this).animate 
@@ -63,14 +68,16 @@ jQuery ->
               opacity: 0
               ->
                 display_return(title_text, 1)
-                drag.find('a.block_a').click()
+                if $('#stat_load').text() == "No"
+                  drag.find('a.block_a').click()
+                  $('#stat_load').text('Loading')
                 $(this).stop().css('background-size', 'contain')
                 $(this).stop().css('background-image', 'url(/assets/slide_full_bg.png)')
             .animate
               opacity: 1
+          $(this).css('top', 55)
           $(this).css('position', 'fixed')
           $(this).css('left', 0)
-          $(this).css('top', 55)
           $(this).css('margin-left', 0)
           $(this).css('margin-top', 0)
           slide_clck.css('left', '0')
