@@ -27,8 +27,16 @@ module ApplicationHelper
     link_to_function(name, "add_fields_slide(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: 'btn btn-mini')
   end
 
-
+  # Кнопка отправки ссылкой
   def link_to_submit(*args, &block)
     link_to_function (block_given? ? capture(&block) : args[0]), "$(this).closest('form').submit()", args.extract_options!
+  end
+
+
+  # удаление &nbsp; и &ndash;
+  def replacing_space(str)
+    str.gsub!("&nbsp;", " ")
+    str.gsub!("&ndash;", "-")
+    str
   end
 end

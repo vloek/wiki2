@@ -4,13 +4,13 @@ delay = (ms, func) ->
 display = ->
   $('#stat_load').text('Loading')
   $(".current_content").animate
-    opacity: 0, 'slow'
+    opacity: 0, 2000
     ->
       # $(this).stop().css('background-size', 'contain')
 
       $(".current_content").html("<%= escape_javascript render 'pages/display_slider_page', page: @page %>")
       $(".current_content").animate
-        opacity: 1
+        opacity: 1, 1000
         ->
           $("#slide_plane").carousel().carousel('pause')
           scry = screen.height - 290

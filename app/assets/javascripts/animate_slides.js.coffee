@@ -20,7 +20,8 @@ jQuery ->
 
 
 
-    $(this).find('.persp').css('margin-top', 55)
+    $(this).find('.persp').css('margin-top', 175)
+    $(this).find('.persp').css('margin-left', -355)
     # Animate rotate
     $(this).find('.persp').css('-webkit-transform','rotateX(0deg)')
     $(this).find('.persp').css('-moz-transform','rotateX(0deg)')
@@ -66,6 +67,7 @@ jQuery ->
           $(this)
             .animate
               opacity: 0
+              2000
               ->
                 display_return(title_text, 1)
                 if $('#stat_load').text() == "No"
@@ -75,6 +77,7 @@ jQuery ->
                 $(this).stop().css('background-image', 'url(/assets/slide_full_bg.png)')
             .animate
               opacity: 1
+              1000
           $(this).css('top', 55)
           $(this).css('position', 'fixed')
           $(this).css('left', 0)

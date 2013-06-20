@@ -28,7 +28,7 @@ ul.menu li.drag {
 div.slide {
 	margin-left: 200px;
 	left: 300px;
-	top: -240px;
+	top: -160px;
 }
 
 div.persp {
@@ -115,5 +115,10 @@ div.persp {
 
 
 .menu {
-	margin-top: 50px !important;
+	margin-top: 60px !important;
+}
+
+
+ol.carousel-indicators {
+	bottom: -135px !important;
 }

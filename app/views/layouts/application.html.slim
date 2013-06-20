@@ -49,8 +49,8 @@ html lang="en"
                 br
                 small ЦЕНТР МОНИТОРИНГА
             .header_title
-              h3 ЭНЦИКЛОПЕДИЯ ЦЕНТРА МОНИТОРИНГА ЕМИАС
-            .time
+              h3.disable-select ЭНЦИКЛОПЕДИЯ ЦЕНТРА МОНИТОРИНГА ЕМИАС
+            .time.disable-select
               = Date.today.strftime("%d/%m/%Y")
 
     #fon
@@ -63,7 +63,7 @@ html lang="en"
       /   / .in_color
       .header_btn
         .graph
-          span#header_title
+          span#header_title.disable-select
       .header_return onclick="location.href=('#{root_path}');"
 
     = link_to '', '/pages/2', remote: true, id: 'btn_return'
@@ -99,4 +99,3 @@ html lang="en"
     = javascript_include_tag "application"
     script src="/js/close.js" type="text/javascript"
     script src="/js/draggable_slides.js" type="text/javascript"
-    script src="/js/jquery.ui.touch-punch.min.js" type="text/javascript"
