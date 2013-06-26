@@ -122,3 +122,8 @@ div.persp {
 ol.carousel-indicators {
 	bottom: -135px !important;
 }
+
+
+div#nested_form {
+	top: 140px !important;
+}

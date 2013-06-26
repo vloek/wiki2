@@ -116,6 +116,7 @@ body::-webkit-scrollbar{
 	padding: 1px;
 	top: 62px;
 	left: 0px;
+	opacity: 0;
 	// width: 300px;
 	// background: #666;
 
@@ -206,7 +207,7 @@ body::-webkit-scrollbar{
 	.header_return {
 		z-index: 10000;
 
-		opacity: 0;
+		opacity: 1;
 		position: relative;
 		left: 10px;
 		display: none;

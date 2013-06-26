@@ -16,7 +16,9 @@ display = ->
           $('.scrolled-container').css('height', scry)
           $('a').on 'click', ->
             window.location.hash = $(this).attr('href')
-
+          $('.header_navigate').animate
+            opacity: 1
+            1000
 
 
 delay 100, display

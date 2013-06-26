@@ -17,7 +17,7 @@
             - first_slide = @page.slides.shift
             div class="item active" style="background-size: cover; background-image: url('#{first_slide.image}'); width: 350px; height: 250px"
             == render partial: 'slides/slide_in_block', collection: @page.slides
-        ol class="carousel-indicators" style="bottom: 10px;"
+        ol class="carousel-indicators" style="bottom: 10px !important;"
           - if @page.slides.size >= 1
             li data-target="#slider_full" data-slide-to="0" class="active"
             - 1.upto @page.slides.size do |slide|

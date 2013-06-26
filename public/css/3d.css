@@ -5,10 +5,10 @@ div.slide {
 }
 
 div.persp {
-	-webkit-transition-duration: 1500ms;
+	-webkit-transition-duration: 2500ms;
 	-webkit-transform: rotateX(50deg) perspective(600px);
-	transition-duration: 1500ms;
-	-moz-transition-duration: 1500ms;
+	transition-duration: 2500ms;
+	-moz-transition-duration: 2500ms;
 	transform: rotateX(50deg);
 
 	border-spacing: 50px;

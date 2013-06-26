@@ -1,6 +1,6 @@
 .scrolled-container style=" height: 500px !important; overflow-y: inherit; test: test;"
     #slide_plane style="margin-top: 40px;"
-      .carousel-inner style="overflow: initial;"
+      div class="carousel-inner disable-select" style="overflow: initial;"
         
         - @page.slides.each do |slide|
           div class="item #{'active' if @page.slides.index(slide) == 0}" style="position:relative; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{slide.image}');"

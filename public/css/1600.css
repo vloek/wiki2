@@ -5,5 +5,19 @@ div.persp {
 }
 
 .menu {
-	margin-top: 30px !important;
+	margin-top: 60px !important;
+  margin-left: -50px;
+}
+
+ul.menu li.drag {
+  margin-top: 70px;
+}
+
+.scrolled-container {
+  margin-top: 260px;
+}
+
+
+ol.carousel-indicators {
+  bottom: -135px;
 }

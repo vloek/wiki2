@@ -23,7 +23,10 @@ display = ->
 
           $('a').on 'click', ->
             window.location.hash = $(this).attr('href')
-      $('.content a').attr('data-remote', 'true')
+          $('.content a').attr('data-remote', 'true')
+          $('.header_navigate').animate
+            opacity: 1
+            1000
       
 
 

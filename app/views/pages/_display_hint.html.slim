@@ -1,6 +1,6 @@
 div class="hint disable-select" style="position: absolute; left: #{display_hint.x}; top: #{display_hint.y};  z-index: 1000 "  align="justify"
   .title
     h3 = display_hint.title.upcase
-  div class="content"
+  div class="content disable-select"
     = raw display_hint.content
 == render display_hint.nested_hints
