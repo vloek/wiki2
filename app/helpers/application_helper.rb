@@ -37,6 +37,8 @@ module ApplicationHelper
   def replacing_space(str)
     str.gsub!("&nbsp;", " ")
     str.gsub!("&ndash;", "-")
+    str.gsub!("$laquo;", " ")
+    str.gsub!("&raquo;", " ")
     str
   end
 
