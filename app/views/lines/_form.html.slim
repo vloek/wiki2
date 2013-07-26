@@ -7,10 +7,13 @@
       = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
       = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
       = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+      = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+      = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
       = f.input :top, input_html: { class: 'input-mini'}, placeholder: 'Верхний бордюр',   label: false,   as: :hidden
       = f.input :left, input_html: { class: 'input-mini'}, placeholder: 'Левый бордюр',    label: false,    as: :hidden
       = f.input :right, input_html: { class: 'input-mini'}, placeholder: 'Правый бордюр',  label: false,  as: :hidden
       = f.input :bottom, input_html: { class: 'input-mini'}, placeholder: 'Нижний бордюр', label: false, as: :hidden
       = f.input :slide_id, as: :hidden
 
-      = f.button :submit, 'Закрепить', class: 'btn btn-mini btn-success'
+      = f.button :submit, 'Закрепить', class: 'btn btn-mini btn-success', id: 'line_kk'
+      = link_to_function 'X', "javascript: $(this).closest('.line').hide()", class: 'btn btn-mini btn-danger'

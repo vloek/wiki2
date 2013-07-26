@@ -3,7 +3,7 @@
       div class="carousel-inner disable-select" style="overflow: initial;"
         
         - @page.slides.each do |slide|
-          div class="item #{'active' if @page.slides.index(slide) == 0}" style="position:relative; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{slide.image}');"
+          div class="item #{'active' if @page.slides.index(slide) == 0}" style="position:relative; height: 500px !important; width: 900px !important; margin: auto; background-size: cover; background-image: url('#{slide.image}');"
             == render partial: 'display_hint', collection: slide.hints
             == render partial: 'lines/line', collection: slide.lines
       ol class="carousel-indicators"

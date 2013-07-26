@@ -10,10 +10,13 @@
         = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
         /= f.input :radius, as: :integer, input_html: { class: 'input-mini' }, label: false
 
+        = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+        = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
         = f.input :hint_id, as: :hidden
 
-        = link_to_submit class: 'btn btn-mini btn-danger' do 
+        = link_to_submit class: 'btn btn-mini btn-success' do 
           i.icon-ok
+        = link_to_function 'X', 'javascript: $(this).closest(".nested_hint").hide()', class: 'btn btn-mini btn-danger'
 
 - else
   div class="nested_hint ui-widget-content"

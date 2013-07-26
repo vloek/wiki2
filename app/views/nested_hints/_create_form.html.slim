@@ -6,10 +6,14 @@
     = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
     = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
     = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+    = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+    = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
     /= f.input :radius, as: :integer, input_html: { class: 'input-mini' }, label: false
 
     = f.input :hint_id, as: :hidden
     .btn-gorup
       = link_to_submit class: 'btn btn-mini btn-success' do
         i.icon-ok
+      = link_to edit_nested_hint_path(@nested_hint), remote: true, class: 'btn btn-mini btn-success' do 
+        i.icon-pencil
       = link_to 'X', @nested_hint, method: :delete, confirm: "Вы уверены?", class: 'btn btn-danger btn-mini', remote: true

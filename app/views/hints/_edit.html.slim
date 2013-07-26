@@ -6,6 +6,8 @@
   = f.input :title, label: false, placeholder: 'Заголовок'
   = f.input :content, as: :ckeditor, label: 'Описание'
   = f.input :slide_id, as: :hidden
+  = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+  = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
   = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
   = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
   .modal-footer

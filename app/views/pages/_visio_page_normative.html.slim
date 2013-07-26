@@ -6,8 +6,8 @@
 		.title
 			.vert
 				= link_to page_fullscreen_path(visio_page_normative), remote: true do 
-					= replacing_space(truncate visio_page_normative.title, length: 48)
+					= replacing_space(truncate visio_page_normative.title, length: 45)
 		.content
 			= link_to page_fullscreen_path(visio_page_normative), remote: true do 
-				=  replacing_space(truncate (strip_tags visio_page_normative.semantic_load), length: 320) || 'Не заполнена смысловая нагрузка'
+				=  replacing_space(truncate (strip_tags visio_page_normative.semantic_load), length: 305) || 'Не заполнена смысловая нагрузка'
 .clearFix

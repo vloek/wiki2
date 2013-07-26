@@ -1,10 +1,14 @@
-div class="fields drago field_new_hint"
+div class="fields drago field_new_hint" style="position: absolute"
   = simple_form_for (@hint), remote: true, id: @hint.id, format: :js, html: { :'data-type' => 'script' } do |f|
     / = f.error_notification
 
     = f.input :title, label: false, placeholder: 'Заголовок'
+    = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+    = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
     = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
     = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+    = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+    = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
     = f.input :slide_id, as: :hidden, input_html: { value: @page_slide.id  }
     = f.input :_destroy, as: :hidden
     div.pull-right
@@ -14,6 +18,6 @@ div class="fields drago field_new_hint"
         - else
           = f.submit "Закреплено", class: 'btn btn-success btn-mini'
         / = link_to_remove_fields "X", f 
-        = link_to "X", hints_path(@hint), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+        = link_to_function "X", "javascript:$(this).closest('.field_new_hint').hide()", method: :delete, remote: true, class: 'btn btn-mini btn-danger'
 
 

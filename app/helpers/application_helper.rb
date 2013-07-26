@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	def link_to_remove_fields(name, f)
-    link_to_function(name, "remove_fields(this)", class: 'btn btn-mini btn-danger')
+    link_to_function(name, "if(confirm('Are you sure?')) remove_fields(this)", class: 'btn btn-mini btn-danger')
   end
   
   def link_to_add_fields(name, f, association)
@@ -38,5 +38,23 @@ module ApplicationHelper
     str.gsub!("&nbsp;", " ")
     str.gsub!("&ndash;", "-")
     str
+  end
+
+
+  # full or not full?
+  def current_ord_x(obj, params)
+    if params[:fullscreen]
+      obj.x_full
+    else
+      obj.x
+    end
+  end
+
+  def current_ord_y(obj, params)
+    if params[:fullscreen]
+      obj.y_full
+    else
+      obj.y
+    end
   end
 end

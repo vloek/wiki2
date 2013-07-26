@@ -34,7 +34,7 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
     @page = Page.find(params[:id])
-    @indicators = Page.where('parent_id == 2')
+    @indicators = Page.where(parent_id: 2)
     if @page.slider
       render '_form_by_slider'
     else
@@ -64,7 +64,7 @@ class PagesController < ApplicationController
     if @page.update_attributes(params[:page])
       redirect_to edit_page_path(@page), notice: 'Page was successfully updated.' 
     else
-      render action: "edit" 
+      redirect_to pages_url, notice: 'Error! Not install ImageMagick(maybe)' 
     end
   end
 

@@ -40,6 +40,17 @@ div.persp {
 	margin-left: -200px;
 }
 
+#main-content #left_content #main-block .title {
+	height: 60px !important;
+	background-size: contain;
+
+}
+
+#main-content #left_content #main-block .title h3 {
+	font-size: 30px !important;
+	line-height: 60px !important;
+}
+
 #main-content #left_content #main-block {
 	min-width: 1000px;
 	min-height: 800px;
@@ -53,6 +64,9 @@ div.persp {
 
 
 #main-content #right_content #img-block {
+	width: 530px !important;
+	height: 350px !important;
+	right: 30px !important;
 	top: 0px;
 }
 
@@ -60,6 +74,10 @@ div.persp {
 	height: 340px;
 	top: 320px;
 	background-size: contain;
+	font-size: 23px;
+	width: 530px !important;
+	right: 28px !important;
+	margin-top: 140px !important;
 }
 
 #main-content #right_content #menu-links ul {
@@ -69,17 +87,23 @@ div.persp {
 
 #main-content #right_content #img-block .slide-links {
 	bottom: -80px;
+	width: 530px !important;
 }
 
 #main-content #left_content #main-block .content {
 	height: 735px;
+	top: 61px !important;
 }
 
 
 #main-content #left_content {
-	right: 520px;
+	right: 600px;
 }
 
+#main-content #right_content #img-block .slides-block {
+	width: 530px !important;
+	height: 350px !important;
+}
 
 
 .scrolled-container {
@@ -91,16 +115,33 @@ div.persp {
 }
 
 .container_normative .normative {
-	width: 852px !important;
+	width: 923px !important;
+	height: 160px;
+	font-family: 'pf_dindisplay_proregular' !important;
+
 }
 
 .container_normative .normative .title {
-	width: 855px;
+	width: 926px;
+	height: 60px !important;
+	background-size: contain;
+	font-size: 36px !important;
 
+}
+
+.container_normative .normative .content {
+	top: 50px !important;
+	line-height: 25px;
+	font-size: 23px !important;
+}
+
+.vert {
+	line-height: 60px !important;
 }
 
 .container_normative {
 	right: 190px !important;
+	margin-bottom: 60px;
 }
 
 
@@ -120,10 +161,35 @@ div.persp {
 
 
 ol.carousel-indicators {
-	bottom: -135px !important;
+	bottom: -230px !important;
 }
 
 
 div#nested_form {
 	top: 140px !important;
+}
+
+.container_normative .normative .slide_normative {
+	height: 166px !important;
+}
+
+
+#main-content #right_content #img-block .slide-links ul li {
+	/*margin-left: 40px;*/
+	width: 130px;
+
+}
+
+
+
+#main-content #right_content #menu-links ul li {
+	background-repeat: repeat-x;
+	height: 31px;
+	font-size: 23px;
+	width: 490px !important;
+}
+
+.carousel-inner>.item {
+	width: 530px !important;
+	height: 350px !important;
 }

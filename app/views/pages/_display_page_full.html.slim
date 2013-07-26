@@ -26,7 +26,7 @@
         / a class="carousel-control right" href="#slider_full" data-slide="next"&rsaquo;
 
       .slide-links
-        ul
+        ul style="margin-left: 10px"
           li 
             - if @page.city_agregation != nil && @page.city_agregation != 0
               =link_to 'Город', '#', class: 'active'
@@ -60,4 +60,4 @@
         - @page.related_pages.uniq.each do |c|
           - next if c.to_i == 0
           li
-            = link_to truncate(Page.find(c.to_i).title, length: 34), page_fullscreen_path(Page.find(c.to_i)), remote: true
+            = link_to truncate(Page.find(c.to_i).title, length: 30), page_fullscreen_path(Page.find(c.to_i)), remote: true

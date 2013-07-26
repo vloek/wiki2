@@ -17,6 +17,7 @@ class NestedHintsController < ApplicationController
   def new
     @nested_hint = NestedHint.new
     @nested_hint.hint_id = params[:hint_id]
+    @fullscreen = params[:fullscreen]
   end
 
   # GET /nested_hints/1/edit

@@ -1,4 +1,4 @@
-div class="hint disable-select" style="position: absolute; left: #{display_hint.x}; top: #{display_hint.y};  z-index: 1000 "  align="justify"
+div class="hint disable-select" style="position: absolute; left: #{current_ord_x(display_hint, params)}; top: #{current_ord_y(display_hint, params)};  z-index: 1000; width: #{display_hint.width}; height: #{display_hint.height};" 
   .title
     h3 = display_hint.title.upcase
   div class="content disable-select"

@@ -29,3 +29,7 @@ div.persp {
 html {
 }
 
+#btn_return {
+	left: 10px !important;
+	bottom: 12px !important;
+}

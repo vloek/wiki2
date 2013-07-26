@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605173036) do
+ActiveRecord::Schema.define(:version => 20130724085914) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -37,7 +37,21 @@ ActiveRecord::Schema.define(:version => 20130605173036) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "slide_id"
+    t.string   "width"
+    t.string   "height"
+    t.string   "x_full"
+    t.string   "y_full"
   end
+
+  create_table "hints_positions", :force => true do |t|
+    t.integer  "hint_id"
+    t.integer  "position_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "hints_positions", ["hint_id"], :name => "index_hints_positions_on_hint_id"
+  add_index "hints_positions", ["position_id"], :name => "index_hints_positions_on_position_id"
 
   create_table "lines", :force => true do |t|
     t.string   "width"
@@ -51,7 +65,19 @@ ActiveRecord::Schema.define(:version => 20130605173036) do
     t.string   "slide_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "x_full"
+    t.string   "y_full"
   end
+
+  create_table "lines_positions", :force => true do |t|
+    t.integer  "line_id"
+    t.integer  "position_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "lines_positions", ["line_id"], :name => "index_lines_positions_on_line_id"
+  add_index "lines_positions", ["position_id"], :name => "index_lines_positions_on_position_id"
 
   create_table "nested_hints", :force => true do |t|
     t.string   "x"
@@ -62,10 +88,29 @@ ActiveRecord::Schema.define(:version => 20130605173036) do
     t.string   "width"
     t.string   "height"
     t.string   "radius"
+    t.string   "x_full"
+    t.string   "y_full"
   end
+
+  create_table "nested_hints_positions", :force => true do |t|
+    t.integer  "nested_hint_id"
+    t.integer  "position_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "nested_hints_positions", ["nested_hint_id"], :name => "index_nested_hints_positions_on_nested_hint_id"
+  add_index "nested_hints_positions", ["position_id"], :name => "index_nested_hints_positions_on_position_id"
 
 # Could not dump table "pages" because of following StandardError
 #   Unknown type 'bool' for column 'city_agregation'
+
+  create_table "positions", :force => true do |t|
+    t.string   "x"
+    t.string   "y"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "properties", :force => true do |t|
     t.integer  "page_id"

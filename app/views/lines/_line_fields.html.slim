@@ -1,4 +1,4 @@
-.line id="line_#{line_fields.id}" style="position: absolute; display: block; width: #{line_fields.width }; height: #{line_fields.height}; border-top: #{line_fields.top.to_i}px; border-bottom: #{line_fields.bottom.to_i}px; border-left: #{line_fields.left.to_i}px; border-right: #{line_fields.right.to_i}px; top: #{line_fields.y}; left: #{ line_fields.x }; border-color: #666; border-style: solid;"
+.line id="line_#{line_fields.id}" style="position: absolute; display: block; width: #{line_fields.width }; height: #{line_fields.height}; border-top: #{line_fields.top.to_i}px; border-bottom: #{line_fields.bottom.to_i}px; border-left: #{line_fields.left.to_i}px; border-right: #{line_fields.right.to_i}px; top: #{current_ord_y(line_fields, params)}; left: #{ current_ord_x(line_fields, params) }; border-color: #666; border-style: solid;"
   = simple_form_for (line_fields), remote: true do |f|
     = f.error_notification
 
@@ -7,6 +7,8 @@
       = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
       = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
       = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+      = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+      = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
       = f.input :top, input_html: { class: 'input-mini'}, placeholder: 'Верхний бордюр',   label: false, as: :hidden
       = f.input :left, input_html: { class: 'input-mini'}, placeholder: 'Левый бордюр',    label: false, as: :hidden
       = f.input :right, input_html: { class: 'input-mini'}, placeholder: 'Правый бордюр',  label: false, as: :hidden

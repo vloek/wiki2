@@ -1,4 +1,4 @@
-.nested_hint style="position: absolute;width: #{nested_hint_fields.width}; height: #{nested_hint_fields.height}; top: #{nested_hint_fields.y}; left: #{nested_hint_fields.x}; background: rgba(0,0,0,0) !important; border-radius: #{nested_hint_fields.radius}px !important;" id="nested_hint_#{nested_hint_fields.id}"
+.nested_hint style="position: absolute;width: #{nested_hint_fields.width}; height: #{nested_hint_fields.height}; top: #{current_ord_y(nested_hint_fields, params)}; left: #{current_ord_x(nested_hint_fields, params)}; background: rgba(0,0,0,0) !important; border-radius: #{nested_hint_fields.radius}px !important;" id="nested_hint_#{nested_hint_fields.id}"
   = simple_form_for (nested_hint_fields), remote: true, format: :js, html: { :'data-type' => 'script' } do |f|
     = f.error_notification
 
@@ -9,6 +9,8 @@
       = f.input :height, as: :hidden,  input_html: { class: 'height_ord' }
       /= f.input :radius, as: :integer, input_html: { class: 'input-mini' }, label: false
 
+      = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+      = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
       = f.input :hint_id, as: :hidden
       .btn-group
         = link_to_submit class: 'btn btn-mini btn-success' do

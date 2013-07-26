@@ -1,4 +1,4 @@
-div class="hint disable-select" style="position: absolute; left: #{hint_on_edit.x}; top: #{hint_on_edit.y};  z-index: 1000 "  align="justify" id="hint_#{ hint_on_edit.id }"
+div class="hint disable-select" style="position: absolute; left: #{current_ord_x(hint_on_edit, params)}; top: #{current_ord_y(hint_on_edit, params)};  z-index: 1000; width: #{hint_on_edit.width}; height: #{hint_on_edit.height} "   id="hint_#{ hint_on_edit.id }"
   .title
     .pull-left
       h3 = hint_on_edit.title.upcase
@@ -8,6 +8,10 @@ div class="hint disable-select" style="position: absolute; left: #{hint_on_edit.
 
         = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
         = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+        = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+        = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
+        = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+        = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
         = f.input :_destroy, as: :hidden
         div.pull-right
           .btn-group style="position: absolute; top: 0; right: 0"

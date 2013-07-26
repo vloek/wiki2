@@ -23,9 +23,12 @@
   .pull-right
     = simple_form_for (@hint), remote: true, id: @hint.id, format: :js, html: { :'data-type' => 'script'} do |f|
       / = f.error_notification
-
+      = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+      = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
       = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
       = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+      = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+      = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
       = f.input :_destroy, as: :hidden
       div.pull-right
         .btn-group style="position: absolute; top: 0; right: 0;"
@@ -40,7 +43,7 @@
               / = link_to_remove_fields "X", f 
           = link_to edit_hint_path(@hint), class: 'btn btn-success btn-mini show_modal', remote: true do
             i.icon-pencil
-          = link_to "X", hints_path(@hint), method: :delete, remote: true, class: 'btn btn-mini btn-danger'
+          = link_to "X", "/hints/#{@hint.id}", method: :delete, remote: true, class: 'btn btn-mini btn-danger'
 
 div class="content"
   = raw @hint.content
