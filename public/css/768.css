@@ -49,6 +49,14 @@ li#1 {
 	height: 768px !important;
 }
 
+.hint .title {
+	font-size: 14px !important;
+}
+
+.hint .content{
+	font-size: 12px !important;
+}
+
 
 #main-content #right_content #img-block {
 	right: 4px;
