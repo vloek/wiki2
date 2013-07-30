@@ -3,12 +3,7 @@
 
 
 .xz
-  br
-  br
-  br
-  br
-  br
-  br
+
   = link_to  new_page_slide_hint_path(@page_slide.page, @page_slide, Hint.new, fullscreen: @fullscreen) , remote: true, class: 'btn btn-info ' do
     i.icon-plus
 
@@ -25,7 +20,12 @@
       img src='/assets/bottom_left.gif'
     = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_bottom_right', fullscreen: @fullscreen) , remote: true, class: 'btn btn-inverse ' do
       img src='/assets/bottom_right.gif'
-
+  br
+  br
+  br
+  br
+  br
+  br
   / #dragable_plane
   .pull-center
     #nested_form style="position:relative; top: -40px; height: 500px; width: 900px; margin: auto; background-size: cover; background-image: url('#{@page_slide.image}');"

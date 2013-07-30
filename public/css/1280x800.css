@@ -10,3 +10,7 @@
 .hint .content {
 	font-size: 14px !important;
 }
+
+.hint .content span {
+  font-size: 14px !important;
+}
