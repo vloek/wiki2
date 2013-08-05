@@ -3,16 +3,17 @@
 
 
 .well style="width: 100% !important; height: 100% !important; position: fixed; top: 59px; left: 0; display: block; overflow-y: scroll"
-	.inline
-		= link_to edit_page_path(@page_slide.page), class: 'btn btn-inverse' do
-			i.icon-arrow-left&nbsp;
-			|Назад
-		h1 style="display: inline" &nbsp; Редактировать слайд
-		= link_to 'Fullscreen', url_for(fullscreen: true), class: 'btn btn-inverse' 
-	hr
-	== render 'form'
+  .inline
+    = link_to edit_page_path(@page_slide.page), class: 'btn btn-inverse' do
+      i.icon-arrow-left&nbsp;
+      |Назад
+    h1 style="display: inline" &nbsp; Редактировать слайд
+    .pull-right
+      = link_to 'Смена режима отображения', url_for(fullscreen: !@fullscreen), class: 'btn btn-inverse', id: 'toggle'
+  hr
+  == render 'form'
 
-	
+  
 br
 br
 

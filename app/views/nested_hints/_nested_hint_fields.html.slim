@@ -1,4 +1,4 @@
-.nested_hint style="position: absolute;width: #{nested_hint_fields.width}; height: #{nested_hint_fields.height}; top: #{current_ord_y(nested_hint_fields, params)}; left: #{current_ord_x(nested_hint_fields, params)}; background: rgba(0,0,0,0) !important; border-radius: #{nested_hint_fields.radius}px !important;" id="nested_hint_#{nested_hint_fields.id}"
+.nested_hint style="position: absolute;width: #{nested_hint_fields.width}; height: #{nested_hint_fields.height}; top: #{current_ord_y(nested_hint_fields, @fullscreen)}; left: #{current_ord_x(nested_hint_fields, @fullscreen)}; background: rgba(0,0,0,0) !important; border-radius: #{nested_hint_fields.radius}px !important;" id="nested_hint_#{nested_hint_fields.id}"
   = simple_form_for (nested_hint_fields), remote: true, format: :js, html: { :'data-type' => 'script' } do |f|
     = f.error_notification
 

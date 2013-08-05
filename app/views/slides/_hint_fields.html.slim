@@ -1,4 +1,4 @@
-div class="fields drago hint_#{hint_fields.id} hint" style="position: absolute; left: #{current_ord_x(hint_fields, params)}; top: #{current_ord_y(hint_fields, params)};" id="field_#{hint_fields.id}"
+div class="fields drago hint_#{hint_fields.id} hint" style="position: absolute; left: #{current_ord_x(hint_fields, @fullscreen)}; top: #{current_ord_y(hint_fields, @fullscreen)};" id="field_#{hint_fields.id}"
   = simple_form_for (hint_fields), remote: true, id: hint_fields.id, format: :js, html: { :'data-type' => 'script' } do |f|
     / = f.error_notification
 

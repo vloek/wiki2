@@ -18,7 +18,7 @@ class HintsController < ApplicationController
   # GET /hints/new.json
   def new
     @hint = Hint.new
-    @fullscreen = params[:fullscreen]
+    @fullscreen = params[:fullscreen].to_bool || false
     @page_slide = Slide.find(params[:slide_id]) if params[:slide_id]
     render 'new'
   end

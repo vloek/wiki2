@@ -1,4 +1,4 @@
-div class="hint disable-select" style="position: absolute; left: #{current_ord_x(hint_on_edit, params)}; top: #{current_ord_y(hint_on_edit, params)};  z-index: 1000; width: #{hint_on_edit.width}; height: #{hint_on_edit.height} "   id="hint_#{ hint_on_edit.id }"
+div class="hint disable-select" style="position: absolute; left: #{current_ord_x(hint_on_edit, @fullscreen)}; top: #{current_ord_y(hint_on_edit, @fullscreen)};  z-index: 1000; width: #{hint_on_edit.width}; height: #{hint_on_edit.height} "   id="hint_#{ hint_on_edit.id }"
   .title
     .pull-left
       h3 = hint_on_edit.title.upcase

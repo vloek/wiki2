@@ -44,16 +44,16 @@ module ApplicationHelper
 
 
   # full or not full?
-  def current_ord_x(obj, params)
-    if params[:fullscreen]
+  def current_ord_x(obj, fullscreen)
+    if fullscreen
       obj.x_full
     else
       obj.x
     end
   end
 
-  def current_ord_y(obj, params)
-    if params[:fullscreen]
+  def current_ord_y(obj, fullscreen)
+    if fullscreen
       obj.y_full
     else
       obj.y

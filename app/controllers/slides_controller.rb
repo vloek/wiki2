@@ -35,7 +35,7 @@ class SlidesController < ApplicationController
   # GET /page/slides/1/edit
   def edit
     @page_slide = Slide.find(params[:id])
-    @fullscreen = params[:fullscreen]
+    @fullscreen = params[:fullscreen].try(:to_bool) || false
   end
 
   # POST /page/slides

@@ -25,6 +25,9 @@ html lang="en"
     - if @fullscreen
       link rel='stylesheet' href='/css/fullscreen.css'
 
+
+
+
       
 
   body
@@ -51,7 +54,7 @@ html lang="en"
             .logo_obrm
               img#cross src="/assets/logo_cross.png" align="right"
 
-              a.logo href="#{root_path}" style="cursor: default;"
+              a.logo href="http://#{request.host}/?fullscreen=#{@fullscreen}" style="cursor: default;"
                 big ЕМИАС
                 br
                 small ЦЕНТР МОНИТОРИНГА
@@ -71,7 +74,7 @@ html lang="en"
       .header_btn
         .graph
           span#header_title.disable-select
-      .header_return onclick="location.href=('#{root_path}');"
+      .header_return onclick="location.href=('http://#{request.host}/?fullscreen=#{@fullscreen}');"
 
     = link_to '', '/pages/2', remote: true, id: 'btn_return'
 
@@ -106,6 +109,7 @@ html lang="en"
 
     = javascript_include_tag "application"
     script src="/js/close.js" type="text/javascript"
+    script src="/js/fs.js" type="text/javascript"
     - if @fullscreen
       script src="/js/drag_full.js" type="text/javascript"
     - else
