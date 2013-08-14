@@ -3,3 +3,12 @@ class Hint < ActiveRecord::Base
   belongs_to :slide
   has_many :nested_hints
 end
+
+
+class Triangle
+  attr :a, :b
+  
+  def place
+    (a * b) / 2
+  end
+end

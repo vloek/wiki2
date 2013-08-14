@@ -1,20 +1,21 @@
-.line id="line_#{line_fields.id}" style="position: absolute; display: block; width: #{line_fields.width }; height: #{line_fields.height}; border-top: #{line_fields.top.to_i}px; border-bottom: #{line_fields.bottom.to_i}px; border-left: #{line_fields.left.to_i}px; border-right: #{line_fields.right.to_i}px; top: #{current_ord_y(line_fields, @fullscreen)}; left: #{ current_ord_x(line_fields, @fullscreen) }; border-color: #666; border-style: solid;"
+.line id="line_#{line_fields.id}" style="position: absolute; display: block; width: #{@fullscreen ? line_fields.widths[:fullscreen] : line_fields.width }; height: #{@fullscreen ? line_fields.heights[:fullscreen] : line_fields.height}; border-top: #{line_fields.top.to_i}px; border-bottom: #{line_fields.bottom.to_i}px; border-left: #{line_fields.left.to_i}px; border-right: #{line_fields.right.to_i}px; top: #{current_ord_y(line_fields, @fullscreen)}; left: #{ current_ord_x(line_fields, @fullscreen) }; border-color: #666; border-style: solid;"
   = simple_form_for (line_fields), remote: true do |f|
     = f.error_notification
 
     .form-inputs style="left: -100px; position: relative;"
-      = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
-      = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
-      = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
-      = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
-      = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
-      = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
-      = f.input :top, input_html: { class: 'input-mini'}, placeholder: 'Верхний бордюр',   label: false, as: :hidden
-      = f.input :left, input_html: { class: 'input-mini'}, placeholder: 'Левый бордюр',    label: false, as: :hidden
-      = f.input :right, input_html: { class: 'input-mini'}, placeholder: 'Правый бордюр',  label: false, as: :hidden
-      = f.input :bottom, input_html: { class: 'input-mini'}, placeholder: 'Нижний бордюр', label: false, as: :hidden
-      = f.input :slide_id, as: :hidden
-      .btn-group
-        = link_to_submit class: 'btn btn-mini btn-success' do
-          i.icon-ok
-        = link_to 'X', line_fields, method: :delete, confirm: "Вы уверены?", class: 'btn btn-danger btn-mini', remote: true
+      == render template:'lines/list_field', locals: { f: f, line: line_fields }
+      / = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
+      / = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+      / = f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+      / = f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+      / = f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+      / = f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
+      / = f.input :top, input_html: { class: 'input-mini'}, placeholder: 'Верхний бордюр',   label: false, as: :hidden
+      / = f.input :left, input_html: { class: 'input-mini'}, placeholder: 'Левый бордюр',    label: false, as: :hidden
+      / = f.input :right, input_html: { class: 'input-mini'}, placeholder: 'Правый бордюр',  label: false, as: :hidden
+      / = f.input :bottom, input_html: { class: 'input-mini'}, placeholder: 'Нижний бордюр', label: false, as: :hidden
+      / = f.input :slide_id, as: :hidden
+      / .btn-group
+      /   = link_to_submit class: 'btn btn-mini btn-success' do
+      /     i.icon-ok
+      /   = link_to 'X', line_fields, method: :delete, confirm: "Вы уверены?", class: 'btn btn-danger btn-mini', remote: true

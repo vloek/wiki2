@@ -1,0 +1,22 @@
+- if @fullscreen
+  = hidden_field_tag "line[widths][fullscreen]", line.widths[:fullscreen],  class: 'width_ord'
+  = hidden_field_tag "line[heights][fullscreen]", line.heights[:fullscreen],  class: 'height_ord'
+  / = f.input :width, as: :hidden, input_html: { class: 'width_ord' }
+- else
+  = f.input :width,  as: :hidden, input_html: { class: 'width_ord' }
+  = f.input :height, as: :hidden, input_html: { class: 'height_ord' }
+= f.input :x, as: :hidden, input_html: { class: 'x_ord' }
+= f.input :y, as: :hidden, input_html: { class: 'y_ord' }
+= f.input :x_full, as: :hidden, input_html: { class: 'x_full' }
+= f.input :y_full, as: :hidden, input_html: { class: 'y_full' }
+= f.input :top, input_html: { class: 'input-mini'}, placeholder: 'Верхний бордюр',   label: false,   as: :hidden
+= f.input :left, input_html: { class: 'input-mini'}, placeholder: 'Левый бордюр',    label: false,    as: :hidden
+= f.input :right, input_html: { class: 'input-mini'}, placeholder: 'Правый бордюр',  label: false,  as: :hidden
+= f.input :bottom, input_html: { class: 'input-mini'}, placeholder: 'Нижний бордюр', label: false, as: :hidden
+= f.input :slide_id, as: :hidden
+.btn-group
+  = f.button :submit, 'Закрепить', class: 'btn btn-mini btn-success line_kk', id: 'line_kk'
+  - if line.new_record?
+    = link_to_function 'X', "javascript: $(this).closest('.line').hide()", class: 'btn btn-mini btn-danger'
+  - else
+    = link_to 'X', line_path(line), method: :delete, confirm: "Вы уверены?", class: 'btn btn-danger btn-mini ', remote: true

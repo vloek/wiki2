@@ -1,0 +1,1288 @@
+<?
+
+function GetUserRightsPrintable_sort($a,$b)
+ {
+  /*
+  UseModule('Security')->GetGroupTypeName($a['grouptype']).
+  UseModule('Security')->GetPrintableName($a['grouptype'],$a['groupname'])
+  */
+  
+  if (UseModule('Security')->GetGroupTypeName($a['grouptype'])==UseModule('Security')->GetGroupTypeName($b['grouptype']))
+  { 
+   if (UseModule('Security')->GetPrintableName($a['grouptype'],$a['groupname'])==UseModule('Security')->GetPrintableName($b['grouptype'],$b['groupname'])) return 0; 
+   if (UseModule('Security')->GetPrintableName($a['grouptype'],$a['groupname'])>UseModule('Security')->GetPrintableName($b['grouptype'],$b['groupname'])) return 1; 
+   return -1;
+  }
+  if (UseModule('Security')->GetGroupTypeName($a['grouptype'])>UseModule('Security')->GetGroupTypeName($b['grouptype'])) { return 1; }
+  return -1;
+ }
+
+/*
+ CnvIpToText($ipbegin,$ipend)
+ CreateNewSID($typename,$OwnerSID="",$isAnd=false)
+ DeleteSID($sid)
+ DeleteOwner($sid)
+ EditIpRanges()
+ EditRights()
+ EditRights_EchoHiddenParameters()
+ GetGroupTypeName($grouptype)
+ GetPrintableName($grouptype,$groupname)
+ GetRightsPrintable($rights)
+ GetUserRights($sid)
+ IsHaveRightsView($sid)
+ IsUserInGroup($grouptype,$groupname)
+ Security()
+ SetOwnerSID($owner,$sid) 
+ SetSiteRights($sid,$srights,$rights)
+ SetUserRights($sid,$group,$rights)
+ ShowIpRangesList()
+ ShowRightsList($sid)
+ ShowURActionButtons($sid,$DelLink="",$EditLink="",$AppendSubLink="")
+ ShowURRActionButtons($rights)
+ 
+*/
+// group types
+ define("GT_SID",1); // Наследовать права от sid
+ define("GT_SITE",2); // Права, заданные на сайте
+ define("GT_CHB",3); // ЧБ
+ define("GT_FAK",4);
+ define("GT_NAPR",5);
+ define("GT_SPEC",6);
+ define("GT_VO",7);
+ define("GT_FO",8);
+ define("GT_SEM",9);
+ define("GT_GROUP",10);
+ define("GT_KAT",11);
+ define("GT_IP",12);
+
+// User Rights
+ define("UR_VIEW",1);               // 00000000 00000001
+ define("UR_EDIT",2);               // 00000000 00000010
+ define("UR_DELETE",4);             // 00000000 00000100
+ define("UR_ADDSUB",8);             // 00000000 00001000
+
+ define("UR_R_VIEW",256);           // 00000001 00000000
+ define("UR_R_EDIT",512);           // 00000010 00000000
+ define("UR_R_DELETE",1024);        // 00000100 00000000
+ define("UR_R_ADDSUB",2048);        // 00001000 00000000
+
+ define("UR_OWNER",65535);          // 11111111 11111111
+
+class Security
+{
+ function Security()
+ {
+  
+ }
+ function GetModuleTitle()
+ {
+  return iconv("windows-1251","utf-8",'Безопасность');
+ }
+
+ function DeleteOwner($sid)
+ {
+  $sql='update sid set OwnerSID="" where sid="'.$sid.'"';
+  UseModule('SQL')->Query($sql);
+  //mysql_query($sql);
+ }
+
+ function IsHaveRightsView($sid)
+ {
+  $r=$this->GetUserRights($sid);
+  return (((int)$r&(int)UR_VIEW)==(int)UR_VIEW);
+ }
+
+ function IsHaveRightsEdit($sid)
+ {
+  $r=$this->GetUserRights($sid);
+  return (((int)$r&(int)UR_EDIT)==(int)UR_EDIT);
+ }
+
+ function IsUserInGroup($grouptype,$groupname)
+ {
+  // Булева фуунка. Определяет принадлежит ли текущий пользователь указанной группе
+  $u=UseModule('Users');
+  switch ($grouptype)
+  {
+   case GT_SID: 
+     return false; 
+     break;
+   case GT_SITE:      
+     return ($u->IsHaveRights($groupname));
+     break;
+   case GT_CHB: 
+     return ($u->GetChb()==$groupname);
+     break;
+   case GT_FAK: 
+     $m=$u->GetFak();
+     if (is_array($m))
+     foreach ($m as $fak)
+     {
+      if ($fak==$groupname)
+       return true;
+     }
+     break;
+   case GT_NAPR: 
+     $m=$u->GetNapr();
+     if (is_array($m))
+     foreach ($m as $fak)
+     {
+      if ($fak==$groupname)
+       return true;
+     }
+     break;
+   case GT_SPEC: 
+     $m=$u->GetSpec();
+     if (is_array($m))
+     foreach ($m as $fak)
+     {
+      if ($fak==$groupname)
+       return true;
+     }
+     break;
+   case GT_VO: 
+     $m=$u->GetVo();
+     if (is_array($m))
+     foreach ($m as $fak)
+     {
+      if ($fak==$groupname)
+       return true;
+     }
+     break;
+   case GT_FO: 
+     $m=$u->GetFo();
+     if (is_array($m))
+     foreach ($m as $fak)
+     {
+      if ($fak==$groupname)
+       return true;
+     }
+     break;
+   case GT_SEM: 
+     $m=$u->GetSem();
+     if (is_array($m))
+     foreach ($m as $fak)
+     {
+      if ($fak==$groupname)
+       return true;
+     }
+     break;
+   case GT_GROUP: 
+     $m=$u->GetGroup();
+     if (is_array($m))
+     foreach ($m as $fak)
+     {
+      if ($fak==$groupname)
+       return true;
+     }
+     break;
+   case GT_KAT: 
+     if ($u->GetKat()==$groupname) return true;
+     break;
+   case GT_IP:
+     $ip=$_SERVER['REMOTE_ADDR'];
+     $m=explode('.',$ip);
+//     $ip=($m[0]<<24)+($m[1]<<16)+($m[2]<<8)+($m[3]);
+     $sqlgip='select * from security_ipranges where id='.$groupname;
+     $resgip=mysql_query($sqlgip);
+     if ($resgip)
+     {
+      $rowgip=mysql_fetch_array($resgip);
+      if ($rowgip)
+      {
+       $a1=(((float)$rowgip['ipbegin']>>24)&(float)0xFF);
+       $b1=(((float)$rowgip['ipbegin']>>16)&(float)0xFF);
+       $c1=(((float)$rowgip['ipbegin']>>8)&(float)0xFF);
+       $d1=((float)$rowgip['ipbegin']&(float)0xFF);
+       $a2=(((float)$rowgip['ipend']>>24)&(float)0xFF);
+       $b2=(((float)$rowgip['ipend']>>16)&(float)0xFF);
+       $c2=(((float)$rowgip['ipend']>>8)&(float)0xFF);
+       $d2=((float)$rowgip['ipend']&(float)0xFF);
+       if (($a1<=$m[0])&&($m[0]<=$a2))
+       {
+        if ($m[0]<$a2) return true;
+        if (($b1<=$m[1])&&($m[1]<=$b2))
+        {
+         if ($m[1]<$b2) return true;
+         if (($c1<=$m[2])&&($m[2]<=$c2))
+         {
+          if ($m[2]<$c2) return true;
+          if (($d1<=$m[3])&&($m[3]<=$d2))
+          {
+           return true;
+          }
+         }
+        }
+       }
+      }
+     }
+     break;
+   default: return false;
+  }
+  return false;
+ }
+
+ function GetUserRights($sid)
+ {
+  $rights=0;
+  $isAnd=false;
+  $isOwner=false;
+  $Module='';
+  // Является ли юзер владельцем объекта и наследуются ли права?
+  $sql="select * from sid where sid='$sid'";
+  if(($result = mysql_query($sql)))
+  {
+   $row = mysql_fetch_array($result);
+   if($row)
+   {
+    if ($row['OwnerUID']==UseModule('Users')->GetUID()) return UR_OWNER;
+    if ($row['OwnerSID']!='') $rights=$this->GetUserRights($row['OwnerSID']);
+    $Module=$row['object_type'];
+    $isAnd=$row['IsAnd'];
+   }
+  }
+  // Теперь посмотрим на спец. права (сайт+модуль)
+  if($Module!='Modules')
+  {
+   //$row=UseModule('SQL')->SelectAndFetchFirst('sid','Modules','name="'.$Module.'"');
+   //if((is_array($row))&&($row['sid']!='')) (int)$rights|=(int)$this->GetUserRights($row['sid']);
+   (int)$rights|=(int)$this->GetUserRights('00000000000000000000000000000000');
+  }
+  // Берем список групп с правами на объект
+  $sql="select * from Security where sid='$sid'";
+  if(!($result = mysql_query($sql))) return $rights; //((int)$rights|(int)UR_VIEW); // Права по умолчанию - только просмотр.
+  $row = mysql_fetch_array($result);
+  if (!$row)
+   return $rights;// ((int)$rights|(int)UR_VIEW); // Права по умолчанию - только просмотр.
+  while($row)
+  {
+   if ($this->IsUserInGroup($row['grouptype'],$row['groupname']))
+   {
+    if ($isAnd) (int)$rights=((int)$rights&(int)$row['rights']); 
+    else (int)$rights=((int)$rights|(int)$row['rights']);
+   }
+   $row = mysql_fetch_array($result);
+  }
+  //if ($isOwner) $rights=$rights|UR_OWNER;
+  return $rights;
+ }
+
+ function SetUserRights($sid,$group,$rights)
+ {
+  if (($this->GetUserRights($sid)&(UR_R_EDIT|UR_EDIT))!=(UR_R_EDIT|UR_EDIT))
+  {
+   return -1; // Access Denied
+  }
+  $sql="select * from Security where sid='$sid' and grouptype='".$group['type']."' and groupname='".$group['name']."'";
+  if(!($result = mysql_query($sql))) 
+  {
+   return -2; // Internal Error
+  }
+  $row = mysql_fetch_object($result);
+  if(!$row)
+   $sql="insert into Security (sid,grouptype,groupname,rights) values (\"".$sid."\",\"".$group['type']."\",\"".$group['name']."\",".$rights.")";
+  else
+   $sql="update Security set rights=".$rights." where sid='$sid' and grouptype='".$group['type']."' and groupname='".$group['name']."'";
+  if(!($result = mysql_query($sql))) 
+  {
+   return -2; // Internal Error
+  }
+  return 0; // Ok
+ }
+
+ function GetModuleSID($modname)
+ {
+  $row=UseModule('SQL')->SelectAndFetchFirst('sid','Modules','name="'.$modname.'"');
+  if (is_array($row))
+   return $row['sid'];
+  else
+   return '';
+ }
+
+ function CreateNewSID($typename,$OwnerSID="",$isAnd=false)
+ {
+  if ($OwnerSID=='')
+   $OwnerSID=$this->GetModuleSID($typename);
+  $OwnerUID=UseModule('Users')->GetUID();
+  $sid=md5(date("D\, j M Y G:i:s T").microtime());
+  $sql="insert into SID (sid,OwnerUID,OwnerSID,IsAnd,object_type) values (\"$sid\",$OwnerUID,\"$OwnerSID\",";
+  if ($isAnd) $sql.="1,";
+  else $sql.="0,";
+  $sql.="\"$typename\")";
+  mysql_query($sql);
+  return $sid;
+ }
+
+ function DeleteSID($sid)
+ {
+  if (($this->GetUserRights($sid)&(UR_R_DELETE))!=UR_R_DELETE)
+  {
+   return 0; // Access Denied
+  }
+  $sql="update SID set OwnerSID=\"\" where OwnerSID=\"$sid\"";
+  if(!($result = mysql_query($sql))) 
+  {
+   return 0; // Internal Error
+  }
+  $sql="delete from SID where sid=\"$sid\"";
+  if(!($result = mysql_query($sql))) 
+  {
+   return 0; // Internal Error
+  }
+  $sql="delete from Security where sid=\"$sid\"";
+  if(!($result = mysql_query($sql))) 
+  {
+   return 0; // Internal Error
+  }
+  return 1;
+ }
+
+ function GetGroupTypeName($grouptype)
+ {
+  switch($grouptype)
+  {
+   case GT_SID: return "Наследовать права от"; break;
+   case GT_SITE: return "Права на сайте"; break;
+   case GT_CHB: return "№ читательского билета"; break;
+   case GT_FAK: return "Факультет"; break;
+   case GT_NAPR: return "Направление"; break;
+   case GT_SPEC: return "Специальность"; break;
+   case GT_VO: return "Вид обучения"; break;
+   case GT_FO: return "Форма обучения"; break;
+   case GT_SEM: return "Семестр"; break;
+   case GT_GROUP: return "Группа"; break;
+   case GT_KAT: return "Категория читателя"; break;
+   case GT_IP: return "IP-адрес или сеть"; break;
+   default: return "<НЕ ИЗВЕСТНО>"; 
+  }
+ }     
+ 
+ function GetRightsPrintable($rights)
+ {
+  $res='';
+  (($rights&UR_VIEW)==UR_VIEW) ? $res.='v' : $res.='.';
+  (($rights&UR_EDIT)==UR_EDIT) ? $res.='e' : $res.='.';
+  (($rights&UR_DELETE)==UR_DELETE) ? $res.='d' : $res.='.';
+  (($rights&UR_ADDSUB)==UR_ADDSUB) ? $res.='a' : $res.='.';
+  $res.='....';
+  (($rights&UR_R_VIEW)==UR_R_VIEW) ? $res.='v' : $res.='.';
+  (($rights&UR_R_EDIT)==UR_R_EDIT) ? $res.='e' : $res.='.';
+  (($rights&UR_R_DELETE)==UR_R_DELETE) ? $res.='d' : $res.='.';
+  (($rights&UR_R_ADDSUB)==UR_R_ADDSUB) ? $res.='a' : $res.='.';
+  $res.='....';
+
+  if (($rights&UR_OWNER)==UR_OWNER) $res='OWNER';
+  return $res;
+ }
+
+ function GetURActionButtons($sid,$DelLink="",$EditLink="",$AppendSubLink="")
+ {
+  $b=false;
+  $rights=$this->GetUserRights($sid);
+  if ((($rights&UR_DELETE)==UR_DELETE)&&($DelLink!=''))
+  {
+   $b=true;
+   $res.='  <a href="'.$DelLink.'" onclick="return confirm('."'Вы собираетесь УДАЛИТЬ объект без возможности его последующего восстановления.Продолжить?'".');"><img height=16 border=0 src="images/b_drop.png" alt="Удалить" valign="top"></a> ';
+  }
+  if ((($rights&UR_EDIT)==UR_EDIT)&&($EditLink!=''))
+  {
+   $b=true;
+   $res.="  <a href='".$EditLink."'><img height=16 border=0 src='images/b_edit.png' alt='Редактировать' valign='top'></a> ";
+  }
+  if ((($rights&UR_ADDSUB)==UR_ADDSUB)&&($AppendSubLink!=''))
+  {
+   $b=true;
+   $res.="  <a href='".$AppendSubLink."'><img height=16 border=0 src='images/b_new.png' alt='Добавить' valign='top'></a> ";
+  }
+  if (($rights&UR_R_VIEW)==UR_R_VIEW)
+  {
+   $b=true;
+   $res.="  <a href='".SITE_PATH."/?id=201&ssid=".$sid."'><img height=16 border=0 src='images/s_rights.png' alt='Привилегии' valign='top'></a> ";
+  }
+  if ($b)
+  {
+   $res.="";
+  }
+
+  return $res;
+ }
+
+ function ShowURActionButtons($sid,$DelLink="",$EditLink="",$AppendSubLink="")
+ {
+  echo $this->GetURActionButtons($sid,$DelLink,$EditLink,$AppendSubLink);
+ }
+
+ function ShowURRActionButtons($rights,$EditLnk,$DelLnk)
+ {
+  $res='';
+  if (($rights&UR_R_EDIT)==UR_R_EDIT)
+  {
+   $res.=' <a href="'.$EditLnk.'"><img border=0 src="images/b_edit.png" alt="Редактировать"></a> ';
+  }
+  if (($rights&UR_R_DELETE)==UR_R_DELETE)
+  {
+   $res.=' <a href="'.$DelLnk.'"><img border=0 src="images/b_drop.png" alt="Удалить"></a> ';
+  }
+  return $res;
+ }
+
+ function GetPrintableName($grouptype,$groupname)
+ {
+  global $OPTIONS;
+  $res;
+  switch ($grouptype)
+  {
+   case GT_SITE:
+     switch($groupname)
+     {
+      case 1: $res.='Зарегистрированный пользователь'; break;
+      case 2: $res.='Редактор новостей'; break;
+      case 4: $res.='Редактор контента'; break;
+      case 8: $res.='Редактор выставок'; break;
+      case 16: $res.='Редактор пользователей'; break;
+      case 32: $res.='Просмотр статистики сайта'; break;
+      case 64: $res.='Просмотр статистики библиотеки'; break;
+//      case 128: $res.='Редакция Базы знаний по ошибкам Ирбис'; break;
+      case 256: $res.='Сотрудник отдела автоматизации'; break;
+      case 65535: $res.='Администратор'; break;
+     }
+     break;
+   case GT_CHB:
+     $res.=iconv('utf-8','windows-1251',UseModule('i64f')->Irbis64Format($OPTIONS['i64Servers'][0]['i64RDR'],'SPB='.$groupname,"v24,' (',v10,' ',v11,' ',v12,')'",''));
+     break;
+   case GT_FAK:
+     $res.=UseModule('i64f')->GetMnuDescByKey($OPTIONS['i64Servers'][0]['i64RDR'],'fak.mnu',$groupname);
+     break;
+   case GT_NAPR:
+     $res.=UseModule('i64f')->GetMnuDescByKey($OPTIONS['i64Servers'][0]['i64RDR'],'napr.mnu',$groupname);
+     break;
+   case GT_SPEC:
+     $res.=UseModule('i64f')->GetMnuDescByKey($OPTIONS['i64Servers'][0]['i64RDR'],'spec.mnu',$groupname);
+     break;
+   case GT_VO:
+     $res.=UseModule('i64f')->GetMnuDescByKey($OPTIONS['i64Servers'][0]['i64RDR'],'vo.mnu',$groupname);
+     break;
+   case GT_FO:
+     $res.=UseModule('i64f')->GetMnuDescByKey($OPTIONS['i64Servers'][0]['i64RDR'],'fo.mnu',$groupname);
+     break;
+   case GT_SEM:
+     $res.=$groupname;
+     break;
+   case GT_GROUP:
+     $res.=$groupname;
+     break;
+   case GT_KAT:
+     $res.=UseModule('i64f')->GetMnuDescByKey($OPTIONS['i64Servers'][0]['i64RDR'],'50.mnu',$groupname);
+     break;
+   case GT_IP:
+     $sqlgip='select * from security_ipranges where id='.$groupname;
+     $resgip=mysql_query($sqlgip);
+     if ($resgip)
+     {
+      $rowgip=mysql_fetch_array($resgip);
+      if ($rowgip)
+      {
+       $res.=$rowgip['name'].' ('.$this->CnvIpToText($rowgip['ipbegin'],$rowgip['ipend']).')';
+      }
+     }
+     break;
+   default: $res.=$groupname;
+  }
+  return $res;
+ }
+
+ function GetRightsListRecurse($sid,$r)
+ {
+  $sql="select * from sid where sid='$sid'";
+  if (($result = mysql_query($sql))) 
+  {
+   if($row = mysql_fetch_array($result))
+   {
+    $rc=0;
+    if (is_array($r)) $rc=count($r);
+    $sql="select * from Security where sid='$sid'";
+    if (($result1 = mysql_query($sql))) 
+    {
+     $row1 = mysql_fetch_array($result1);
+     while($row1)
+     {
+      $r[$rc]=$row1;
+      $rc++;
+      $row1 = mysql_fetch_array($result1);
+     }
+    }
+    if ($row['OwnerSID']!='')
+     $r=$this->GetRightsListRecurse($row['OwnerSID'],$r);
+   }
+  }
+  return $r;
+ }
+
+ function GetRightsListPrintable($sid)
+ {
+  global $OPTIONS;
+  $owner='';
+  $ouid='';
+  $rights=$this->GetUserRights($sid);
+  $res="";
+  if (($rights&UR_R_VIEW)==UR_R_VIEW)
+  {
+   $res.="<table border=1 cellspacing=0><tr><td>Тип</td><td>Группа</td><td>Права группы</td><td>Действия</td></tr>";
+   $sql="select * from sid where sid='$sid'";
+   if (($result = mysql_query($sql))) 
+   {
+    if($row = mysql_fetch_array($result))
+    {
+     $ouid=$row['OwnerUID'];
+     if ($row['OwnerSID']!='')
+     {
+      $r=$this->GetRightsListRecurse($row['OwnerSID'],$r);
+      $owner=$row['OwnerSID'];
+     }
+     if (is_array($r))
+     {
+      for ($rc=0;$rc<count($r);$rc++)
+      {
+       for ($rc2=0;$rc2<$rc;$rc2++)
+       {
+        if (($r[$rc]['grouptype']==$r[$rc2]['grouptype'])&&($r[$rc]['groupname']==$r[$rc2]['groupname']))
+        {
+         (int)$r[$rc2]['rights']|=(int)$r[$rc]['rights'];
+         array_splice($r,$rc,1);
+         $rc--;$rc2=$rc;
+        }
+       }
+      }
+      uasort($r,'GetUserRightsPrintable_sort');
+      foreach ($r as $rr)
+       $res.=("<tr bgcolor=#AAAAAA><td>".$this->GetGroupTypeName($rr['grouptype'])."</td><td>".$this->GetPrintableName($rr['grouptype'],$rr['groupname'])."</td><td>".$this->GetRightsPrintable($rr['rights'])."</td><td>-</td></tr>");
+     }
+//     else
+//      $res.='<tr bgcolor=#AAAAAA><td colspan=2><b>ЛЮБОЙ ПОЛЬЗОВАТЕЛЬ</b></td><td>'.$this->GetRightsPrintable(UR_VIEW).'</td><td>-</td></tr>';
+    }
+   }
+   $rows=UseModule('SQL')->SelectAndFetch('*','Security','sid="'.$sid.'"');
+   if ((!$rows)&&($owner==''))
+   {
+    //return 'Доступно всем (только просмотр)<br><br>Владелец объекта: '.UseModule('Users')->GetUserLink($ouid);
+   }
+   if (is_array($rows)) 
+   {
+    uasort($rows,'GetUserRightsPrintable_sort');
+    foreach($rows as $row)
+    {
+     $res.=("<tr><td>".$this->GetGroupTypeName($row['grouptype'])."</td><td>".$this->GetPrintableName($row['grouptype'],$row['groupname'])."</td><td>".$this->GetRightsPrintable($row['rights'])."</td><td>".$this->ShowURRActionButtons($this->GetUserRights($row['sid']),SITE_PATH.'/?id=205&vid='.$row['id'],SITE_PATH.'/?id=205&o=del&vid='.$row['id'])."</td></tr>");
+     $row = mysql_fetch_array($result);
+    }
+   }
+   /*else
+    $res.='<tr><td colspan=2><b>ЛЮБОЙ ПОЛЬЗОВАТЕЛЬ</b></td><td>'.$this->GetRightsPrintable(UR_VIEW).'</td><td>-</td></tr>';*/
+   /*$sql="select * from Security where sid='$sid'";
+   if (($result = mysql_query($sql))) 
+   {
+    $row = mysql_fetch_array($result);
+    if ((!$row)&&($owner==''))
+    {
+     return 'Доступно всем (только просмотр)<br><br>Владелец объекта: '.UseModule('Users')->GetUserLink($ouid);
+    }
+    while($row)
+    {
+     $res.=("<tr><td>".$this->GetGroupTypeName($row['grouptype'])."</td><td>".$this->GetPrintableName($row['grouptype'],$row['groupname'])."</td><td>".$this->GetRightsPrintable($row['rights'])."</td><td>".$this->ShowURRActionButtons($this->GetUserRights($row['sid']),SITE_PATH.'/?id=205&vid='.$row['id'],SITE_PATH.'/?id=205&o=del&vid='.$row['id'])."</td></tr>");
+     $row = mysql_fetch_array($result);
+    }
+   }*/
+   $res.="</table>";
+   if ($owner!='')
+    $res.='<br><a href="'.SITE_PATH.'/?id=0&idm=Security&ida=SIDOwnerDrop&ssid='.$sid.'"><img border=0 src="images/b_drop.png"> Удалить связь с верхним объектом</a><br>';
+   else
+    $res.='<br><a href="'.SITE_PATH.'/?id=0&idm=Security&ida=SIDOwnerRestore&ssid='.$sid.'"><img border=0 src="images/b_new.png"> Восстановить связь с верхним объектом</a><br>';
+   $res.='<br>Владелец объекта: '.UseModule('Users')->GetUserLink($ouid);
+  }
+  else
+   $res="Недостаточно прав для просмотра";
+  return $res;
+ }
+
+ function ShowRightsList($sid)
+ {
+  echo $this->GetRightsListPrintable($sid);
+ }
+
+ function SetOwnerSID($owner,$sid)
+ {
+  $sql='update sid set OwnerSID="'.$owner.'" where sid="'.$sid.'"';
+  mysql_query($sql);
+ }
+
+ function SetSiteRights($sid,$srights,$rights)
+ {
+  $sql='delete from security where sid="$sid" and grouptype='.GT_SITE;
+  mysql_query($sql);
+
+  if (($srights&UA_USER)==UA_USER) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_USER.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_NEWSEDITOR)==UA_NEWSEDITOR) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_NEWSEDITOR.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_PAGEEDITOR)==UA_PAGEEDITOR) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_PAGEEDITOR.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_VISTEDITOR)==UA_VISTEDITOR) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_VISTEDITOR.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_USEREDITOR)==UA_USEREDITOR) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_USEREDITOR.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_VIEWSITESTAT)==UA_VIEWSITESTAT) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_VIEWSITESTAT.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_VIEWLIBSTAT)==UA_VIEWLIBSTAT) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_VIEWLIBSTAT.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_EDITKB)==UA_EDITKB) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_EDITKB.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_OA)==UA_OA) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_OA.'",'.$rights.')';
+   mysql_query($sql);
+  }
+  if (($srights&UA_ADMIN)==UA_ADMIN) 
+  {
+   $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.GT_SITE.',"'.UA_ADMIN.'",'.$rights.')';
+   mysql_query($sql);
+  }
+ }
+
+ function EditRights_EchoHiddenParameters()
+ {
+  echo '<input type="hidden" name="id" value="RightsEdit">';
+  echo '<input type="hidden" name="ssid" value="'.$_REQUEST['ssid'].'">';
+  $step=$_REQUEST['step'];
+  if (($step=='')||($step==0)) $step=1;
+  if($_REQUEST['act']=="Далее") $step++;
+  if($_REQUEST['act']=="Назад") $step--;
+  echo '<input type="hidden" name="step" value="'.$step.'">';
+  echo '<input type="hidden" name="grouptype" value="'.$_REQUEST['grouptype'].'">';
+  for ($i=1;$i<10;$i++)
+   if ($_REQUEST['sr'.$i]!='')
+    echo '<input type="hidden" name="sr'.$i.'" value="'.$_REQUEST['sr'.$i].'">';
+  for ($i=1;$i<17;$i++)
+   if ($_REQUEST['r'.$i]!='')
+    echo '<input type="hidden" name="r'.$i.'" value="'.$_REQUEST['r'.$i].'">';
+  if($_REQUEST['oper']!="") echo '<input type="hidden" name="oper" value="'.$_REQUEST['oper'].'">';
+  if($_REQUEST['chb']!="") echo '<input type="hidden" name="chb" value="'.$_REQUEST['chb'].'">';
+  if($_REQUEST['fak']!="") echo '<input type="hidden" name="fak" value="'.$_REQUEST['fak'].'">';
+  if($_REQUEST['napr']!="") echo '<input type="hidden" name="napr" value="'.$_REQUEST['napr'].'">';
+  if($_REQUEST['spec']!="") echo '<input type="hidden" name="spec" value="'.$_REQUEST['spec'].'">';
+  if($_REQUEST['vo']!="") echo '<input type="hidden" name="vo" value="'.$_REQUEST['vo'].'">';
+  if($_REQUEST['fo']!="") echo '<input type="hidden" name="fo" value="'.$_REQUEST['fo'].'">';
+  if($_REQUEST['sem']!="") echo '<input type="hidden" name="sem" value="'.$_REQUEST['sem'].'">';
+  if($_REQUEST['group']!="") echo '<input type="hidden" name="group" value="'.$_REQUEST['group'].'">';
+  if($_REQUEST['kat']!="") echo '<input type="hidden" name="kat" value="'.$_REQUEST['kat'].'">';
+  if($_REQUEST['gip']!="") echo '<input type="hidden" name="gip" value="'.$_REQUEST['gip'].'">';
+ }
+
+ function CnvIpToText($ipbegin,$ipend)
+ {
+  $res;
+  $a=(((float)$ipbegin>>24)&(float)0xFF);
+  $b=(((float)$ipbegin>>16)&(float)0xFF);
+  $c=(((float)$ipbegin>>8)&(float)0xFF);
+  $d=((float)$ipbegin&(float)0xFF);
+  //$res=$a;
+  $res.=$a.'.'.$b.'.'.$c.'.'.$d;
+  //$res=$ipbegin;
+  if ($ipbegin!=$ipend)
+  {
+   $res.=' - ';
+   $a=(((float)$ipend>>24)&(float)0xFF);
+   $b=(((float)$ipend>>16)&(float)0xFF);
+   $c=(((float)$ipend>>8)&(float)0xFF);
+   $d=((float)$ipend&(float)0xFF);
+   $res.=$a.'.'.$b.'.'.$c.'.'.$d;
+  }
+  return $res;
+ }
+
+ function EditRights($sid="")
+ {
+  global $ID_USERS_EDIT;
+
+  if ($sid=='')
+   $sid=$_REQUEST['ssid'];
+  else
+   $_REQUEST['ssid']=$sid;
+  $step=$_REQUEST['step'];
+  if (($step=='')||($step==0)) $step=1;
+  if(($_REQUEST['act']=="Далее")||($_REQUEST['act']=="Готово")) $step++;
+  if($_REQUEST['act']=="Назад") $step--;
+  $grouptype=$_REQUEST['grouptype'];
+  for ($i=1;$i<10;$i++)
+   $sr[$i]=$_REQUEST['sr'.$i];
+  for ($i=1;$i<17;$i++)
+   $r[$i]=$_REQUEST['r'.$i];
+  $chb=$_REQUEST['chb'];
+  $fak=$_REQUEST['fak'];
+  $napr=$_REQUEST['napr'];
+  $spec=$_REQUEST['spec'];
+  $vo=$_REQUEST['vo'];
+  $fo=$_REQUEST['fo'];
+  $sem=$_REQUEST['sem'];
+  $group=$_REQUEST['group'];
+  $kat=$_REQUEST['kat'];
+  $gip=$_REQUEST['gip'];
+
+  echo '<form action="/">';
+
+  if ($step<=3)
+  {
+   $this->EditRights_EchoHiddenParameters();
+   echo '<br>Текущие ограничения:';
+   $this->ShowRightsList($sid); 
+  }
+  if (($this->GetUserRights($sid)&UR_R_ADDSUB)!=UR_R_ADDSUB)
+  {
+   echo "</form>";
+   return;
+  }
+  
+  switch($step)
+  {
+   case 1:
+     ?>
+     <br><br>Добавить новое ограничение:<br>
+     <select name="grouptype">
+     <option value="<?echo GT_SITE;?>">Права на сайте</option>
+     <option value="<?echo GT_CHB;?>">№ Читательского билета</option>
+     <option value="<?echo GT_FAK;?>">Факультет</option>
+     <option value="<?echo GT_NAPR;?>">Направление</option>
+     <option value="<?echo GT_SPEC;?>">Специальность</option>
+     <option value="<?echo GT_VO;?>">Вид обучения</option>
+     <option value="<?echo GT_FO;?>">Форма обучения</option>
+     <option value="<?echo GT_SEM;?>">Семестр</option>
+     <option value="<?echo GT_GROUP;?>">Группа</option>
+     <option value="<?echo GT_KAT;?>">Категория читателя</option>
+     <option value="<?echo GT_IP;?>">По IP-адресу или сети</option>
+     </select><br>
+     <input type="submit" name="act" value="Далее">
+     </form>
+     <?
+     break;
+   case 2:
+     switch($grouptype)
+     {
+      case GT_SITE: 
+        ?>
+        Добавить требования специфических прав на сайте
+        <table border=0 cellspacing=0 cellpadding=0>
+        <tr><td><input type="checkbox" name="sr1" value="<?echo UA_USER;?>" <?if ($sr[1]==UA_USER) echo("checked");?>></td><td>Пользователь</td></tr>
+        <tr><td><input type="checkbox" name="sr2" value="<?echo UA_NEWSEDITOR;?>" <?if ($sr[2]==UA_NEWSEDITOR) echo("checked");?>></td><td>Редактор новостей</td></tr>
+        <tr><td><input type="checkbox" name="sr3" value="<?echo UA_PAGEEDITOR;?>" <?if ($sr[3]==UA_PAGEEDITOR) echo("checked");?>></td><td>Редактор контента</td></tr>
+        <tr><td><input type="checkbox" name="sr4" value="<?echo UA_VISTEDITOR;?>" <?if ($sr[4]==UA_VISTEDITOR) echo("checked");?>></td><td>Редактор выставок</td></tr>
+        <tr><td><input type="checkbox" name="sr5" value="<?echo UA_USEREDITOR;?>" <?if ($sr[5]==UA_USEREDITOR) echo("checked");?>></td><td>Редактор пользователей</td></tr>
+        <tr><td><input type="checkbox" name="sr6" value="<?echo UA_VIEWSITESTAT;?>" <?if ($sr[6]==UA_VIEWSITESTAT) echo("checked");?>></td><td>Просмотр статистики сайта</td></tr>
+        <tr><td><input type="checkbox" name="sr7" value="<?echo UA_VIEWLIBSTAT;?>" <?if ($sr[7]==UA_VIEWLIBSTAT) echo("checked");?>></td><td>Просмотр статистики библиотеки</td></tr>
+        <tr><td><input type="checkbox" name="sr8" value="<?echo UA_EDITKB;?>" <?if ($sr[8]==UA_EDITKB) echo("checked");?>></td><td>Редакция базы знаний по ошибкам Ирбис</td></tr>
+        <tr><td><input type="checkbox" name="sr9" value="<?echo UA_OA;?>" <?if ($sr[9]==UA_OA) echo("checked");?>></td><td>Сотрудник отдела автоматизации</td></tr>
+        </table>
+        <?
+        break;
+      case GT_CHB: 
+        echo "<h4>№ читательского билета</h4>"; 
+        echo 'Введите номер читательского билета: <input type="text" name="chb" value="'.$chb.'"><br>';
+        break;
+      case GT_FAK: 
+        echo "<h4>Факультет</h4>"; 
+        echo 'Выберите факультет, студентам которого желаете дать права:<br> ';
+        UseModule('i64f')->GetMnuAsSelect('fak.mnu','fak',false,$fak);
+        echo '<br>';
+        break;
+      case GT_NAPR: 
+        echo "<h4>Направление</h4>"; 
+        echo 'Выберите направление, студентам которого желаете дать права:<br> ';
+        UseModule('i64f')->GetMnuAsSelect('napr.mnu','napr',false,$napr);
+        echo '<br>';
+        break;
+      case GT_SPEC: 
+        echo "<h4>Специальность</h4>"; 
+        echo 'Выберите специальность, студентам которой желаете дать права:<br> ';
+        UseModule('i64f')->GetMnuAsSelect('spec.mnu','spec',false,$spec);
+        echo '<br>';
+        break;
+      case GT_VO: 
+        echo "<h4>Вид обучения</h4>"; 
+        echo 'Выберите вид обучения, студентам которого желаете дать права:<br> ';
+        UseModule('i64f')->GetMnuAsSelect('vo.mnu','vo',false,$vo);
+        echo '<br>';
+        break;
+      case GT_FO:  
+        echo "<h4>Форма обучения</h4>"; 
+        echo 'Выберите форму обучения, студентам которой желаете дать права:<br> ';
+        UseModule('i64f')->GetMnuAsSelect('fo.mnu','fo',false,$fo);
+        echo '<br>';
+        break;
+      case GT_SEM: 
+        echo "<h4>Семестр</h4>"; 
+        echo 'Укажите семестр, студентам которого желаете дать права: <input type="text" name="sem" value="'.$sem.'"><br>';
+        break;
+      case GT_GROUP: 
+        echo "<h4>Номер группы</h4>"; 
+        echo 'Укажите номер группы, студентам которой желаете дать права: <input type="text" name="group" value="'.$group.'"><br>';
+        break;
+      case GT_KAT: 
+        echo "<h4>Категория читателя</h4>"; 
+        echo 'Выберите категорию читателей, которым желаете дать права:<br> ';
+        UseModule('i64f')->GetMnuAsSelect('50.mnu','kat',false,$kat);
+        echo '<br>';
+        break;
+      case GT_IP: 
+        echo "<h4>IP-адрес или сеть</h4>"; 
+        echo 'Выберите группу адресов, которой желаете дать права:<br> ';
+        echo '<select name="gip">';
+        $sqlgip="select * from security_ipranges";
+        $resgip=mysql_query($sqlgip);
+        if ($resgip)
+        {
+         $rowgip=mysql_fetch_array($resgip);
+         while ($rowgip)
+         {
+          echo '<option value="'.$rowgip['id'].'">'.$rowgip['name'].' ('.$this->CnvIpToText($rowgip['ipbegin'],$rowgip['ipend']).')</option>';
+          $rowgip=mysql_fetch_array($resgip);
+         }
+        }
+        echo '</select> <a href="'.SITE_PATH.'/?id=210"><img border=0 src="images/b_edit.png" alt="Редактировать список групп"></a>';
+        echo '<br>';
+        break;
+      default: echo "<НЕ ИЗВЕСТНО>"; 
+     }
+     ?>
+     <input type="submit" name="act" value="Назад">
+     <input type="submit" name="act" value="Далее">
+     </form>
+     <?
+     break;
+   case 3:
+     switch($grouptype)
+     {
+      case GT_SITE:
+        $groupname=0;
+        for ($i=1;$i<10;$i++)
+        {
+         $groupname+=$_REQUEST['sr'.$i];
+        }
+        ?>
+        Добавить требования специфических прав на сайте (<?echo $groupname;?>)<br>
+        <?
+        break;
+      case GT_CHB:
+        $groupname=$_REQUEST['chb'];
+        echo "<h4>Добавить доступ для читателя с читательским билетом № ".$this->GetPrintableName($grouptype,$groupname)."</h4>";
+        break;
+      case GT_FAK:
+        $groupname=$_REQUEST['fak'];
+        echo "<h4>Добавить доступ для студентов указанонго факультета (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_NAPR: 
+        $groupname=$_REQUEST['napr'];
+        echo "<h4>Добавить доступ для студентов обучающихся по указанному направлению (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_SPEC:
+        $groupname=$_REQUEST['spec'];
+        echo "<h4>Добавить доступ для студентов обучающихся по указанной специальности (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_VO:
+        $groupname=$_REQUEST['vo'];
+        echo "<h4>Добавить доступ для студентов обучающихся по указанному виду обучения (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_FO:
+        $groupname=$_REQUEST['fo'];
+        echo "<h4>Добавить доступ для студентов обучающихся по указанной форме обучения (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_SEM:
+        $groupname=$_REQUEST['sem'];
+        echo "<h4>Добавить доступ для студентов обучающихся на указанном семестре (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_GROUP:
+        $groupname=$_REQUEST['group'];
+        echo "<h4>Добавить доступ для студентов учащихся в указанной группе (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_KAT:
+        $groupname=$_REQUEST['kat'];
+        echo "<h4>Добавить доступ для читателей указанной категории (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+      case GT_IP:
+        $groupname=$_REQUEST['gip'];
+        echo "<h4>Добавить доступ для компьютеров указанной группы (".$this->GetPrintableName($grouptype,$groupname).")</h4>";
+        break;
+     }
+     ?>
+     Назначить следующие права для этой группы:
+     <table border=0 cellspacing=0 cellpadding=0>
+     <tr><td><input type="checkbox" name="r1" value="<?echo UR_VIEW;?>" <?if ($r[1]==UR_VIEW) echo("checked"); ?>></td><td>Просмотр</td></tr>
+     <tr><td><input type="checkbox" name="r2" value="<?echo UR_EDIT;?>" <?if ($r[2]==UR_EDIT) echo("checked"); ?>></td><td>Редактирование</td></tr>
+     <tr><td><input type="checkbox" name="r3" value="<?echo UR_DELETE;?>" <?if ($r[3]==UR_DELETE) echo("checked"); ?>></td><td>Удаление</td></tr>
+     <tr><td><input type="checkbox" name="r4" value="<?echo UR_ADDSUB;?>" <?if ($r[3]==UR_ADDSUB) echo("checked"); ?>></td><td>Добавление</td></tr>
+     <tr><td><input type="checkbox" name="r9" value="<?echo UR_R_VIEW;?>" <?if ($r[9]==UR_R_VIEW) echo("checked"); ?>></td><td>Просмотр прав пользователей</td></tr>
+     <tr><td><input type="checkbox" name="r10" value="<?echo UR_R_EDIT;?>" <?if ($r[10]==UR_R_EDIT) echo("checked"); ?>></td><td>Редактирование прав пользователей</td></tr>
+     <tr><td><input type="checkbox" name="r11" value="<?echo UR_R_DELETE;?>" <?if ($r[11]==UR_R_DELETE) echo("checked"); ?>></td><td>Лишение прав ползователей</td></tr>
+     <tr><td><input type="checkbox" name="r12" value="<?echo UR_R_ADDSUB;?>" <?if ($r[11]==UR_R_ADDSUB) echo("checked"); ?>></td><td>Добавление ограничений</td></tr>
+     </table>
+     <input type="submit" name="act" value="Назад">
+     <input type="submit" name="act" value="Готово">
+     </form>
+     <?
+     break;
+   case 4:
+     switch($grouptype)
+     {
+      case GT_SITE:
+        $groupname=0;
+        for ($i=1;$i<10;$i++)
+         $groupname+=$_REQUEST['sr'.$i];
+        break;
+      case GT_CHB:
+        $groupname=$chb;
+        break;
+      case GT_FAK:
+        $groupname=$fak;
+        break;
+      case GT_NAPR: 
+        $groupname=$napr;
+        break;
+      case GT_SPEC:
+        $groupname=$spec;
+        break;
+      case GT_VO:
+        $groupname=$vo;
+        break;
+      case GT_FO:
+        $groupname=$fo;
+        break;
+      case GT_SEM:
+        $groupname=$sem;
+        break;
+      case GT_GROUP:
+        $groupname=$group;
+        break;
+      case GT_KAT:
+        $groupname=$kat;
+        break;
+      case GT_IP:
+        $groupname=$gip;
+        break;
+     }
+     $rights=0;
+     for ($i=1;$i<17;$i++)
+      $rights+=$_REQUEST['r'.$i];
+     $sql='';
+     if ($_REQUEST['oper']=='edit')
+      $sql='update security set groupname="'.$groupname.'",rights='.$rights.' where sid="'.$sid.'" and grouptype='.$grouptype;
+     else
+      $sql='insert into security (sid,grouptype,groupname,rights) VALUES ("'.$sid.'",'.$grouptype.',"'.$groupname.'",'.$rights.')';
+     mysql_query($sql);
+     echo '<br>Текущие ограничения:';
+     $this->ShowRightsList($sid); 
+     echo '
+     <br><br>Добавить новое ограничение:<br>
+     <input type="hidden" name="id" value="'.$_REQUEST['id'].'">
+     <input type="hidden" name="ssid" value="'.$sid.'">
+     <input type="hidden" name="step" value="0">
+     <select name="grouptype">
+     <option value="'.GT_SITE.'">Права на сайте</option>
+     <option value="'.GT_CHB.'">№ Читательского билета</option>
+     <option value="'.GT_FAK.'">Факультет</option>
+     <option value="'.GT_NAPR.'">Направление</option>
+     <option value="'.GT_SPEC.'">Специальность</option>
+     <option value="'.GT_VO.'">Вид обучения</option>
+     <option value="'.GT_FO.'">Форма обучения</option>
+     <option value="'.GT_SEM.'">Семестр</option>
+     <option value="'.GT_GROUP.'">Группа</option>
+     <option value="'.GT_KAT.'">Категория читателя</option>
+     <option value="'.GT_IP.'">По IP-адресу или сети</option>
+     </select><br>
+     <input type="submit" name="act" value="Далее">
+     </form>';
+     break;
+  }
+ }
+
+ function EditIpRanges()
+ {
+  $flds[0]['Name']="name";
+  $flds[0]['Title']="Имя группы адресов";
+  $flds[0]['ForInsert']=true;
+  $flds[0]['ForUpdate']=true;
+  $flds[0]['ForForm']=true;
+  $flds[0]['Type']="text";
+  $flds[0]['FormType']="input";
+
+  $flds[1]['Name']="ipbegin";
+  $flds[1]['Title']="Стартовый адрес";
+  $flds[1]['ForInsert']=true;
+  $flds[1]['ForUpdate']=true;
+  $flds[1]['ForForm']=true;
+  $flds[1]['Type']="ip";
+  $flds[1]['FormType']="ip";
+
+  $flds[2]['Name']="ipend";
+  $flds[2]['Title']="Конечный адрес";
+  $flds[2]['ForInsert']=true;
+  $flds[2]['ForUpdate']=true;
+  $flds[2]['ForForm']=true;
+  $flds[2]['Type']="ip";
+  $flds[2]['FormType']="ip";
+
+  UseModule('Forms')->ShowForm(211,1,"security_ipranges",3,$flds);
+ }
+
+ function ShowIpRangesList()
+ {
+  $sql="select * from security_ipranges";
+  $result=mysql_query($sql);
+  if ($result)
+  {
+   $row=mysql_fetch_array($result);
+   echo '<br><table border=1 cellpadding=0 cellspacing><tr><td>Наименование</td><td>Адрес</td><td>Действия</td></tr>';
+   while ($row)
+   {
+    echo '<tr><td>'.$row['name'].'</td><td>'.$this->CnvIpToText($row['ipbegin'],$row['ipend']).'</td><td><a href="'.SITE_PATH.'/?id=211&vid='.$row['id'].'"><img border=0 src="images/b_edit.png" alt="Редактировать"></a><a href="'.SITE_PATH.'/?id=211&vid='.$row['id'].'&o=del"><img border=0 src="images/b_drop.png" alt="Удалить"></a></td></tr>';
+    $row=mysql_fetch_array($result);
+   }
+   echo '</table>';
+  }
+  echo '<br><a href="'.SITE_PATH.'/?id=211"><img border=0 src="images/b_new.png" alt="Добавить новую группу">Добавить новую группу</a>';
+ }
+
+ function AppendObjectType($typename,$OwnerSID='')
+ {
+  // Добавляем sid там где пусто
+  $sql='select id from '.strtolower($typename).' where sid=""';
+  $result=mysql_query($sql);
+  if ($result)
+  {
+   $row=mysql_fetch_array($result);
+   while ($row)
+   {
+    $sid=$this->CreateNewSID($typename,$OwnerSID,false);
+    $sql1='update '.strtolower($typename).' set sid="'.$sid.'" where id='.$row['id'];
+    mysql_query($sql1);
+    $row=mysql_fetch_array($result);
+   }
+  }
+  else
+  {
+   UseModule('SQL')->PrintLastErrorMessage();
+  }
+
+  // Проверяем связь $typename => sid
+  $sql='select id,sid from '.strtolower($typename).' where sid<>""';
+  $result=mysql_query($sql);
+  if ($result)
+  {
+   $row=mysql_fetch_array($result);
+   while ($row)
+   {
+    $sql1='select * from sid where sid="'.$row['sid'].'"';
+    $result1=mysql_query($sql1);
+    if ($result1)
+    {
+     $row1=mysql_fetch_array($result1);
+     if ($row1) // sid найден, удостоверимся что его object_type соответствует
+     {
+      if ($row1['object_type']!=$typename)
+      {
+       //О, нашлась неисправность. Проверяем: Если пусто, то захватываем, иначе кричим об ошибке
+       if ($row1['object_type']=='')
+       {
+        $sql2='update sid set object_type="'.$typename.'" where sid="'.$row['sid'].'"';
+        mysql_query($sql2);
+        echo $typename.': Обновлен sid '.$row['sid'].'<br>';
+       }
+       else
+       {
+        echo $typename.': <b>ОШИБКА</b>: sid '.$row['sid'].' используется типом '.$row1['object_type'].'<br>';
+       }
+      }
+     }
+     else
+     {
+      // sid не найден, добавляем...
+      $OwnerUID=UseModule('Users')->GetUID();
+      $sid=$row['sid'];
+      $sql2="insert into SID (sid,OwnerUID,OwnerSID,IsAnd,object_type) values (\"$sid\",$OwnerUID,\"\",0,\"$typename\")";
+      mysql_query($sql2);
+      echo $typename.': Добавлен sid '.$sid.'<br>';
+     }
+    }
+    else
+    {
+     echo UseModule('SQL')->GetLastErrorMessage().'<br>';
+    }
+    $row=mysql_fetch_array($result);
+   }
+  }
+  else
+   UseModule('SQL')->PrintLastErrorMessage();
+ }
+
+ function CheckSIDSystem()
+ {
+  /*$sql='update sid set object_type=""';
+  mysql_query($sql);*/
+  echo 'Проверка на типы...<br>';
+  $this->AppendObjectType('Vistavki');
+  $this->AppendObjectType('Pages');
+  $this->AppendObjectType('FT');
+  $this->AppendObjectType('News');
+  $this->AppendObjectType('Modules');
+  $this->AppendObjectType('PayStat');
+  $this->AppendObjectType('SciencePeoples');
+  echo 'Готово.<br>';
+  echo 'Поиск потеряных sid...<br>';
+  $rows=UseModule('SQL')->SelectAndFetch('sid','sid','object_type=""');
+  if (is_array($rows)) foreach($rows as $row)
+  {
+   echo 'Чистим '.$row['sid'].'<br>';
+   UseModule('SQL')->Delete('security','sid="'.$row['sid'].'"');
+   UseModule('SQL')->Delete('sid','sid="'.$row['sid'].'"');
+  }
+  echo 'Готово.<br>';
+  echo 'Проверка на условия...<br>';
+  $rows=UseModule('SQL')->SelectAndFetchUnique('sid','security','');
+  if (is_array($rows)) foreach($rows as $row)
+  {
+   $rows2=UseModule('SQL')->SelectAndFetch('sid','sid','sid="'.$row.'"');
+   if (!$rows2[0]['sid']=='')
+   {
+    echo 'левый sid'.$row['sid'].'<br>';
+    UseModule('SQL')->Delete('security','sid="'.$row['sid'].'"');
+   }
+  }
+  echo 'Готово.<br>';
+  $rows=UseModule('SQL')->SelectAndFetch('sid,name','modules','');
+  if (is_array($rows)) foreach($rows as $row)
+  {
+   $rows2=UseModule('SQL')->SelectAndFetch('sid,OwnerSID','sid','object_type="'.$row['name'].'"');
+   if (is_array($rows2)) foreach($rows2 as $row2)
+   {
+    if ($row2['OwnerSID']=='')
+     UseModule('SQL')->Update('sid','OwnerSID="'.$row['sid'].'"','sid="'.$row2['sid'].'"');
+   }
+  }
+  UseModule('SQL')->Update('sid','OwnerSID="00000000000000000000000000000001"','OwnerSID="80077a59aaedd9801c788afeb4762f49"');
+  UseModule('SQL')->Update('sid','IsAnd=0','');
+ }
+
+ function ShowGlobalRights()
+ {
+  if (((int)$this->GetUserRights('00000000000000000000000000000000')&(int)UR_R_EDIT)!=UR_R_EDIT)
+  {
+   echo 'У Вас недостатточно прав';
+   return;
+  }
+  $rows=UseModule('SQL')->SelectAndFetch('*','Modules','');
+  echo '<table>';
+  if (is_array($rows)) foreach ($rows as $row)
+  {
+   echo '<tr><td><b>'.$row['name'].'</b></td><td>';
+   $this->ShowURActionButtons($row['sid'],'','','');
+   echo '</td></tr>';
+  }
+  echo '</table>';
+ }
+
+
+ function SIDOwnerDrop()
+ { // Special Action
+  $this->DeleteOwner($_REQUEST['ssid']);
+  echo "<script>history.go(-1)</script>";
+ }
+
+ function SIDOwnerRestore()
+ { // Special Action
+  $s=UseModule('SQL')->SelectAndFetchFirst('*','sid','sid="'.$_REQUEST['ssid'].'"');
+  $m=UseModule('SQL')->SelectAndFetchFirst('*','Modules','name="'.$s['object_type'].'"');
+  UseModule($m['name']); // Убеждаемся что соотв. модуль загружен
+  if (method_exists(UseModule($s['object_type']),'SIDOwnerRestore'))
+  {
+   eval('UseModule("'.$s['object_type'].'")->SIDOwnerRestore("'.$_REQUEST['ssid'].'");');
+   echo 'eval';
+  }
+  else
+  {
+   $this->SetOwnerSID($m['sid'],$_REQUEST['ssid']);
+  }
+  echo "<script>history.go(-1)</script>";
+ }
+
+ function GetSIDByRec($r)
+ {
+  $o=UseModule('General')->GetFirst113Occ($r,'SID');
+  if ($o==0) return '';
+  return $r->GetSubField(113,$o,'B');
+ }
+
+ function IsHaveRightsViewOnRec($r)
+ {
+  $sid=$this->GetSIDByRec($r);
+  return $this->IsHaveRightsView($sid);
+ }
+
+ function Migrate()
+ {
+  global $OPTIONS;
+  $S;
+  $sids=UseModule('SQL')->SelectAndFetch('*','sid','');
+  foreach($sids as $si)
+  {
+   $csid=$si['sid'];
+   $secs=UseModule('SQL')->SelectAndFetch('*','Security','sid="'.$csid.'"');
+//   print_r($secs);
+   $S[$csid]=$si;
+   unset($S[$csid]['sid']);
+   unset($S[$csid][0]);
+   unset($S[$csid][1]);
+   unset($S[$csid][2]);
+   unset($S[$csid][3]);
+   unset($S[$csid][4]);
+   if (is_array($secs))
+   {
+    foreach($secs as $i=>$sec)
+    {
+     unset($secs[$i][0]);
+     unset($secs[$i][1]);
+     unset($secs[$i][2]);
+     unset($secs[$i][3]);
+     unset($secs[$i][4]);
+     unset($secs[$i]['id']);
+     unset($secs[$i]['sid']);
+    }
+    $S[$csid]['Security']=$secs;
+   }
+  }
+  $f=fopen($OPTIONS['SiteHtdoc'].'Data/sid','w');
+  fwrite($f,var_export($S,true));
+  fclose($f);
+ }
+};
+
+$MODULES['Security']=new Security();
+?>
