@@ -1,0 +1,80 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+    meta name="viewport" content="width=1920, initial-scale=1.0"
+    title ВИКИ ЕМИАС
+    /! Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+    = stylesheet_link_tag "application", :media => "all"
+    link href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144"
+    link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114"
+    link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72"
+    link href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed"
+    link href="favicon.ico" rel="shortcut icon"
+    link rel='stylesheet' media='screen and (min-width: 1920px) and (max-width: 1940px)' href='/css/1920.css'
+    link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 768px)'   href='/css/768.css'
+    link rel='stylesheet' media='screen and (min-width: 1350px) and (max-width: 1370px)' href='/css/1360.css'
+    link rel='stylesheet' media='screen and (min-width: 1600px) and (max-width: 1600px)' href='/css/1600.css'
+    link rel='stylesheet' media='screen and (min-width: 1280px) and (max-width: 1280px)' href='/css/1280x800.css'
+    link rel='stylesheet' href='/css/3d.css'
+    - if @fullscreen
+      link rel='stylesheet' href='/css/fullscreen.css'
+
+
+    javascript:
+      window.joosy = {
+        libraries: #{extract_sources_and_sizes_from_include_tag('wiki')}
+      };
+
+    = csrf_meta_tags
+
+
+  body style="opacity: 1"
+    = javascript_include_tag 'wiki_preloader'
+    .navbar
+      /.navbar-fixed-top
+      .navbar-inner
+        .container
+          / a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
+          /   span.icon-bar
+          /   span.icon-bar
+          /   span.icon-bar
+          .logo_obrm
+            img#cross src="/assets/logo_cross.png" align="right"
+
+            a.logo href="http://#{request.host}/?fullscreen=#{@fullscreen}" style="cursor: default;"
+              big ЕМИАС
+              br
+              small ЦЕНТР МОНИТОРИНГА
+          .header_title
+            h3.disable-select ЭНЦИКЛОПЕДИЯ ЦЕНТРА МОНИТОРИНГА ЕМИАС
+          .time.disable-select
+            = Date.today.strftime("%d/%m/%Y")
+    #fon
+      img#bg_img src="/assets/fon.jpg"  height="100%"        
+    .header_navigate
+      / .header_btn
+      /   .inleft
+      /     .inright
+      /       span#header_title 
+      /   / .in_color
+      .header_btn
+        .graph
+          span#header_title.disable-select
+      .header_return onclick="location.href=('http://#{request.host}/?fullscreen=#{@fullscreen}');"
+
+    = link_to '', '/pages/2', remote: true, id: 'btn_return'
+
+    /       .container.nav-collapse
+    /         ul.nav
+    /           li= link_to "Link 1", "/path1"
+    /           li= link_to "Link 2", "/path2"
+    /           li= link_to "Link 3", "/path3"
+
+    .container
+
+      .row#content 
+        #application

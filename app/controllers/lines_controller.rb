@@ -19,7 +19,7 @@ class LinesController < ApplicationController
     @line = Line.new
     @line.slide_id = params[:slide_id]
     @line = feel_by_type(@line, params[:type])
-    @fullscreen = params[:fullscreen].to_bool || false
+    @fullscreen = params[:fullscreen].try(:to_bool) || false
   end
 
   # GET /lines/1/edit

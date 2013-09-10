@@ -23,7 +23,7 @@ class PagesController < ApplicationController
   def new
     @page = Page.new
     # @page.properties.build
-    @fullscreen = params[:fullscreen].to_bool || false
+    @fullscreen = params[:fullscreen].try(:to_bool) || false
     @indicators = Page.where('parent_id == 2')
     @page.parent_id = params[:parent_id] if params[:parent_id]
 

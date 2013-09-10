@@ -1,3 +1,3 @@
-$(document).ready ->
-  $('#nested_forms').nestedAttributes
-    bindAddTo: $('#add_another')
+# $(document).ready ->
+#   $('#nested_forms').nestedAttributes
+#     bindAddTo: $('#add_another')

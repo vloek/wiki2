@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require jquery.ui.touch-punch.min
+// require jquery.ui.touch-punch.min
 //= require twitter/bootstrap
 //= require jquery.event.move
 //= require jquery.event.swipe

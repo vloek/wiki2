@@ -3,21 +3,25 @@ jQuery ->
     $(this).animate
       opacity: 0
 
+  $(document).on ->
+    ontouchmove (e) ->
+      e.preventDefault()
 
-  $('.drag').click ->
+  $('.drag').on 'click', ->
     # Variable
     drag         = $(this)
+
     title_text   = $(this).find('.title span').text()
     prp          = $(this).find('.persp')
     fog_color    = prp.attr('background-color')
     shadow_color = 'inset 0 0 23px '+ fog_color
     slide_clck   = $(this).find('.slide')
     mt           = prp.position().top
+    $.get drag.find('.block_a').attr('href'), (data)->
 
     # Hide btn_close and remove href attr
     $(this).find('.slide').parent('a').attr('href', '')
     $('.btn_main_close').hide()
-
 
 
 
@@ -31,7 +35,7 @@ jQuery ->
     $(this).find('.persp').css('transform','rotateX(0deg)')
     $(this).find('.persp').animate
       borderSpacing: 50
-      2100
+      5100
       ->
         $(this).css('-webkit-transition-duration','0').css('-transition-duration','0')
 
@@ -64,8 +68,6 @@ jQuery ->
      
     scrx = $(window).width() 
     scry = $(window).height() - 55
-    # $(this).find('.slide').animate 
-    #   left: 0
 
 
     $(this).find('.persp')
@@ -79,35 +81,19 @@ jQuery ->
               2000
               ->
                 if $('#stat_load').text() == "No"
-                  drag.find('a.block_a').click()
+                  # drag.find('a.block_a').click()
                   $('#stat_load').text('Loading')
                 $(this).css('background-size', 'contain')
                 $(this).css('background-image', 'url(/assets/slide_full_bg.png)')
                 setTimeout(display_return(title_text, 1), 3500)
                 $(this).css('top', 55)
-            # .animate
-            #   1000
-            #   ->
-            #     
                 
-          # $(this).css('top', 55)
-
-          # $(this).css('position', 'fixed').animate 
-          #   marginTop: 0
-          #   2400
-
-          # $(this).css('left', 0)
-          # $(this).css('margin-left', 0)
-          # $(this).css('margin-top', 0)
-          # slide_clck.css('left', '0')
           slide_clck.css('width', '0')
           slide_clck.css('right', 'auto')
           slide_clck.css('-webkit-perspective', '0')
 
       .animate
         boxShadow: shadow_color
-
-
 
     $('.drag').draggable('destroy')
     $('li').removeClass('drag ui-draggable')
@@ -120,6 +106,7 @@ jQuery ->
     $(this).find('.slide').css('cursor', 'auto')
     # $(this).find('.slide').animate
     #   top: -130
+
 
 
 
