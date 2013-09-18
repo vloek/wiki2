@@ -16,17 +16,20 @@ display = ->
           scry = screen.height - 290
           $('.scrolled-container').css('height', scry)
           # Slider
-          # $("#slide_plane").unbind 'swiperight'
-          # $("#slide_plane").unbind 'swipeleft'
-          # $("#slide_plane").unbind 'mousemove'
-          # $("#slide_plane").unbind 'mousedown'
-          # $("#slide_plane").unbind 'mouseup'
           $(".drag").draggable('destroy')
+          m = 0
 
           $("#slide_plane").on 'swiperight', ->
-            $("#slide_plane").carousel('prev')
+            $("#slide_plane").stop().carousel('prev')
+            m = m - 1
+            alert m
+
+
           $("#slide_plane").on 'swipeleft',  ->
-            $("#slide_plane").carousel('next')
+            m = m + 1
+            $("#slide_plane").stop().carousel('next')
+            alert m
+
 
 
           $('a').on 'click', ->
@@ -35,9 +38,7 @@ display = ->
           $('.header_navigate').animate
             opacity: 1
             1000
-      
-
-
+          # $('#slide_plane').touchSlider();
 
 delay 100, display
 $("<style type='text/css'> .hint .content a:link { color: #<%= @page.color %> !important;}  .hint .content a { color: #<%= @page.color %> !important; }  .hint .content a:visited { color: #<%= @page.color %> !important; } .hint .content a:focus { color: #<%= @page.color %> !important; } .hint .content a:hover { color: #<%= @page.color %> !important; }  </style>").appendTo("head");

@@ -3,7 +3,8 @@ $("li.drag").draggable({
          var $draggable = $(this),
              hasBeenDroppedBefore = $draggable.data('hasBeenDropped'),
              wasJustDropped = dropped && dropped[0].id == "droppable";
-         $draggable.find('.block_a').click();
+         // $draggable.find('.block_a').click();
+         $draggable.click();
              
          if(wasJustDropped) {
              // don't revert, it's in the droppable

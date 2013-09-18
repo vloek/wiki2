@@ -9,6 +9,10 @@ jQuery ->
 
   $('.drag').on 'click', ->
     # Variable
+    $("li.drag").draggable()
+    $draggable = $(this)
+
+
     drag         = $(this)
 
     title_text   = $(this).find('.title span').text()

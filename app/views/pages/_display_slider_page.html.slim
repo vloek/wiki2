@@ -10,3 +10,15 @@
         - if @page.slides.size >= 1
           - @page.slides.each do |num|
             li data-target="#slide_plane" data-slide-to="#{@page.slides.index(num)}" class="#{ 'active' if @page.slides.index(num) == 0}"
+    / #slide_plane
+    /   .touchslider-viewport style="overflow: initial"
+    /     div
+    /       - @page.slides.each do |slide|
+    /         .touchslider-item style="background-size: cover; background-image: url('#{slide.image}'); position:relative; height: 800px !important; width: 1600px !important; margin: auto;"
+    /           == render partial: 'display_hint', collection: slide.hints
+    /           == render partial: 'lines/line', collection: slide.lines
+    /     div
+    /       span.touchslider-prev ←
+    /       - if @page.slides.size >= 1
+    /         - @page.slides.each do |num|
+    /           span.touchslider-nav-item class="#{ 'touchslider-nav-item-current' if @page.slides.index(num) == 0  }" #{@page.slides.index num}
