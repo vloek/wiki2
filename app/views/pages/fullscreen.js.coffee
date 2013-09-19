@@ -1,3 +1,16 @@
+$defaultTime = (new Date()).getTime()
+
+delay = (ms, func) ->
+  setTimeout func, ms
+
+ok_time = (time) ->
+  if ($defaultTime + 200) <= time
+    $defaultTime = time
+    return true
+  else
+    return false
+
+
 $('.current_content').animate
   opacity: 1
   500
@@ -11,9 +24,9 @@ $('.current_content').animate
         $('#btn_return').css('display', 'block')
         # Slider
         $("#slider_full").on 'swiperight', ->
-            $("#slider_full").carousel('prev')
+            $("#slider_full").carousel('prev') if ok_time((new Date).getTime())
         $("#slider_full").on 'swipeleft', ->
-          $("#slider_full").carousel('next')
+          $("#slider_full").carousel('next') if ok_time((new Date).getTime())
     $('a').bind 'click', ()->
       window.location.hash = $(this).attr('href')
 

@@ -90,18 +90,22 @@
 
 }
 
+
+               
+
+
 .scrolled-container {
 	margin-top: 60px;
 	height: 520px;
-	overflow-y: scroll;
 	padding-top: 0px;
 	-webkit-transform: translateZ(0px);
+	//-webkit-overflow-scrolling: touch;
 
-	-webkit-overflow-scrolling: auto;
-	overflow-scrolling: auto;
+	-webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+	overflow-y: scroll;
 
 	&::-webkit-scrollbar {
-		-webkit-overflow-scrolling: auto;
 
 		width: 12px;
 	}

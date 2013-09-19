@@ -1,5 +1,15 @@
+$defaultTime = (new Date()).getTime()
+
 delay = (ms, func) ->
   setTimeout func, ms
+
+ok_time = (time) ->
+  if ($defaultTime + 200) <= time
+    $defaultTime = time
+    return true
+  else
+    return false
+
 
 display = ->
   $('#stat_load').text('Loading')
@@ -17,18 +27,13 @@ display = ->
           $('.scrolled-container').css('height', scry)
           # Slider
           $(".drag").draggable('destroy')
-          m = 0
 
           $("#slide_plane").on 'swiperight', ->
-            $("#slide_plane").stop().carousel('prev')
-            m = m - 1
-            alert m
+            $("#slide_plane").stop().carousel('prev') if ok_time((new Date).getTime())
 
 
           $("#slide_plane").on 'swipeleft',  ->
-            m = m + 1
-            $("#slide_plane").stop().carousel('next')
-            alert m
+            $("#slide_plane").stop().carousel('next') if ok_time((new Date).getTime())
 
 
 

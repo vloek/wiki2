@@ -6,6 +6,8 @@ display = ->
   $(".current_content").animate
     opacity: 0, 2000
     ->
+      $('#scrolled-cont').tinyscrollbar()
+
       # $(this).stop().css('background-size', 'contain')
 
       $(this).html('<%= escape_javascript render 'pages/display_page', page: @page %>')
