@@ -6,7 +6,6 @@ display = ->
   $(".current_content").animate
     opacity: 0, 2000
     ->
-      $('#scrolled-cont').tinyscrollbar()
 
       # $(this).stop().css('background-size', 'contain')
 
@@ -14,6 +13,7 @@ display = ->
       $('.current_content').animate
         opacity: 1, 1000
         ->
+          $('.scrolled-container').mCustomScrollbar()
           scry = screen.height - 290
           $('.scrolled-container').css('height', scry)
           $('a').on 'click', ->

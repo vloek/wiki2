@@ -22,6 +22,7 @@
  *= require hints
  *= require coda-slider
  *= require jquery-ui
+ *= require jquery.mCustomScrollbar
  *= require nested_hints
  *= require bootstrap_and_overrides
  *= require default

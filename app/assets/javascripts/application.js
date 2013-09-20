@@ -16,6 +16,7 @@
 // require jquery.ui.touch-punch.min
 //= require twitter/bootstrap
 //= require jquery.event.move
+//= require jquery.mCustomScrollbar.min
 //= require jquery.event.swipe
 //= require drago
 //= require pages
