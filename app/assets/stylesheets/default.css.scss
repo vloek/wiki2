@@ -236,6 +236,10 @@ body::-webkit-scrollbar{
 	margin-top: 100px;
 }
 
+.content {
+	overflow-y: hidden !important;
+}
+
 
 #btn_return {
 	&:active {
@@ -376,7 +380,12 @@ body::-webkit-scrollbar{
 
 
 ol.carousel-indicators {
-	bottom: -35px;
+	bottom: 16px !important;
+	// right: auto  !important;
+	left: auto  !important;
+	margin-right: auto  !important;
+	margin-left: auto  !important;
+	top: auto  !important;
 }
 
 #toggle {

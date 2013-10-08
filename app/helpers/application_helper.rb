@@ -46,7 +46,7 @@ module ApplicationHelper
   # full or not full?
   def current_ord_x(obj, fullscreen)
     if fullscreen
-      obj.x_full
+      obj.x_full.present? ? obj.x_full : obj.x 
     else
       obj.x
     end
@@ -54,9 +54,25 @@ module ApplicationHelper
 
   def current_ord_y(obj, fullscreen)
     if fullscreen
-      obj.y_full
+      obj.y_full.present? ? obj.y_full : obj.y 
     else
       obj.y
     end
+  end
+
+  def current_width(fullscreen, obj)
+    if fullscreen
+      obj.widths[:fullscreen].present? ? obj.widths[:fullscreen] : obj.width
+    else
+      obj.width
+    end 
+  end
+
+  def current_height(fullscreen, obj)
+    if fullscreen
+      obj.heights[:fullscreen].present? ? obj.heights[:fullscreen] : obj.height
+    else
+      obj.height
+    end 
   end
 end

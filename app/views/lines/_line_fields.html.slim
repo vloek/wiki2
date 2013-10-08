@@ -1,4 +1,4 @@
-.line id="line_#{line_fields.id}" style="position: absolute; display: block; width: #{@fullscreen ? line_fields.widths[:fullscreen] : line_fields.width }; height: #{@fullscreen ? line_fields.heights[:fullscreen] : line_fields.height}; border-top: #{line_fields.top.to_i}px; border-bottom: #{line_fields.bottom.to_i}px; border-left: #{line_fields.left.to_i}px; border-right: #{line_fields.right.to_i}px; top: #{current_ord_y(line_fields, @fullscreen)}; left: #{ current_ord_x(line_fields, @fullscreen) }; border-color: #666; border-style: solid;"
+.line id="line_#{line_fields.id}" style="position: absolute; display: block; width: #{current_width(@fullscreen, line_fields)}; height: #{current_height(@fullscreen, line_fields)}; border-top: #{line_fields.top.to_i}px; border-bottom: #{line_fields.bottom.to_i}px; border-left: #{line_fields.left.to_i}px; border-right: #{line_fields.right.to_i}px; top: #{current_ord_y(line_fields, @fullscreen)}; left: #{ current_ord_x(line_fields, @fullscreen) }; border-color: #666; border-style: solid;"
   = simple_form_for (line_fields), remote: true do |f|
     = f.error_notification
 

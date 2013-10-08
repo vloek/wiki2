@@ -15,7 +15,10 @@ $('.current_content').animate
   opacity: 1
   500
   ->
+
     $('.current_content').html("<div class='content_d'><%= escape_javascript render 'pages/display_page_full', page: @page %></div>")
+    $('#content_pokaz').mCustomScrollbar()
+      
     $('#btn_return').animate
       opacity: 1
       ->
@@ -32,6 +35,7 @@ $('.current_content').animate
 
 
       $('.content a').attr('data-remote', 'true')
+      $('.content a.hide_me').removeAttr('data-remote')
 
 
 
@@ -44,5 +48,7 @@ $('.current_content').animate
 
     $("<style type='text/css'> #header_title { color: #<%= @page.parent.color %> !important; }</style>").appendTo("head")
     $("<style type='text/css'> .current_content { box-shadow: #<%= @page.parent.color %> 0px 0px 23px inset !important; }</style>").appendTo("head")
+
+
 
 

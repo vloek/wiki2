@@ -3,7 +3,7 @@ html lang="en"
   head
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
-    meta name="viewport" content="width=1920"
+    meta name="viewport" content="width=1920, initial-scale=1.0, maximum-scale=1.0"
     title= content_for?(:title) ? yield(:title) : "Meth"
     = csrf_meta_tags
 
@@ -21,6 +21,7 @@ html lang="en"
     link rel='stylesheet' media='screen and (min-width: 1350px) and (max-width: 1370px)' href='/css/1360.css'
     link rel='stylesheet' media='screen and (min-width: 1600px) and (max-width: 1600px)' href='/css/1600.css'
     link rel='stylesheet' media='screen and (min-width: 1280px) and (max-width: 1280px)' href='/css/1280x800.css'
+    link rel='stylesheet' media='screen and (min-width: 2048px) and (max-width: 2050px)' href='/css/2048x1536.css'
     link rel='stylesheet' href='/css/3d.css'
     - if @fullscreen
       link rel='stylesheet' href='/css/fullscreen.css'
@@ -29,7 +30,7 @@ html lang="en"
 
       
 
-  body
+  body scroll="no" style="position:fixed;overflow:hidden"
 
 
     #stat_load style="display: none"No
