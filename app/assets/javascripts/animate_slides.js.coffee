@@ -39,7 +39,7 @@ jQuery ->
     $(this).find('.persp').css('transform','rotateX(0deg)')
     $(this).find('.persp').animate
       borderSpacing: 50
-      5100
+      2100
       ->
         $(this).css('-webkit-transition-duration','0').css('-transition-duration','0')
 

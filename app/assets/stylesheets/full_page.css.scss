@@ -188,7 +188,7 @@
 				margin: 0;
 				height: 230px;
 
-				overflow-y: scroll;
+				overflow-y: hidden;
 				&::-webkit-scrollbar {
 					width: 12px;
 				}

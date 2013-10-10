@@ -1,7 +1,7 @@
-.xz#xz
-
-  = link_to  new_page_slide_hint_path(@page_slide.page, @page_slide, Hint.new, fullscreen: @fullscreen) , remote: true, class: 'btn btn-info ' do
-    i.icon-plus
+.xz#xz style="margin-top: 10px"
+  .btn-group
+    = link_to  new_page_slide_hint_path(@page_slide.page, @page_slide, Hint.new, fullscreen: @fullscreen) , remote: true, class: 'btn btn-info ' do
+      i.icon-plus
 
   |&nbsp;
   .btn-group
@@ -16,10 +16,6 @@
       img src='/assets/bottom_left.gif'
     = link_to  new_page_slide_line_path(@page_slide.page, @page_slide, Line.new, type: 'line_bottom_right', fullscreen: @fullscreen) , remote: true, class: 'btn btn-inverse ' do
       img src='/assets/bottom_right.gif'
-  br
-  br
-  br
-  br
   br
   br
   / #dragable_plane

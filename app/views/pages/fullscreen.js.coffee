@@ -17,8 +17,18 @@ $('.current_content').animate
   ->
 
     $('.current_content').html("<div class='content_d'><%= escape_javascript render 'pages/display_page_full', page: @page %></div>")
-    $('#content_pokaz').mCustomScrollbar()
-      
+    $('#content_pokaz').mCustomScrollbar
+      autoDraggerLength: true
+      autoHideScrollbar: false
+      advanced:
+        updateOnContentResize: true
+        
+    $('#mini-nav').mCustomScrollbar
+      autoDraggerLength: true
+      autoHideScrollbar: false
+      advanced:
+        updateOnContentResize: true
+
     $('#btn_return').animate
       opacity: 1
       ->

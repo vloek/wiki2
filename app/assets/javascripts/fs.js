@@ -109,3 +109,4 @@
 $('#toggle').click(function() {
   screenfull.toggle( $('#container')[0] );
 });
+
