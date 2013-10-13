@@ -1,6 +1,6 @@
 Meth::Application.routes.draw do
   resources :lines
-
+  get 'test' => 'welcome#test'
 
   resources :nested_hints
 

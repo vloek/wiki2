@@ -1,0 +1,47 @@
+$(document).ready ->
+  height = parseInt($(window).height()) - parseInt($('.navbar-inner').height())
+  objects = $('.to_hide')
+  $('.menu').css('height', height)
+
+
+  $.each objects, (i, el) ->
+    topMarg = parseInt($(this).css('top')) + 1000   
+    $(el).animate
+      top: topMarg
+      1000 * i
+
+    $(this).click ->
+      $('.e_h').fadeOut(1000)
+
+      $(this).removeClass('to_hide')
+      animateCascadeTop()
+      delay 5000, toTop(this)
+  
+    
+
+  animateCascadeTop = ->
+    hideElements = $('.to_hide')
+    for x in hideElements
+      $(x).animate
+        left: -400
+        top: -1000
+        1000
+      $(x).css('-webkit-transform', 'rotateY(30deg)')
+      $(x).css('transform', 'rotateY(30deg)')
+
+
+  toTop = (x)->
+    $(x).css('top', '0px')
+    $(x).css('left', '0px')
+    $(x).css('width', '100%')
+    $(x).css('height', height)
+    $(x).css('-webkit-transform', 'rotateX(0)')
+    $(x).css('transform', 'rotateX(0)')
+    $(x).css('position', 'fixed')
+
+  fadeFromTop = (obj) ->
+    topMarg = parseInt($(obj).css('top')) + 1000   
+    $(obj).css('top', topMarg)
+
+  delay = (ms, func) -> setTimeout func, ms
+

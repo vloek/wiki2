@@ -4,4 +4,8 @@ class WelcomeController < ApplicationController
 		@menu_item = Page.where(:show_in_menu => true)
 	end
 
+
+  def test
+    render layout: 'wiki'
+  end
 end

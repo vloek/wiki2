@@ -55,19 +55,30 @@ jQuery ->
     $(this).find('.persp').css('z-index', '1000')
     $(this).removeClass('to_hide')
     $('.menu_item').hide()
+
+
+    #-----------------------
     # $(this).find('.menu_item').animate 
     #   opacity: 0
-    #   1500
-    #   ->
-    #     $(this).hide()
-    # $('.to_hide').fadeOut('slow')
-    $('.to_hide').animate 
-      opacity: 0, height: 0
-      1500
+    #   400
+    # #   ->
+    # #     $(this).hide()
+    # # $('.to_hide').fadeOut('slow')
+    # $('.to_hide').animate 
+    #   opacity: 0, height: 0
+    #   400
 
     # $(this).animate
     #   'margin-top': 56, left: 0, 'margin-left': 0, textIndent: 0, top: 160
     #   1200
+
+    objects = $('.to_hide')
+    for object in objects
+      $(object).animate
+        top: -500, opacity: 0
+        3000
+        ->
+          $(object).hide()
 
      
     scrx = $(window).width() 
