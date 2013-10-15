@@ -5,21 +5,24 @@ $(document).ready ->
 
 
   $.each objects, (i, el) ->
-    topMarg = parseInt($(this).css('top')) + 1000   
+    topMarg = parseInt($(el).css('top')) + 1000   
     $(el).animate
-      top: topMarg
-      1000 * i
+      top: topMarg + 100 * (i + 1)
+      1000 * (i)
+    $($('.menu_item')[i]).animate
+      top: topMarg + 140 * (i + 1)
+      1000 * (i)
 
     $(this).click ->
       $('.e_h').fadeOut(1000)
-
       $(this).removeClass('to_hide')
       animateCascadeTop()
       delay 5000, toTop(this)
+
   
     
 
-  animateCascadeTop = ->
+  animateCascadeTop = ()->
     hideElements = $('.to_hide')
     for x in hideElements
       $(x).animate
@@ -32,6 +35,7 @@ $(document).ready ->
 
   toTop = (x)->
     $(x).css('top', '0px')
+    $(x).css('bottom', '0px')
     $(x).css('left', '0px')
     $(x).css('width', '100%')
     $(x).css('height', height)
@@ -43,5 +47,11 @@ $(document).ready ->
     topMarg = parseInt($(obj).css('top')) + 1000   
     $(obj).css('top', topMarg)
 
+  showMenuElements = () ->
+    $('.e_h').show()
+
   delay = (ms, func) -> setTimeout func, ms
+
+  delay 6000, showMenuElements()
+
 
