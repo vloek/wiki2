@@ -5,7 +5,9 @@ div.slide {
 	left: 350px; 
 	top: -160px;
 	cursor: pointer;
-
+	-webkit-transform: rotateX(60deg) perspective(600px);
+  -moz-transition-duration: 2500ms;
+  transition-duration: 2500ms;
 }
 
 div.persp {
@@ -20,7 +22,9 @@ div.persp {
 	padding: 10px;
 	box-sizing: border-box; 
 	-moz-box-sizing: border-box;
-
+	-webkit-transform: rotateX(60deg) perspective(600px);
+  -moz-transition-duration: 2500ms;
+  transition-duration: 2500ms;
 }
 
 .drag {
@@ -41,6 +45,9 @@ div.persp {
 	border-radius: 10px;
 	background: url('/assets/menu_item_bg.gif');
 	// margin: 10px;
+	-webkit-transform: rotateX(60deg) perspective(600px);
+  -moz-transition-duration: 2500ms;
+  transition-duration: 2500ms;
 
 	.title {
 		// height: 100%;

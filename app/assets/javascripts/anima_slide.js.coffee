@@ -23,7 +23,7 @@ $(document).ready ->
     
 
   animateCascadeTop = ()->
-    hideElements = $('.to_hide')
+    hideElements = $('.to_hide .slide')
     for x in hideElements
       $(x).animate
         left: -400
@@ -34,14 +34,14 @@ $(document).ready ->
 
 
   toTop = (x)->
-    $(x).css('top', '0px')
-    $(x).css('bottom', '0px')
-    $(x).css('left', '0px')
-    $(x).css('width', '100%')
-    $(x).css('height', height)
-    $(x).css('-webkit-transform', 'rotateX(0)')
-    $(x).css('transform', 'rotateX(0)')
-    $(x).css('position', 'fixed')
+    $(x).find('.persp').css('top', '0px')
+    $(x).find('.persp').css('bottom', '0px')
+    $(x).find('.persp').css('left', '0px')
+    $(x).find('.persp').css('width', '100%')
+    $(x).find('.persp').css('height', height)
+    $(x).find('.persp').css('-webkit-transform', 'rotateX(0)')
+    $(x).find('.persp').css('transform', 'rotateX(0)')
+    $(x).find('.persp').css('position', 'fixed')
 
   fadeFromTop = (obj) ->
     topMarg = parseInt($(obj).css('top')) + 1000   
