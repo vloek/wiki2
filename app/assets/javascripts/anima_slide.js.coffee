@@ -1,8 +1,7 @@
 $(document).ready ->
-  height = parseInt($(window).height()) - parseInt($('.navbar-inner').height())
+  height = parseInt($(window).height()) - parseInt($('.navbar-inner').height() - 10)
   objects = $('.to_hide')
   $('.menu').css('height', height)
-
 
   $.each objects, (i, el) ->
     topMarg = parseInt($(this).css('top')) + 1000   
@@ -16,6 +15,7 @@ $(document).ready ->
       $(this).removeClass('to_hide')
       animateCascadeTop()
       delay 5000, toTop(this)
+  $('.e_h').fadeIn('slow')
   
     
 
