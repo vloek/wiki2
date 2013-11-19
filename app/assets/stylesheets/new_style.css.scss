@@ -1,0 +1,31 @@
+.menu3d_element {
+  width: 500px;
+  height: 320px;
+  border: 1px solid #aaa;
+  background: #fee;
+  -webkit-transform: rotateX(60deg) perspective(600px);
+  transition-duration: 2500ms;
+  position: absolute;
+  top: -1120px;
+  left:30%;
+  right: auto;
+  background-image: url('/system/pages/slides/000/000/004/original/Navi.jpg?1371137834');
+  background-size: cover;
+  z-index: 400;
+  box-shadow: 0px 0px 10px #aaa;
+  -moz-transition-duration: 2500ms;
+  transform: rotateX(50deg);
+}
+
+
+.perspective {
+  -webkit-perspective: 600px; 
+  position: relative; 
+  perspective: 500px; 
+}
+
+.menu_item {
+  position: absolute;
+  top: -1120px;
+  left: 100px;
+}
