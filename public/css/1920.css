@@ -21,14 +21,14 @@ div.persp {
 }
 
 ul.menu li.drag {
-	margin-top: 100px !important;
+	/*margin-top: 100px !important;*/
 }
 
 
 div.slide {
 	margin-left: 200px;
 	left: 300px;
-	top: -160px;
+	/*top: -160px;*/
 }
 
 div.persp {
@@ -36,9 +36,7 @@ div.persp {
 	height: 400px;
 }
 
-.row {
-	margin-left: -200px;
-}
+
 
 #main-content #left_content #main-block .title {
 	height: 60px !important;
@@ -156,7 +154,8 @@ div.persp {
 
 
 .menu {
-	margin-top: 60px !important;
+	/*margin-top: 60px !important;*/
+	width: 1050px;
 }
 
 
@@ -175,7 +174,6 @@ div#nested_form {
 
 
 #main-content #right_content #img-block .slide-links ul li {
-	/*margin-left: 40px;*/
 	width: 130px;
 
 }
@@ -184,7 +182,7 @@ div#nested_form {
 
 #main-content #right_content #menu-links ul li {
 	background-repeat: repeat-x;
-	height: 31px;
+	/*height: 31px;*/
 	font-size: 23px;
 	width: 490px !important;
 }
@@ -205,4 +203,8 @@ div#nested_form {
 
 .hint .content span {
 	font-size: 18px !important;
+}
+
+li.wrap {
+	margin-top: 20px;
 }

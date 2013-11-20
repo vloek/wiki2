@@ -2,10 +2,13 @@ div.slide {
 	-webkit-perspective: 1100px;
 	perspective: 1100px ;
 	position: absolute; 
-	left: 350px; 
+	// left: 350px; 
 	top: -160px;
+	float: center;
+	position: relative;
+	min-width: 500px;
 	cursor: pointer;
-	-webkit-transform: rotateX(60deg) perspective(600px);
+	// -webkit-transform: rotateX(60deg) perspective(600px);
   -moz-transition-duration: 2500ms;
   transition-duration: 2500ms;
 }
@@ -18,6 +21,7 @@ div.persp {
 	// transform: perspective(1100px) rotateX(50deg);
 	width: 500px;
 	height: 320px;
+	float: right;
 	background-size: 100%;
 	padding: 10px;
 	box-sizing: border-box; 
@@ -37,6 +41,7 @@ div.persp {
 	cursor: pointer;
 	// position: relative;
 	vertical-align: middle;
+	float: left;
 	text-align: left;
 	padding-left: 15px;
 	width: 180px !important;
@@ -45,7 +50,7 @@ div.persp {
 	border-radius: 10px;
 	background: url('/assets/menu_item_bg.gif');
 	// margin: 10px;
-	-webkit-transform: rotateX(60deg) perspective(600px);
+	// -webkit-transform: rotateX(60deg) perspective(600px);
   -moz-transition-duration: 2500ms;
   transition-duration: 2500ms;
 
@@ -84,7 +89,12 @@ div.persp {
 }
 
 .menu {
+	width: 800px;
+	position: relative;
 	overflow: visible;
+	margin-right: auto !important;
+	margin-left: auto  !important;
+
 
 }
 
@@ -102,7 +112,14 @@ div.persp {
 }
 
 ul.menu {
+	margin: 0;
+	margin-top: 56px;	
+	padding: 0;
 	li.drag {
 		margin-top: 50px ;
 	}
+}
+
+.sidebar-nav {
+	margin-top: 56px;
 }
