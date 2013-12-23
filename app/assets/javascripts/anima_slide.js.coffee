@@ -1,24 +1,53 @@
 $(document).ready ->
-  height = parseInt($(window).height()) - parseInt($('.navbar-inner').height() ) - 10
+  class Slide
+    constructor: (@id, @i) ->
+      @id = "#" + @id
+      tmp = @id # fix cache bug
+      # alert(@id)
+      $(tmp).click ->
+        $('.e_h').fadeOut(1000)
+        # alert(tmp)
+        $(tmp).removeClass('to_hide')
+        animateCascadeTop()
+        delay 5000, toTop(tmp)
+
+    load: () ->
+      topMarg = parseInt($(@id).css('top')) + 1060   
+
+      $(@id).animate 
+        top: topMarg + 100 + (@i * 75)
+        1000 * @i
+      $($('.menu_item')[@i]).animate
+        top: topMarg + 240 + (@i * 130)
+        1000 * (@i)
+      $($('.menu_item')[@i]).fadeTo(4000, 1)
+      
+
+
+
+  height = parseInt($(window).height()) - parseInt($('.navbar-fixed-top').height() ) - 10
+  height_navbar = parseInt($('.navbar-fixed-top').height() )
   objects = $('.to_hide')
   $('.menu').css('height', height)
 
   $.each objects, (i, el) ->
-    topMarg = parseInt($(el).css('top')) + 1000   
-    $(el).animate
-      top: topMarg + 100 + (i * 75)
-      1000 * (i)
-    $($('.menu_item')[i]).animate
-      top: topMarg + 240 + (i * 130)
-      1000 * (i)
+    obj = new Slide el.id, i
+    obj.load()
+  #   topMarg = parseInt($(el).css('top')) + 1000   
+  #   $(el).animate
+  #     top: topMarg + 100 + (i * 75)
+  #     1000 * (i)
+  #   $($('.menu_item')[i]).animate
+  #     top: topMarg + 240 + (i * 130)
+  #     1000 * (i)
 
-    $(this).click ->
-      $('.e_h').fadeOut(1000)
-      $(this).removeClass('to_hide')
-      animateCascadeTop()
-      delay 5000, toTop(this)
-  $('.e_h').fadeIn('slow')
-  $('.menu_item').fadeTo(4000, 1)
+  #   $(this).click ->
+  #     $('.e_h').fadeOut(1000)
+  #     $(this).removeClass('to_hide')
+  #     animateCascadeTop()
+  #     delay 5000, toTop(this)
+  # $('.e_h').fadeIn('slow')
+  # $('.menu_item').fadeTo(4000, 1)
 
   
     
@@ -36,7 +65,7 @@ $(document).ready ->
 
 
   toTop = (x)->
-    $(x).css('top', '0px')
+    $(x).css('top', height_navbar + 'px')
     $(x).css('bottom', '0px')
     $(x).css('left', '0px')
     $(x).css('width', '100%')

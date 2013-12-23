@@ -27,34 +27,34 @@
 
 
 
-function has3d(){
-   var el, has3d;
+// function has3d(){
+//    var el, has3d;
    
-   /* Create a new element */
-   el = document.createElement('p');
+//    /* Create a new element */
+//    el = document.createElement('p');
 
-   /* Apply a transform */
-   el.style['transform'] = 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)';
+//    /* Apply a transform */
+//    el.style['transform'] = 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)';
 
-   /* 
-   Add it to the body to get the computed style (for Opera mostly).
-   Since it's empty, it shouldn't interfere with layout in modern browsers. 
-   */
-   document.body.insertBefore(el, document.body.lastChild);
+    
+//    Add it to the body to get the computed style (for Opera mostly).
+//    Since it's empty, it shouldn't interfere with layout in modern browsers. 
    
-   /* Get the computed value */
-   has3d = window.getComputedStyle(el).getPropertyValue('transform');
+//    document.body.insertBefore(el, document.body.lastChild);
+   
+//    /* Get the computed value */
+//    has3d = window.getComputedStyle(el).getPropertyValue('transform');
 
-   /* 
-   If it's not undefined, tell us whether it is 'none'.
-   Otherwise, return false.
-   */
-   if( has3d !== undefined ){
-      return has3d !== 'none';
-   } else {
-      return false;
-   }
-}
+//    /* 
+//    If it's not undefined, tell us whether it is 'none'.
+//    Otherwise, return false.
+//    */
+//    if( has3d !== undefined ){
+//       return has3d !== 'none';
+//    } else {
+//       return false;
+//    }
+// }
 
 
 

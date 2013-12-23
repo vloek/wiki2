@@ -216,8 +216,8 @@ div#nested_form {
   -webkit-transform: rotateX(60deg) perspective(600px);
   transition-duration: 2500ms;
   position: absolute;
-  top: -1120px;
-  left:40%;
+  top: -1180px;
+  left:600px;
   right: auto;
   background-image: url('/system/pages/slides/000/000/004/original/Navi.jpg?1371137834');
   background-size: cover;
