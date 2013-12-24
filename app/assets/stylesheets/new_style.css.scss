@@ -7,7 +7,7 @@
   transition-duration: 2500ms;
   position: absolute;
   top: -1120px;
-  left:600px;
+  left: 430px;
   right: auto;
   background-image: url('/system/pages/slides/000/000/004/original/Navi.jpg?1371137834');
   background-size: cover;
@@ -24,15 +24,15 @@
 .perspective {
   -webkit-perspective: 600px; 
   position: relative; 
-  perspective: 500px; 
-  margin-left:100px;
+  perspective: 600px; 
+  //margin-left:100px;
 }
 
 .menu_item {
   position: absolute;
   top: -1120px;
   opacity: 0;
-  left: 100px;
+  //left: 100px;
   
   
   

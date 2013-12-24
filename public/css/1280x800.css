@@ -1,5 +1,5 @@
 .menu {
-  margin-top: 60px !important;
+  margin-top: 10px !important;
   pih: pih-pih;
 }
 
@@ -13,4 +13,8 @@
 
 .hint .content span {
   font-size: 14px !important;
+}
+
+.menu_item {
+  margin-left: 90px;
 }

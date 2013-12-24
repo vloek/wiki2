@@ -65,14 +65,14 @@ $(document).ready ->
 
 
   toTop = (x)->
-    $(x).css('top', height_navbar + 'px')
+    $(x).css('top',  '50px') #parseStr(parseInt(height_navbar) - 3) + 'px')
     $(x).css('bottom', '0px')
     $(x).css('left', '0px')
     $(x).css('width', '100%')
     $(x).css('height', height)
     $(x).css('-webkit-transform', 'rotateX(0)')
     $(x).css('transform', 'rotateX(0)')
-    $(x).css('position', 'fixed')
+    $(x).css('position', 'relative')
 
   fadeFromTop = (obj) ->
     topMarg = parseInt($(obj).css('top')) + 1000   
