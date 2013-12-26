@@ -1,16 +1,21 @@
-div.menu style=" position: relative; top: 0px; bottom: 0"
-  div class="perspective" style="z-index: 400"
-    div.menu_item style="position: absolute; " 
-    div class="to_hide menu3d_element drag" id="slideObj1"  Object 1
-  div class="perspective" style="z-index: 300"
-    div.menu_item style="position: absolute; " 
-    div class="to_hide menu3d_element drag" id="slideObj2"  Object 2
-  div class="perspective" style="z-index: 200"
-    div.menu_item style="position: absolute; " 
-    div class="to_hide menu3d_element drag" id="slideObj3"  Object 3
-  div class="perspective" style="z-index: 100"
-    div.menu_item
-      p Test
-    div class="to_hide menu3d_element drag" id="slideObj4"  Object 4
+div.menu style=" position: relative; top: 0px; bottom: 0;"
+  - @menu_item.reverse.each_slice(3) do |menu_ite|
+    - menu_ite.each do |elem|
+      - page_link = 'page_link' + elem.id.to_s
+      div class="perspective" style="z-index: #{elem.id * 2}"
+        = link_to '', "/pages/#{elem.id}?fullscreen=#{@fullscreen}", remote: true, id: page_link, class: 'block_a'
+      
+        div.menu_item style="position: absolute; " 
+        div class="to_hide menu3d_element drag" id="slideObj#{elem.id}" style=" border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' };"
+  / div class="perspective" style="z-index: 300"
+  /   div.menu_item style="position: absolute; " 
+  /   div class="to_hide menu3d_element drag" id="slideObj2"  Object 2
+  / div class="perspective" style="z-index: 200"
+  /   div.menu_item style="position: absolute; " 
+  /   div class="to_hide menu3d_element drag" id="slideObj3"  Object 3
+  / div class="perspective" style="z-index: 100"
+  /   div.menu_item
+  /     p Test
+  /   div class="to_hide menu3d_element drag" id="slideObj4"  Object 4
 
 

@@ -3,13 +3,22 @@ $(document).ready ->
     constructor: (@id, @i) ->
       @id = "#" + @id
       tmp = @id # fix cache bug
-      # alert(@id)
+      id_num = tmp.replace(/\D*/, '')
+      title_text = '123'
       $(tmp).click ->
         $('.e_h').fadeOut(1000)
-        # alert(tmp)
         $(tmp).removeClass('to_hide')
         animateCascadeTop()
-        delay 5000, toTop(tmp)
+        delay 3000, toTop(tmp)
+        link = "#page_link" + id_num
+        $(link).click()
+        $(tmp).css('background-size', 'contain')
+        $(tmp).css('background-image', 'url(/assets/slide_full_bg.png)')
+        $(tmp).addClass('current_content')
+        setTimeout(display_return(title_text, 1), 3500)
+        $(tmp).off('click')
+
+
 
     load: () ->
       topMarg = parseInt($(@id).css('top')) + 1060   
@@ -84,5 +93,20 @@ $(document).ready ->
   delay = (ms, func) -> setTimeout func, ms
 
   delay 6000, showMenuElements()
+
+  display_return = (title, parent_id) ->
+    window.scrollTo(0,0)
+    $('#header_title').html(title)
+    $('.header_btn').animate
+      opacity: 1
+      1500
+    # $('.header_return').animate
+    #   opacity: 1
+    #   1000
+    #   ->
+    $('.header_return').css('display', 'table-cell')
+    $('.header_btn').css('display', 'table-cell')
+    $('.header_return').css('id', parent_id)
+
 
 

@@ -26,7 +26,7 @@ display = ->
           scry = screen.height - 290
           $('.scrolled-container').css('height', scry)
           # Slider
-          $(".drag").draggable('destroy')
+          # $(".drag").draggable('destroy')
 
           $("#slide_plane").on 'swiperight', ->
             $("#slide_plane").stop().carousel('prev') if ok_time((new Date).getTime())
