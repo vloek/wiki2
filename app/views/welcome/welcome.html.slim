@@ -12,11 +12,11 @@ coffee:
 		.sidebar-nav
 			.jcarousel-skin-tango style=""
 				ul.menu style="list-style: none; margin-top:30px;"
-					li style="height:60px; z-index: -100"
+					li.wrap style="height:60px; z-index: -100; margin-top: 122px"
 						- marg = 0
 						- @menu_item.reverse.each_slice(3) do |menu_ite|
 							- menu_ite.each do |elem|
-								li id="#{elem.id}" class="drag to_hide" style="margin-left: #{marg}px;position: relative; z-index: #{elem.id*2}; left:20px"
+								li id="#{elem.id}" class="drag to_hide" style="margin-left: #{marg}px; z-index: #{elem.id*2}; "
 									- page_link = 'page_link' + elem.id.to_s
 									= link_to '', page_path(elem, fullscreen: @fullscreen), remote: true, id: page_link, class: 'block_a'
 									.menu_item style="border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' }; position: relative"

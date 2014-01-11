@@ -98,13 +98,13 @@ html lang="en"
     /           li= link_to "Link 2", "/path2"
     /           li= link_to "Link 3", "/path3"
 
-    .container
+    / .container
 
-      .row#content
+    /   .row#content
           
-        .span10 stylee="margin-right: 40px !important;"
-          = bootstrap_flash
-          = yield
+    /     .span10 stylee="margin-right: 40px !important;"
+    = bootstrap_flash
+    = yield
           
             / h3 Sidebar
             / ul.nav.nav-list
@@ -114,5 +114,5 @@ html lang="en"
             /   li= link_to "Link 3", "/path3"
      
     
-      footer
+    footer
         / p &copy; Company 2013
