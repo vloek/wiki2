@@ -1,0 +1,24 @@
+.wiki2d .slide .persp {
+  -webkit-transition-duration: initial !important;
+  -webkit-transform: none !important;
+  transition-duration: none !important;
+  -moz-transition-duration: none !important;
+  transform: none !important;    
+}
+
+.wiki2d .slide {
+  top: -90px !important;
+}
+
+[class*="span"] {
+  float: center !important;
+  min-height: 1px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+li.drag {
+   pointer-events: none;
+   cursor: default;
+} 

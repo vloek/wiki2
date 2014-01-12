@@ -17,7 +17,6 @@
  *= require pages
  *= require skin
  *= require welcome
- 
  *= require li_styles
  *= require hints
  *= require jquery.mCustomScrollbar
@@ -36,7 +35,6 @@ body {
 	padding-top: 0 !important;
 	opacity: 0;
 	overflow: auto;
-
 }
 
 body::-webkit-scrollbar{

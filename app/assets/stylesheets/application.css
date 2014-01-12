@@ -18,8 +18,6 @@
  *= require skin
  *= require welcome
  *= require li_styles
- *= require new_style
- 
  *= require lines
  *= require hints
  *= require coda-slider

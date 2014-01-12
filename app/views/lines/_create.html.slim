@@ -1,0 +1,6 @@
+.line id="line_#{@line.id}" style="position: absolute; display: block; width: #{@fullscreen ? @line.widths[:fullscreen] : @line.width }; height: #{@fullscreen ? @line.heights[:fullscreen] : @line.height}; border-top: #{@line.top.to_i}px; border-bottom: #{@line.bottom.to_i}px; border-left: #{@line.left.to_i}px; border-right: #{@line.right.to_i}px; top: #{current_ord_y(@line, @fullscreen)}; left: #{ current_ord_x(@line, @fullscreen) }; border-color: #666; border-style: solid;"
+  = simple_form_for (@line), remote: true do |f|
+    = f.error_notification
+
+    .form-inputs style="left: -100px; position: relative;"
+      == render template:'lines/list_field', locals: { f: f, line: @line }
