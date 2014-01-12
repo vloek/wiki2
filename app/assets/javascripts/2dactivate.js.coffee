@@ -12,3 +12,5 @@ jQuery ->
 
     marg_top_persp = persp_height / 5 + 10
     $('li.drag').css('margin-top', marg_top_persp)
+
+    $('#content').css('margin-top', (doc_height / 6 - 130))
