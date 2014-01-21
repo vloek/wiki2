@@ -23,6 +23,7 @@
 //= require pages
 //= require jscolor
 //= require ckeditor/init
+//= require bootstrap
 //= require main_animate
 //= require_tree .
 
