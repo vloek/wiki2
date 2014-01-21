@@ -58,6 +58,8 @@ $('.current_content').animate
 
     $("<style type='text/css'> #header_title { color: #<%= @page.parent.color %> !important; }</style>").appendTo("head")
     $("<style type='text/css'> .current_content { box-shadow: #<%= @page.parent.color %> 0px 0px 23px inset !important; }</style>").appendTo("head")
+    $("<style type='text/css'> ol.carousel-indicators { position: absolute; } </style> ").appendTo("head")
+
 
 
 

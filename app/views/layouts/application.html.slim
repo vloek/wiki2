@@ -15,18 +15,20 @@ html lang="en"
     link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114"
     link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72"
     link href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed"
+    meta name="apple-mobile-web-app-capable" content="yes"
+    meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"
     link href="favicon.ico" rel="shortcut icon"
-    link rel='stylesheet' media='screen and (min-width: 1920px) and (max-width: 1940px)' href='/css/1920.css'
-    link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 768px)' href='/css/768.css'
-    link rel='stylesheet' media='screen and (min-width: 1350px) and (max-width: 1370px)' href='/css/1360.css'
-    link rel='stylesheet' media='screen and (min-width: 1600px) and (max-width: 1600px)' href='/css/1600.css'
-    link rel='stylesheet' media='screen and (min-width: 1280px) and (max-width: 1280px)' href='/css/1280x800.css'
-    link rel='stylesheet' media='screen and (min-width: 2048px) and (max-width: 2050px)' href='/css/2048x1536.css'
+    link rel='stylesheet'  href='/css/1920.css'
+    / link rel='stylesheet' media='screen and (min-width: 768px) and (max-width: 768px)' href='/css/768.css'
+    / link rel='stylesheet' media='screen and (min-width: 1350px) and (max-width: 1370px)' href='/css/1360.css'
+    / link rel='stylesheet' media='screen and (min-width: 1600px) and (max-width: 1600px)' href='/css/1600.css'
+    / link rel='stylesheet' media='screen and (min-width: 1280px) and (max-width: 1280px)' href='/css/1280x800.css'
+    / link rel='stylesheet' media='screen and (min-width: 2048px) and (max-width: 2050px)' href='/css/2048x1536.css'
     link rel='stylesheet' href='/css/3d.css'
     - if @fullscreen
       link rel='stylesheet' href='/css/fullscreen.css'
 
-    - unless @mode == '2d'
+    - if @mode.nil?
       link rel='stylesheet' href='/2d.css'
     /!
       Javascripts
@@ -70,7 +72,7 @@ html lang="en"
             .logo_obrm
               img#cross src="/assets/logo_cross.png" align="right"
 
-              a.logo href="http://#{request.host}/?fullscreen=#{@fullscreen}" style="cursor: default;"
+              a.logo href="http://#{request.host}/?fullscreen=#{@fullscreen}&mode=#{@mode}" style="cursor: default;"
                 big ЕМИАС
                 br
                 small ЦЕНТР МОНИТОРИНГА
@@ -92,16 +94,9 @@ html lang="en"
           span#header_title.disable-select
       .header_return onclick="location.href=('http://#{request.host}/?fullscreen=#{@fullscreen}');"
 
-    = link_to '', '/pages/2', remote: true, id: 'btn_return'
+    = link_to ' ', '/pages/2', remote: true, id: 'btn_return'
 
-    /       .container.nav-collapse
-    /         ul.nav
-    /           li= link_to "Link 1", "/path1"
-    /           li= link_to "Link 2", "/path2"
-    /           li= link_to "Link 3", "/path3"
-
-    .container
-
+    .container style="margin-top: 55px; height: 100%;"
       .row#content
           
         .span10 stylee="margin-right: 40px !important;"

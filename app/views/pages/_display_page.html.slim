@@ -1,4 +1,4 @@
-= raw page.content
-.scrolled-container#scrolled-cont
+/ = raw page.content
+.scrolled#scrolled-cont
 	/ table.table
 	== render partial: 'pages/visio_page_normative', collection: page.children.sort! { |a, b| a.title.downcase <=> b.title.downcase }

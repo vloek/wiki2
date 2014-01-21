@@ -1,3 +1,9 @@
+html {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
 body {
 	width: 100%;
 	height: 100%;
@@ -14,9 +20,30 @@ body {
 	// background-repeat: no-repeat;
 }
 
+.scrolled {
+	width: 98%;
+	height: 84%;
+
+	//height: 84%;
+	margin: auto;
+	margin-top: 4%;
+}
+
+
+.mCustomScrollBox {
+	//display: table-row;
+	//width: 80%;
+	margin: auto;
+}
+
+.mCSB_container {
+	//display: table-cell;
+}
+
 body::-webkit-scrollbar{
 		width: 0;
 	}
+
 
 
 #content {
@@ -55,7 +82,7 @@ body::-webkit-scrollbar{
 	top: 0;
 	width: 170px;
 	font-family: 'pf_dindisplay_proregular';
-	height: 52px;
+	height: 50px;
 	background: url('/assets/logo_obrm_bg.gif');
 	line-height: 16px;
 	a.logo {
@@ -98,6 +125,7 @@ body::-webkit-scrollbar{
 	position: absolute;
 	left: 200px;
 	min-width: 500px;
+	top: 3px;
 	margin-left: 1px;
 	color: #ffda13;
 	text-align: left;
@@ -233,7 +261,7 @@ body::-webkit-scrollbar{
 
 .content_d {
 	margin-left: 200px;
-	margin-top: 100px;
+	margin-top: 140px;
 }
 
 .content {
@@ -264,7 +292,7 @@ body::-webkit-scrollbar{
 
 
 #content {
-	padding-top: 20px !important;
+	padding-top: 0px !important;
 }
 
 
@@ -380,7 +408,7 @@ body::-webkit-scrollbar{
 
 
 ol.carousel-indicators {
-	bottom: 16px !important;
+	bottom: 20px !important;
 	// right: auto  !important;
 	left: auto  !important;
 	margin-right: auto  !important;

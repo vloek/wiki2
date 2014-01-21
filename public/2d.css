@@ -6,6 +6,10 @@
   transform: none !important;    
 }
 
+.wiki2d {
+  box-sizing: border-box;
+}
+
 .wiki2d .slide {
   top: -90px !important;
 }
@@ -18,7 +22,25 @@
 }
 
 
-li.drag {
-   pointer-events: none;
+.wiki2d .scrolled-container {
+  display: table;
+  height: 100%;
+  margin-top: 0;
+  width: 100%;
+}
+
+.wiki2d #slide_plane {
+  display: table-row !important;
+  margin: auto;
+}
+
+.wiki2d .carousel-inner {
+  display: table-cell;
+  margin: auto;
+  vertical-align: middle;
+}
+
+/*li.drag {*/
+/*   pointer-events: none;
    cursor: default;
-} 
+*/} 

@@ -7,9 +7,11 @@ jQuery ->
     ontouchmove (e) ->
       e.preventDefault()
 
-  $('.drag').on 'click', ->
+  $('.wiki3d .drag').on 'click', ->
     # Variable
-    $("li.drag").draggable()
+    # $("li.drag").draggable()
+    $(this).find('.persp').addClass('current_content')
+
     $draggable = $(this)
 
 
@@ -46,6 +48,7 @@ jQuery ->
     sss       = jQuery($(this).find('.persp')).offset()
     presp     = $(this).find('.persp')
     slide_ofs = jQuery($(this).find('.slide')).offset()
+    $(this).css('-webkit-transition-duration','0').css('-transition-duration','0')
 
     # $(this).animate 
     #   left: sss.left, top: sss.top
@@ -76,31 +79,32 @@ jQuery ->
 
     $(this).find('.persp')
       .animate
-        width: scrx, height: scry, zero: 0, r: 0, marginLeft: -slide_ofs.left, marginTop: 55, border: 0, left: 0, top: 0
+        width: scrx, height: scry, zero: 0, r: 0,   border: 0, left: -350, marginLeft: -350,  top: 0, marginTop: 55,  opacity: 0
         1800
         ->
-          $(this)
-            .animate
-              opacity: 0
-              2000
-              ->
-                if $('#stat_load').text() == "No"
-                  # drag.find('a.block_a').click()
-                  $('#stat_load').text('Loading')
-                $(this).css('background-size', 'contain')
-                $(this).css('background-image', 'url(/assets/slide_full_bg.png)')
-                setTimeout(display_return(title_text, 1), 3500)
-                $(this).css('top', 55)
-                
+          $(this).css('left', 0)
+          $(this).css('margin-left', 0)
+          if $('#stat_load').text() == "No"
+            drag.find('a.block_a').click()
+            $('#stat_load').text('Loading')
+          $(this).css('background-size', 'contain')
+          $(this).css('position', 'fixed')
+          $(this).css('background-image', 'url(/assets/slide_full_bg.png)').animate
+            opacity: 1
+          setTimeout(display_return(title_text, 1), 3500)
+          # $(this).css('top', 55)
+          # drag.find('a.block_a').click()
+
+
           slide_clck.css('width', '0')
           slide_clck.css('right', 'auto')
           slide_clck.css('-webkit-perspective', '0')
 
       .animate
-        boxShadow: shadow_color
+        boxShadow: shadow_color, opacity: 1
 
-    $('.drag').draggable('destroy')
-    $('li').removeClass('drag ui-draggable')
+    # $('.drag').draggable('destroy')
+    $('.drag').removeClass('drag ui-draggable')
     $(this).css('z-index', '1200')
     $(this).off('click')
     $(this).find('.persp').addClass('current_content')
@@ -124,10 +128,6 @@ display_return = (title, parent_id) ->
   $('.header_btn').animate
     opacity: 1
     1500
-  # $('.header_return').animate
-  #   opacity: 1
-  #   1000
-  #   ->
   $('.header_return').css('display', 'table-cell')
   $('.header_btn').css('display', 'table-cell')
   $('.header_return').css('id', parent_id)
