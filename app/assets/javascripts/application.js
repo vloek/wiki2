@@ -18,10 +18,12 @@
 //= require jquery.event.move
 //= require jquery.mCustomScrollbar.min
 //= require jquery.event.swipe
+//= require date.format
 //= require drago
 //= require pages
 //= require jscolor
 //= require ckeditor/init
+//= require main_animate
 //= require_tree .
 
 

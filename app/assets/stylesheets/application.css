@@ -11,7 +11,9 @@
  *= require_self
  *= require figure
  *= require full_page
+ *= require jquery-ui
  *= require jquery.rollbar
+ *= require jquery.ui.all
  *= require menu
  *= require normative
  *= require pages
@@ -21,7 +23,6 @@
  *= require lines
  *= require hints
  *= require coda-slider
- *= require jquery-ui
  *= require jquery.mCustomScrollbar
  *= require nested_hints
  *= require new_style
