@@ -14,7 +14,8 @@ jQuery ->
         $('.wiki2d').css('top', '55px')
         $('.wiki2d').css('left', '0px')
         $('.wiki2d').css('position', 'fixed')
-        $('.wiki2d').css('width', '100%').css('height', '100%')
+        c = $(window).height() - 55
+        $('.wiki2d').css('width', '100%').css('height', c)
         $('.wiki2d').css('background-size', 'contain')
         $('.wiki2d').css('background-image', 'url(/assets/slide_full_bg.png)')
         $('.wiki2d').css('border', $(slide).css('border'))
@@ -53,3 +54,4 @@ jQuery ->
       1500
       ->
         $('a#btn_return').css('display', 'block')
+

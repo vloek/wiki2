@@ -12,12 +12,12 @@ display = ->
     opacity: 1, 1000
     ->
       $(".current_content").html('<%= escape_javascript render 'pages/display_page', page: @page %>')
-  # $('.current_content').animate
-  #   opacity: 1, 1000
-  #   ->
-  $('.scrolled').mCustomScrollbar()
+      # $('.current_content').animate
+      #   opacity: 1, 1000
+      #   ->
+      $('.scrolled').mCustomScrollbar()
   scry = screen.height - 250
-  $('.scrolled-container').css('height', scry)
+  $('.scrolled').css('height', scry)
   $('a').on 'click', ->
     window.location.hash = $(this).attr('href')
   $('.header_navigate').animate
