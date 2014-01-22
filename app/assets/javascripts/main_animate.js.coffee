@@ -28,7 +28,7 @@ jQuery ->
           1000
           ->
             $('#slide_plane').css('display', 'table-row')
-            setTimeout(display_return(title_text, 1), 2500)
+            setTimeout(display_return(title_text, 1), 1000)
 
 
 
@@ -38,7 +38,7 @@ jQuery ->
     $('#header_title').html(title)
     $('.header_btn').animate
       opacity: 1
-      1500
+      700
     $('.header_return').css('display', 'table-cell')
     $('.header_btn').css('display', 'table-cell')
     $('.header_return').css('id', parent_id)
