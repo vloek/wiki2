@@ -8,6 +8,9 @@ display = ->
   #   ->
 
   # $(this).stop().css('background-size', 'contain')
+  $('.header_navigate').animate
+    opacity: 1
+    300
   $(".current_content").animate
     opacity: 1, 1000
     ->
@@ -16,13 +19,11 @@ display = ->
       #   opacity: 1, 1000
       #   ->
       $('.scrolled').mCustomScrollbar()
+
   scry = screen.height - 250
   $('.scrolled').css('height', scry)
   $('a').on 'click', ->
     window.location.hash = $(this).attr('href')
-  $('.header_navigate').animate
-    opacity: 1
-    1000
 
 
 delay 1000, display

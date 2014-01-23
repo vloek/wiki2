@@ -19,6 +19,9 @@ display = ->
       # $(this).stop().css('background-size', 'contain')
 
       $(".current_content").html("<%= escape_javascript render 'pages/display_slider_page', page: @page %>")
+      $('.header_navigate').animate
+        opacity: 1
+        300
       $(".current_content").animate
         opacity: 1, 1000
         ->
@@ -43,9 +46,7 @@ display = ->
           $('a').on 'click', ->
             window.location.hash = $(this).attr('href')
           $('.content a').attr('data-remote', 'true')
-          $('.header_navigate').animate
-            opacity: 1
-            1000
+          
           # $('#slide_plane').touchSlider();
 
 delay 100, display
