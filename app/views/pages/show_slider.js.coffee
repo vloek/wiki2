@@ -25,20 +25,20 @@ display = ->
       $(".current_content").animate
         opacity: 1, 1000
         ->
-          $("#slide_plane").carousel().carousel('pause')
+          $("#slide_plane").carousel
+            interval: false
           scry = screen.height - 290
           # $('.scrolled-container').css('height', scry)
           # Slider
           $(".drag").draggable('destroy')
 
+
           $("#slide_plane").on 'swiperight', ->
             $("#slide_plane").stop().carousel('prev') if ok_time((new Date).getTime())
-            $("#slide_plane").carousel().carousel('pause')
 
 
           $("#slide_plane").on 'swipeleft',  ->
             $("#slide_plane").stop().carousel('next') if ok_time((new Date).getTime())
-            $("#slide_plane").carousel().carousel('pause')
             
 
 

@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   # GET /pages
   def index
     @pages = Page.where(parent_id: nil)
+    render layout: 'admin'
   end
 
   # GET /pages/1
@@ -39,14 +40,15 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @indicators = Page.where(parent_id: 2)
     if @page.slider
-      render '_form_by_slider'
+      render '_form_by_slider', layout: 'admin'
     else
       if @page.parent_id.present?
-        render '_form'
+        render '_form', layout: 'admin'
       else
-        render 'form_mini'
+        render 'form_mini', layout: 'admin'
       end
     end
+
   end
 
   # POST /pages
