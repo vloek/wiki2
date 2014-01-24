@@ -41,7 +41,7 @@ ssh_options[:forward_agent] = true
 
 # Имя вашего проекта в панели управления.
 # Не меняйте это значение без необходимости, оно используется дальше.
-set :application,     "wiki3"
+set :application,     "wiki2"
 
 # Сервер размещения проекта.
 set :deploy_server,   "fluorine.locum.ru"
