@@ -23,7 +23,6 @@ body {
 .scrolled {
 	width: 98%;
 	height: 84%;
-
 	//height: 84%;
 	margin: auto;
 	margin-top: 4%;
@@ -140,12 +139,12 @@ body::-webkit-scrollbar{
 
 
 .header_navigate {
-	display: table-row;
+	//display: table-row;
 	z-index: 10000;
-	position: fixed;
-	padding: 1px;
-	top: 62px;
-	left: 0px;
+	//position: fixed;
+	//padding: 1px;
+	//top: 62px;
+	//left: 0px;
 	opacity: 0;
 	// width: 300px;
 	// background: #666;
@@ -323,6 +322,14 @@ body::-webkit-scrollbar{
 	}
 }
 
+.zoomer {
+	display: table-row;
+	z-index: 10000;
+	position: fixed;
+	padding: 1px;
+	top: 60px;
+	left: 5px;
+}
 
 .header_btn {
 	display: block;
@@ -351,7 +358,7 @@ body::-webkit-scrollbar{
 		margin-top: 2px;
 		height: 64px;
 		width: 188px;
-
+		
 
 
 		background: rgb(33,33,33); /* Old browsers */

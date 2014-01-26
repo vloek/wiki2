@@ -82,17 +82,18 @@ html lang="en"
               = Date.today.strftime("%d/%m/%Y")
 
     #fon
-      img#bg_img src="/assets/fon.jpg"  height="100%"        
-    .header_navigate
-      / .header_btn
-      /   .inleft
-      /     .inright
-      /       span#header_title 
-      /   / .in_color
-      .header_btn
-        .graph
-          span#header_title.disable-select
-      .header_return onclick="location.href=('http://#{request.host}/?fullscreen=#{@fullscreen}');"
+      img#bg_img src="/assets/fon.jpg"  height="100%"  
+    .zoomer      
+      .header_navigate
+        / .header_btn
+        /   .inleft
+        /     .inright
+        /       span#header_title 
+        /   / .in_color
+        .header_btn
+          .graph
+            span#header_title.disable-select
+        .header_return onclick="location.href=('http://#{request.host}/?fullscreen=#{@fullscreen}');"
 
     = link_to ' ', '/pages/2', remote: true, id: 'btn_return'
 

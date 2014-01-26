@@ -31,7 +31,8 @@ class LinesController < ApplicationController
   # POST /lines.json
   def create
     @line = Line.new(params[:line])
-    @line.save
+    @obj_id = params[:obj_id]
+    @line.save!
   end
 
   # PUT /lines/1

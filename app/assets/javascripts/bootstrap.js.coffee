@@ -7,6 +7,7 @@ jQuery ->
 
   zoom_coefficient = (1.7 / ($(document).width() / $(document).height())) - 0.2
   if !(/mobile/i.test(navigator.userAgent))
+    $("<style type='text/css'> .header_navigate {  zoom: #{zoom_coefficient + 0.1}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
     $("<style type='text/css'> #btn_return {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
     $("<style type='text/css'> .menu_item {  zoom: #{zoom_coefficient * 1.2 }; -moz-transform: scale(#{zoom_coefficient  * 0.8})}</style>").appendTo('head')
     $("<style type='text/css'> .scrolled-container {  zoom: #{zoom_coefficient }; -moz-transform: scale(#{zoom_coefficient * 1.2 })}</style>").appendTo('head')

@@ -16,7 +16,6 @@
 // require jquery.ui.touch-punch.min
 //= require twitter/bootstrap
 //= require jquery.event.move
-//= require jquery.mCustomScrollbar.min
 //= require jquery.event.swipe
 //= require date.format
 //= require drago
@@ -24,6 +23,8 @@
 //= require jscolor
 //= require ckeditor/init
 //= require bootstrap
+//= require jquery.mCustomScrollbar.min
+
 //= require main_animate
 //= require_tree .
 

@@ -14,7 +14,6 @@ gem 'simple_form'
 gem 'paperclip', git:'git://github.com/thoughtbot/paperclip.git' # для загрузки картинок
 gem 'remotipart'
 gem 'russian'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

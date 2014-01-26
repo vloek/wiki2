@@ -1,6 +1,7 @@
-.line style="border-top: #{@line.top.to_i}px; border-bottom: #{@line.bottom.to_i}px; border-left: #{@line.left.to_i}px; border-right: #{@line.right.to_i}px;border-color: #999; border-style: solid;  left: -50px; top: 50px"
+.line id="#{@line.object_id}" style="border-top: #{@line.top.to_i}px; border-bottom: #{@line.bottom.to_i}px; border-left: #{@line.left.to_i}px; border-right: #{@line.right.to_i}px;border-color: #999; border-style: solid;  left: -50px; top: 50px"
   = simple_form_for (@line), remote: true do |f|
     = f.error_notification
+    = hidden_field_tag :obj_id, @line.object_id
 
     .form-inputs style="left: -100px; position: relative;"
       == render template: 'lines/list_field', locals: { f: f, line: @line }

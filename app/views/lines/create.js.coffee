@@ -1,3 +1,6 @@
+$("#<%= @obj_id %>").replaceWith(("<%= j render 'lines/line_fields', line_fields: @line  %>"))
+
+$("#<%= @obj_id %>").find('btn-warning').removeClass('btn-warning').stop().addClass('btn-success')
 $('.line')
   .draggable
     drag: ->
