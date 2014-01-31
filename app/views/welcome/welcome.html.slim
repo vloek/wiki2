@@ -7,51 +7,50 @@ coffee:
 
 / .back
 / 	img src='/assets/back.png'
-- cache do 
-	- if @mode.nil?
-		.wiki2d
-			.menu-margin-top
-				.sidebar-nav
-					.jcarousel-skin-tango style=""
-						/ ul.menu style="list-style: none; margin-top:30px;"
-						div.wrapper style="height:60px; z-index: -100; margin-top: 10px"
-						- marg = 0
-						- @menu_item.reverse.each_slice(3) do |menu_ite|
-							- menu_ite.each do |elem|
-								div id="#{elem.id}" class="drag to_hide slide2d" style="margin-left: #{marg}px;position: relative; z-index: #{elem.id*2 - elem.id*2 + 10}; left:#{190 - elem.id * 90}px;"
-									- page_link = 'page_link' + elem.id.to_s
-									= link_to '', page_path(elem, fullscreen: @fullscreen), remote: true, id: page_link, class: 'block_a'
-									.menu_item style="border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' }; position: relative"
-										.title style="margin: auto; display: table-row; height: 69px"
-											span style="color: ##{elem.color||'#567';}; display: table-cell"= elem.title
-										.arrow
-											.triangle-left style="border-left: 25px solid #323232;"
-										.arrow2
-											.triangle-left style="border-left: 17px solid ##{elem.color||'#567';}; border-top: 14px solid transparent; border-bottom: 14px solid transparent;"
-									
-									.slide style=" z-index: -#{elem.id}; "
-										.persp.disable-select id="page_#{elem.id}" style=" opacity: 1;  right: 0; bottom: 0; box-shadow: inset 0 0 23px ##{elem.color || '#222' }; border: 1px solid ##{elem.color|| '#222'}; background-image: url('#{ elem.slide.url}'); background-color: #{elem.color}; background-size: cover;"
-	- else 
-		.wiki3d style="height: 100%;"
-			div.wrapper style="height:60px; z-index: -100; margin-top: 50px"
-			/ div.menu style="list-style: none; position: relative; margin-top:90px;"
-			- marg = 0
-			- @menu_item.reverse.each_slice(3) do |menu_ite|
-				- menu_ite.each do |elem|
-					div id="#{elem.id}" class="drag to_hide" style="margin-left: #{marg}px;position: relative; z-index: #{elem.id*2}; left:20px"
-						- page_link = 'page_link' + elem.id.to_s
-						= link_to '', page_path(elem, fullscreen: @fullscreen), remote: true, id: page_link, class: 'block_a'
-						.menu_item style="border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' }; position: relative"
-							.title style="margin: auto; display: table-row; height: 69px"
-								span style="color: ##{elem.color||'#567';}; display: table-cell"= elem.title
-							.arrow
-								.triangle-left style="border-left: 25px solid #323232;"
-							.arrow2
-								.triangle-left style="border-left: 17px solid ##{elem.color||'#567';}; border-top: 14px solid transparent; border-bottom: 14px solid transparent;"
+- if @mode.nil?
+	.wiki2d
+		.menu-margin-top
+			.sidebar-nav
+				.jcarousel-skin-tango style=""
+					/ ul.menu style="list-style: none; margin-top:30px;"
+					div.wrapper style="height:60px; z-index: -100; margin-top: 10px"
+					- marg = 0
+					- @menu_item.reverse.each_slice(3) do |menu_ite|
+						- menu_ite.each do |elem|
+							div id="#{elem.id}" class="drag to_hide slide2d" style="margin-left: #{marg}px;position: relative; z-index: #{elem.id*2 - elem.id*2 + 10}; left:#{190 - elem.id * 90}px;"
+								- page_link = 'page_link' + elem.id.to_s
+								= link_to '', page_path(elem, fullscreen: @fullscreen), remote: true, id: page_link, class: 'block_a'
+								.menu_item style="border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' }; position: relative"
+									.title style="margin: auto; display: table-row; height: 69px"
+										span style="color: ##{elem.color||'#567';}; display: table-cell"= elem.title
+									.arrow
+										.triangle-left style="border-left: 25px solid #323232;"
+									.arrow2
+										.triangle-left style="border-left: 17px solid ##{elem.color||'#567';}; border-top: 14px solid transparent; border-bottom: 14px solid transparent;"
+								
+								.slide style=" z-index: -#{elem.id}; "
+									.persp.disable-select id="page_#{elem.id}" style=" opacity: 1;  right: 0; bottom: 0; box-shadow: inset 0 0 23px ##{elem.color || '#222' }; border: 1px solid ##{elem.color|| '#222'}; background-image: url('#{ elem.slide.url}'); background-color: #{elem.color}; background-size: cover;"
+- else 
+	.wiki3d style="height: 100%;"
+		div.wrapper style="height:60px; z-index: -100; margin-top: 50px"
+		/ div.menu style="list-style: none; position: relative; margin-top:90px;"
+		- marg = 0
+		- @menu_item.reverse.each_slice(3) do |menu_ite|
+			- menu_ite.each do |elem|
+				div id="#{elem.id}" class="drag to_hide" style="margin-left: #{marg}px;position: relative; z-index: #{elem.id*2}; left:20px"
+					- page_link = 'page_link' + elem.id.to_s
+					= link_to '', page_path(elem, fullscreen: @fullscreen), remote: true, id: page_link, class: 'block_a'
+					.menu_item style="border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' }; position: relative"
+						.title style="margin: auto; display: table-row; height: 69px"
+							span style="color: ##{elem.color||'#567';}; display: table-cell"= elem.title
+						.arrow
+							.triangle-left style="border-left: 25px solid #323232;"
+						.arrow2
+							.triangle-left style="border-left: 17px solid ##{elem.color||'#567';}; border-top: 14px solid transparent; border-bottom: 14px solid transparent;"
+					
+					.slide style=" z-index: -#{elem.id}; "
+						.persp.disable-select id="page_#{elem.id}" style=" opacity: 1;  right: 0; bottom: 0; box-shadow: inset 0 0 23px ##{elem.color || '#222' }; border: 1px solid ##{elem.color|| '#222'}; background-image: url('#{ elem.slide.url}'); background-color: #{elem.color}; background-size: cover; margin-top: 55px;"
 						
-						.slide style=" z-index: -#{elem.id}; "
-							.persp.disable-select id="page_#{elem.id}" style=" opacity: 1;  right: 0; bottom: 0; box-shadow: inset 0 0 23px ##{elem.color || '#222' }; border: 1px solid ##{elem.color|| '#222'}; background-image: url('#{ elem.slide.url}'); background-color: #{elem.color}; background-size: cover; margin-top: 55px;"
-							
 / .ttt_pisk
 / 	.cont
 / 		p Сиськи

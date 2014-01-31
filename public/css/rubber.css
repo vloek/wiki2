@@ -1,0 +1,23 @@
+.slide_normative {
+  width: 22%;
+  height: auto !important;
+  min-height: 100%;
+  top: -2px !important;
+}
+
+
+.container_normative .normative {
+  width: 73%;
+  height: 75%;
+}
+
+.container_normative .normative .title {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 25%
+}
+
+.vert {
+  font-size: 62%;
+}

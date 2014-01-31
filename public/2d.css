@@ -15,7 +15,7 @@
 }
 
 [class*="span"] {
-  float: center !important;
+  /*float: center !important;*/
   min-height: 1px;
   margin-left: auto;
   margin-right: auto;
