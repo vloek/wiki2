@@ -5,16 +5,17 @@ jQuery ->
 
   $('li.drag').draggable({ axis: 'y'})
   if (1.7 / ($(document).width() / $(document).height())) == 1 
-    zoom_coefficient = 0.9
+    zoom_coefficient = 1
   else 
     zoom_coefficient = (1.7 / ($(document).width() / $(document).height())) - 0.2
   if !(/mobile/i.test(navigator.userAgent))
+    $("<style type='text/css'> .container_normative {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
     $("<style type='text/css'> .header_navigate {  zoom: #{zoom_coefficient + 0.1}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
     $("<style type='text/css'> #btn_return {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
     $("<style type='text/css'> .menu_item {  zoom: #{zoom_coefficient * 1.2 }; -moz-transform: scale(#{zoom_coefficient  * 0.8})}</style>").appendTo('head')
     $("<style type='text/css'> .scrolled-container {  zoom: #{zoom_coefficient + 0.03 }; -moz-transform: scale(#{zoom_coefficient * 1.2 })}</style>").appendTo('head')
     # $("<style type='text/css'> .scrolled {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
-    $("<style type='text/css'> .content_d {  zoom: #{zoom_coefficient  }; -moz-transform: scale(#{zoom_coefficient * 0.8})}</style>").appendTo('head')
+    $("<style type='text/css'> .content_d {  -webkit-transform: scale(#{zoom_coefficient  }); -moz-transform: scale(#{zoom_coefficient * 0.8}); margin-top: 70px; }  #right_content { right: -180px !important;} body { font-size: 22px !important;} </style>").appendTo('head')
 date_display = ->
   $('.time').html new Date().format("dd/mm/yyyy")
 

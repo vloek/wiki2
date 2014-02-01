@@ -1,20 +1,20 @@
-/ .container_normative
+.container_normative style="zoom:0.7"
 
-/ 	.normative
-/ 		= link_to page_fullscreen_path(visio_page_normative), remote: true do 
-/ 			.slide_normative style="background: black; background-image: url('#{visio_page_normative.slides.first.image if visio_page_normative.slides.present?}');  background-size: cover; background-repeat: none;"
-/ 		.title
-/ 			.vert
-/ 				= link_to page_fullscreen_path(visio_page_normative), remote: true do 
-/ 					= replacing_space(truncate visio_page_normative.title, length: 45)
-/ 		.content
-/ 			= link_to page_fullscreen_path(visio_page_normative), remote: true do 
-/ 				=  replacing_space(truncate (strip_tags visio_page_normative.semantic_load), length: 305) || 'Не заполнена смысловая нагрузка'
-/ .clearFix
-
-.row-fluid style="margin-top: 20px"
-	div class="span2 offset2" style="min-height: 130px; background: black; background-size: cover; background-repeat: none;box-shadow: 0 0 13px #999; background-image: url('#{visio_page_normative.slides.first.image if visio_page_normative.slides.present?}');"
-	.span6 style="border: 2px solid #444; min-height: 130px; background: #111;"
-		div style="width: 100%; height: 20%; min-height: 35px; background-size: contain; background: url('/assets/bg_normative_title.png');"
+	.normative
+		= link_to page_fullscreen_path(visio_page_normative), remote: true do 
+			.slide_normative style="background: black; background-image: url('#{visio_page_normative.slides.first.image if visio_page_normative.slides.present?}');  background-size: cover; background-repeat: none;"
+		.title
+			.vert
+				= link_to page_fullscreen_path(visio_page_normative), remote: true do 
+					= replacing_space(truncate visio_page_normative.title, length: 45)
+		.content
 			= link_to page_fullscreen_path(visio_page_normative), remote: true do 
- 				= replacing_space(truncate visio_page_normative.title, length: 45)
+				=  replacing_space(truncate (strip_tags visio_page_normative.semantic_load), length: 305) || 'Не заполнена смысловая нагрузка'
+.clearFix
+
+/ .row-fluid style="margin-top: 20px"
+/ 	div class="span2 offset2" style="min-height: 130px; background: black; background-size: cover; background-repeat: none;box-shadow: 0 0 13px #999; background-image: url('#{visio_page_normative.slides.first.image if visio_page_normative.slides.present?}');"
+/ 	.span6 style="border: 2px solid #444; min-height: 130px; background: #111;"
+/ 		div style="width: 100%; height: 20%; min-height: 35px; background-size: contain; background: url('/assets/bg_normative_title.png'); font-color: white"
+/ 			= link_to page_fullscreen_path(visio_page_normative), remote: true do 
+/  				= replacing_space(truncate visio_page_normative.title, length: 45)
