@@ -1,23 +1,17 @@
-.slide_normative {
-  width: 22%;
-  height: auto !important;
-  min-height: 100%;
-  top: -2px !important;
-}
-
-
-.container_normative .normative {
-  width: 73%;
-  height: 75%;
-}
-
-.container_normative .normative .title {
-  position: relative;
-  display: block;
+.scrolled-container {
+  display: table;
+  height: 100%;
+  margin-top: 0;
   width: 100%;
-  height: 25%
 }
 
-.vert {
-  font-size: 62%;
+#slide_plane {
+  display: table-row !important;
+  margin: auto;
+}
+
+.carousel-inner {
+  display: table-cell;
+  margin: auto;
+  vertical-align: middle;
 }

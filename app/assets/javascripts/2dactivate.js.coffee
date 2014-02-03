@@ -20,7 +20,7 @@ setProportion = ->
 
   $('.persp').width(persp_width).height(persp_height)
 
-  marg_top_persp = persp_height / 5 + 10
+  marg_top_persp = persp_height / count_persp + 10
   $('.drag').css('margin-top', marg_top_persp)
 
   $('#content').css('margin-top', (doc_height / 6 - 130))
