@@ -23,11 +23,11 @@ $('.current_content').animate
       advanced:
         updateOnContentResize: true
         
-    $('#mini-nav').mCustomScrollbar
-      autoDraggerLength: true
-      autoHideScrollbar: false
-      advanced:
-        updateOnContentResize: true
+    # $('#mini-nav').mCustomScrollbar
+    #   autoDraggerLength: true
+    #   autoHideScrollbar: false
+    #   advanced:
+    #     updateOnContentResize: true
 
     $('#btn_return').animate
       opacity: 1

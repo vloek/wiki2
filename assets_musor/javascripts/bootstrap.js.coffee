@@ -9,7 +9,7 @@ date_display = ->
   $('.time').html new Date().format("dd/mm/yyyy")
 
 $(document).ready ->
-  $('body').css({opacity:0}).delay(2).animate({opacity:1})
+  #$('body').css({opacity:0}).delay(2).animate({opacity:1})
   $('a').on 'click', ->
     window.location.hash = $(this).attr('href')
   setInterval date_display, 5000

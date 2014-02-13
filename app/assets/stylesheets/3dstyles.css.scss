@@ -1,0 +1,31 @@
+div.slides3d {
+  .slide_row {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .menu_item {
+    position: relative;
+    display: block;
+    //float: left;
+    top: 30px;
+  }
+
+  .perspectiva {
+    //float: right;
+    position: absolute;
+    right: 0;
+    width: 70%;
+    -webkit-perspective: 250px;
+    perspective: 500px;
+    display: block;
+    height: 120px;
+  }
+
+
+  .slide3d {
+    -webkit-transform: rotateX(30deg) perspective(600px);
+    -webkit-transition-duration: 2500ms;
+    top: -20px
+  }
+}

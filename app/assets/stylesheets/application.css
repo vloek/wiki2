@@ -14,6 +14,7 @@
  *= require jquery-ui
  *= require jquery.rollbar
  *= require jquery.ui.all
+ *= require 3dstyles
  *= require menu
  *= require normative
  *= require pages
