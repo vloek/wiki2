@@ -1,31 +1,47 @@
 div.slides3d {
+  padding-top: 55px;
+  height: 100%;
+
   .slide_row {
     position: relative;
-    margin-bottom: 40px;
+    //z-index: -10000;
+    //-webkit-perspective: 250px;
+    perspective: 250px;
   }
 
   .menu_item {
     position: relative;
     display: block;
     //float: left;
-    top: 30px;
+    top: 120px;
+    margin-bottom: 60px;
   }
 
   .perspectiva {
     //float: right;
-    position: absolute;
-    right: 0;
-    width: 70%;
-    -webkit-perspective: 250px;
-    perspective: 500px;
-    display: block;
-    height: 120px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    //right: auto;
+    //left: auto;
+    //margin-left: auto;
+    //margin-right: auto;
+    width: 100%;
+    -webkit-perspective: 450px;
+    perspective: 250px;
+    //display: block;
+    //height: 100%;
   }
 
 
   .slide3d {
-    -webkit-transform: rotateX(30deg) perspective(600px);
-    -webkit-transition-duration: 2500ms;
-    top: -20px
+    //margin-bottom: -295px;
+    //margin-left: 452px;
+    //margin-left: auto;
+    //margin-right: auto;
+
+    //-webkit-transform: rotateX(35deg) perspective(600px);
+    //-webkit-transition-duration: 2500ms;
+    //top: -20px
   }
 }

@@ -31,15 +31,19 @@ jQuery ->
 
 
 
-    $(this).find('.persp').css('margin-top', 175)
-    $(this).find('.persp').css('margin-left', -355)
+    # $(this).find('.persp').css('margin-top', 175)
+    # $(this).find('.persp').css('margin-left', -355)
     # Animate rotate
     $(this).find('.persp').css('-webkit-transform','rotateX(0deg)')
     $(this).find('.persp').css('-moz-transform','rotateX(0deg)')
     $(this).find('.persp').css('-ms-transform','rotateX(0deg)')
     $(this).find('.persp').css('-o-transform','rotateX(0deg)')
     $(this).find('.persp').css('transform','rotateX(0deg)')
+    l = $(this).find('.persp').offset().left
+    t = $(this).find('.persp').offset().top
     $(this).find('.persp').animate
+      # left: -l
+      # top: -t 
       borderSpacing: 50
       2100
       ->
@@ -76,10 +80,11 @@ jQuery ->
     scrx = $(window).width() 
     scry = $(window).height() - 55
 
+    $(this).css('position', 'fixed')
 
     $(this).find('.persp')
       .animate
-        width: scrx, height: scry, zero: 0, r: 0,   border: 0, left: -350, marginLeft: -350,  top: 0, marginTop: 55,  opacity: 0
+        width: scrx, height: scry, zero: 0, r: 0,   border: 0, left: 0, marginLeft: 0,  top: 0, marginTop: 55,  opacity: 0
         1800
         ->
           $(this).css('left', 0)

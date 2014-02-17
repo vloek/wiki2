@@ -11,6 +11,10 @@ display = ->
   $('.header_navigate').animate
     opacity: 1
     300
+  $('.current_content').css('background-size', 'contain')
+  $('.current_content').css('-webkit-transition', 'initial')
+  $('.current_content').css('background-image', 'url(/assets/slide_full_bg.png)')
+
   $(".current_content").animate
     opacity: 1, 1000
     ->

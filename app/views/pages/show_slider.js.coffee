@@ -4,7 +4,7 @@ delay = (ms, func) ->
   setTimeout func, ms
 
 ok_time = (time) ->
-  if ($defaultTime + 200) <= time
+  if ($defaultTime + 300) <= time
     $defaultTime = time
     return true
   else
@@ -13,6 +13,9 @@ ok_time = (time) ->
 
 display = ->
   $('#stat_load').text('Loading')
+  $('.current_content').css('background-size', 'contain')
+  $('.current_content').css('-webkit-transition', 'initial')
+  $('.current_content').css('background-image', 'url(/assets/slide_full_bg.png)')
   $(".current_content").animate
     opacity: 1, 1000
     ->
@@ -30,14 +33,17 @@ display = ->
           scry = screen.height - 290
           # $('.scrolled-container').css('height', scry)
           # Slider
-          $(".drag").draggable('destroy')
+          # $(".drag").draggable('destroy')
+          $defaultTime = (new Date()).getTime()
 
 
           $("#slide_plane").on 'swiperight', ->
-            $("#slide_plane").stop().carousel('prev') if ok_time((new Date).getTime())
+            alert((new Date).getTime()) if ok_time((new Date).getTime())
+            $("#slide_plane").stop().carousel('prev') if ok_time((new Date).getTime() + 100)
 
 
           $("#slide_plane").on 'swipeleft',  ->
+            alert((new Date).getTime()) if ok_time((new Date).getTime())
             $("#slide_plane").stop().carousel('next') if ok_time((new Date).getTime())
             
 

@@ -103,20 +103,18 @@ html lang="en"
 
     = link_to ' ', '/pages/2', remote: true, id: 'btn_return'
 
-    .container style="margin-top: 55px; height: 100%;"
-      .row#content
-          
-        .span10 stylee="margin-right: 40px !important;"
-          = bootstrap_flash
-          = yield
-          
-            / h3 Sidebar
-            / ul.nav.nav-list
-            /   li.nav-header Sidebar
-            /   li= link_to "Link 1", "/path1"
-            /   li= link_to "Link 2", "/path2"
-            /   li= link_to "Link 3", "/path3"
-     
+
     
-      footer
-        / p &copy; Company 2013
+    = bootstrap_flash
+    = yield
+    
+      / h3 Sidebar
+      / ul.nav.nav-list
+      /   li.nav-header Sidebar
+      /   li= link_to "Link 1", "/path1"
+      /   li= link_to "Link 2", "/path2"
+      /   li= link_to "Link 3", "/path3"
+
+
+footer
+  / p &copy; Company 2013

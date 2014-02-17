@@ -4,7 +4,7 @@ delay = (ms, func) ->
   setTimeout func, ms
 
 ok_time = (time) ->
-  if ($defaultTime + 200) <= time
+  if ($defaultTime + 200) >= time
     $defaultTime = time
     return true
   else
