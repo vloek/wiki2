@@ -101,8 +101,8 @@ $(document).ready ->
     # $(x).css('left', $(x).offset().left)
 
     $(x)
-      .css
-        position: 'fixed'
+      # .css
+      #   position: 'fixed'
       .removeClass('slide3d')
     $(x)
       .css('-webkit-transform', 'rotateX(0)')
@@ -118,8 +118,16 @@ $(document).ready ->
     #     width: win_width
     #     height: height
     #     3200
+    $(x).closest('.perspectiva').animate
+      width: '100%'
+      height: '100%'
     $(x).css('left', 0)
-    $(x).css('top', 55)
+    $(x).css('top', 0)
+    # a = $(x).offset().left
+    # b = -$(x).offset().top
+    # $(x).css('margin-left', a)
+    # $(x).css('margin-top', b)
+
     $(x)
       .css('width', win_width)
       .css('height', height)
