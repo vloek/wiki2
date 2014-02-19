@@ -9,7 +9,7 @@ jQuery ->
 
     $('.wiki2d').animate
       opacity: 0
-      1000
+      1500
       ->
         $('.wiki2d').css('top', '55px')
         $('.wiki2d').css('left', '0px')
