@@ -41,6 +41,20 @@ html lang="en"
     - else 
       link rel='stylesheet' href='/css/rubber.css'
       script src='/js/3d_load.js' type='text/javascript'
+      / coffee:
+      /   jQuery ->
+      /     if (1.7 / ($(document).width() / $(document).height())) == 1 
+      /       zoom_coefficient = 1
+      /     else 
+      /       zoom_coefficient = (1.7 / ($(document).width() / $(document).height())) - 0.1
+      /     if !(/mobile/i.test(navigator.userAgent))
+      /       unless zoom_coefficient == 1
+      /         $("<style type='text/css'> .content_d {  -webkit-transform: scale(#{zoom_coefficient  }); -moz-transform: scale(#{zoom_coefficient * 0.8}); margin-top: 70px; }  #right_content { right: -180px !important;} body { font-size: 22px !important;} </style>").appendTo('head')
+      /         $("<style type='text/css'> .container_normative {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient }); } .container_normative .normative .title { font-size: 32px !important; }</style>").appendTo('head')
+      /         $("<style type='text/css'> .header_navigate {  zoom: #{zoom_coefficient + 0.1}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
+      /         $("<style type='text/css'> #btn_return {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
+      /         $("<style type='text/css'> .menu_item {  zoom: #{zoom_coefficient   }; -moz-transform: scale(#{zoom_coefficient  * 0.8})}</style>").appendTo('head')
+      /         $("<style type='text/css'> .scrolled-container {  zoom: #{zoom_coefficient + 0.03 }; -moz-transform: scale(#{zoom_coefficient * 1.2 })}</style>").appendTo('head')
 
     script src="/js/close.js" type="text/javascript"
     script src="/js/fs.js" type="text/javascript"
@@ -49,8 +63,20 @@ html lang="en"
     - else
       script src="/js/drag.js" type="text/javascript"
     script src="/js/draggable_slides.js" type="text/javascript"
-    
-
+  coffee:
+    if (1.7 / ($(document).width() / $(document).height())) == 1 
+      zoom_coefficient = 1
+    else 
+      zoom_coefficient = (1.7 / ($(document).width() / $(document).height())) - 0.2
+    if !(/mobile/i.test(navigator.userAgent))
+      unless zoom_coefficient == 1
+        $("<style type='text/css'> .content_d {  -webkit-transform: scale(#{zoom_coefficient  }); -moz-transform: scale(#{zoom_coefficient * 0.8}); margin-top: 70px; }  #right_content { right: -180px !important;} body { font-size: 22px !important;} </style>").appendTo('head')
+        $("<style type='text/css'> .container_normative {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient }); } .container_normative .normative .title { font-size: 32px !important; }</style>").appendTo('head')
+        $("<style type='text/css'> .header_navigate {  zoom: #{zoom_coefficient + 0.1}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
+        $("<style type='text/css'> #btn_return {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
+        $("<style type='text/css'> .menu_item {  zoom: #{zoom_coefficient   }; -moz-transform: scale(#{zoom_coefficient  * 0.8})}</style>").appendTo('head')
+        $("<style type='text/css'> .scrolled-container {  zoom: #{zoom_coefficient + 0.03 }; -moz-transform: scale(#{zoom_coefficient * 1.2 })}</style>").appendTo('head')
+        # $("<style type='text/css'> .scrolled {  zoom: #{zoom_coefficient}; -moz-transform: scale(#{zoom_coefficient })}</style>").appendTo('head')
 
       
 

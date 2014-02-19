@@ -24,60 +24,58 @@ setProportion = (selector)->
   $(selector).width(slide_width).height(slide_height)
 
 
+display_return = (title, parent_id) ->
+  window.scrollTo(0,0)
+  $('#header_title').html(title)
+  $('.header_btn').animate
+    opacity: 1
+    300
+  $('.header_return').css('display', 'table-cell')
+  $('.header_btn').css('display', 'table-cell')
+  $('.header_return').css('id', parent_id)
+
+
 
 $(document).ready ->
 
-  height = parseInt($(window).height()) - parseInt($('.navbar-inner').height())
+  height    = parseInt($(window).height()) - parseInt($('.navbar-inner').height())
   win_width = parseInt($(window).width())
-  objects = $('.to_hide')
+  objects   = $('.to_hide')
   # $('.menu').css('height', height)
   # animateCascadeTop()
 
   $.each objects, (i, el) ->
-  #   topMarg = parseInt($(el).css('top')) + 1000   
-  #   $(el).animate
-  #     top: topMarg + 100 + (i * 75)
-  #     1000 * (i)
-
-  #     top: topMarg + 150 * (i + 1)
-  #     1000 * (i+1)
-    # $($('.menu_item')[i]).animate
-    #   top: 20
-    #   1000 * (i)
-
     $(this).click ->
       # $('.e_h') #fadeOut(1000)
       $(this).removeClass('to_hide')
       $(this).closest('.perspectiva').removeClass('to_remove')
       animateCascadeTop(this)
-      $(this).off('click')
+      # toTop(this)
 
-      # slide = $(this).find('.slide3d')
-      # delay 5000, toTop(this)
+      # $(el).off('click')
+      # alert(el)
 
-  # $('.e_h').fadeIn('slow')
-  # $('.menu_item').fadeTo(4000, 1)
 
-  
-    
-
-  animateCascadeTop = (target)->
+  animateCascadeTop = (target) ->
     hideElements = $('.to_hide')
-    $(hideElements).animate
+    elem = '#'+target.id
+    # $(hideElements).animate
+    #   opacity: 0
+    #   'slow'
+    #   ->
+    $('.menu_item').hide()
+
+    $('.to_remove').animate
       opacity: 0
-      'slow'
+      700
       ->
-        $('.to_remove').animate
-          opacity: 0
-          'slow'
-        $('.to_remove').remove()
-        toTop(target)
-    $('.menu_item').animate 
-      opacity: 0
-    $('.to_hide').animate
-      opacity: 0
-      2000    
-    # $(hideElements).remove()
+        # $('.to_remove').remove()
+        # toTop(target)
+        $(elem).css('z-index', 10000)
+    toTop(elem)
+
+
+
     # for x in hideElements
     #   $(x).animate
     #     right: 500
@@ -91,55 +89,50 @@ $(document).ready ->
 
 
 
-
   toTop = (x)->
     # $(x).css('top', -$(x).offset().top + 55)
     # $(x).css('bottom', '0px')
     # $(x).css('left', -$(x).offset().left)
     # $(x).css('z-index', -100)
-    # $(x).css('top', $(x).offset().top)
-    # $(x).css('left', $(x).offset().left)
+    # $(x).css('top', 55)
+    # $(x).css('left', 0)
+    link = $(x).closest('.perspectiva').find('a.block_a')
+    title_text   = $(x).closest('.perspectiva').find('.title span').text()
+
+    $(x).off('click')
 
     $(x)
-      # .css
-      #   position: 'fixed'
       .removeClass('slide3d')
+      # .css
+      #   left: -$(x).offset().left
+      #   top: -$(x).offset().top
     $(x)
       .css('-webkit-transform', 'rotateX(0)')
       .css('transform', 'rotateX(0)')
-      .closest('.perspectiva').css('-webkit-perspective', 'none')
+      # .closest('.perspectiva').css('-webkit-perspective', 'none')
 
-    # $('.current_content').css('background-image', 'url(/assets/slide_full_bg.png)')
-
-    # $(x)
-    #   .animate
-    #     left: 0
-    #     top: 0
-    #     width: win_width
-    #     height: height
-    #     3200
     $(x).closest('.perspectiva').animate
       width: '100%'
       height: '100%'
-    $(x).css('left', 0)
-    $(x).css('top', 0)
-    # a = $(x).offset().left
-    # b = -$(x).offset().top
-    # $(x).css('margin-left', a)
-    # $(x).css('margin-top', b)
+    $(x).css
+      left: 0
+      position: 'fixed'
+      top: 0
+    $('.to_hide').remove()
+    $('.to_remove').remove()
+    # $(x).css('top', -$(x).offset().top )
 
     $(x)
       .css('width', win_width)
       .css('height', height)
 
+
     $(x)
       .addClass('current_content')
-      .closest('.perspectiva').find('a.block_a').click()
-      # .css('z-index', 100000)
-    # $(x).css('background-size', 'contain')
-      # opacity: 1
-    $(x)
-      .find('.block_a').click()
+    # $(x).closest('.perspectiva').find('a.block_a').click()
+    $(link).click()
+    $(x).off('click')
+    display_return(title_text, 1)
 
 
 

@@ -265,6 +265,7 @@ body::-webkit-scrollbar{
 
 .content {
 	overflow-y: hidden !important;
+	overflow-x: hidden !important;
 }
 
 
@@ -430,4 +431,23 @@ ol.carousel-indicators {
 
 .mCSB_scrollTools {
 	// display: block !important;
+}
+
+
+.scrolled-container {
+  display: table;
+  height: 100%;
+  margin-top: 0;
+  width: 100%;
+}
+
+#slide_plane {
+  display: table-row !important;
+  margin: auto;
+}
+
+.carousel-inner {
+  display: table-cell;
+  margin: auto;
+  vertical-align: middle;
 }

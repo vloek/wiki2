@@ -22,7 +22,10 @@ display = ->
       # $('.current_content').animate
       #   opacity: 1, 1000
       #   ->
-      $('.scrolled').mCustomScrollbar()
+      # height_current_content = $('.current_content').height() / 100 * 84
+      # $('.scrolled').css('height', height_current_content - 100)
+      $('.scrolled').mCustomScrollbar
+        mouseWheelPixels: 150
 
   scry = screen.height - 250
   $('.scrolled').css('height', scry)

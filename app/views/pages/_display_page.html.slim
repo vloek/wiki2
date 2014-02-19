@@ -1,4 +1,5 @@
 / = raw page.content
 .scrolled#scrolled-cont
-	/ table.table
-	== render partial: 'pages/visio_page_normative', collection: page.children.sort! { |a, b| a.title.downcase <=> b.title.downcase }
+  / table.table
+  == render partial: 'pages/visio_page_normative', collection: page.children.sort! { |a, b| a.title.downcase <=> b.title.downcase }
+  .clearFix style="height: 50px"

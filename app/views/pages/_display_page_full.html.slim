@@ -57,6 +57,8 @@
       div class="content disable-select" id="content_pokaz"
         == render 'pages/pages_property', page: @page
         == render partial: 'properties/property_in_page', collection: @page.properties
+        .clearFix style="height: 50px"
+        
   #right_content
     #img-block
       div class='slides-block carousel' id="slider_full"

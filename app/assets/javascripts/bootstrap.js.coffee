@@ -4,10 +4,10 @@ jQuery ->
   $("a[rel=tooltip]").tooltip()
 
   $('li.drag').draggable({ axis: 'y'})
-  if (1.7 / ($(document).width() / $(document).height())) == 1 
+  if (1.7 / ($(window).width() / $(window).height())) == 1 
     zoom_coefficient = 1
   else 
-    zoom_coefficient = (1.7 / ($(document).width() / $(document).height())) - 0.2
+    zoom_coefficient = (1.7 / ($(window).width() / $(window).height())) - 0.2
   if !(/mobile/i.test(navigator.userAgent))
     unless zoom_coefficient == 1
       $("<style type='text/css'> .content_d {  -webkit-transform: scale(#{zoom_coefficient  }); -moz-transform: scale(#{zoom_coefficient * 0.8}); margin-top: 70px; }  #right_content { right: -180px !important;} body { font-size: 22px !important;} </style>").appendTo('head')

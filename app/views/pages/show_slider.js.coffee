@@ -6,6 +6,7 @@ delay = (ms, func) ->
 ok_time = (time) ->
   if ($defaultTime + 300) <= time
     $defaultTime = time
+    # alert('Ok')
     return true
   else
     return false
@@ -38,13 +39,13 @@ display = ->
 
 
           $("#slide_plane").on 'swiperight', ->
-            alert((new Date).getTime()) if ok_time((new Date).getTime())
-            $("#slide_plane").stop().carousel('prev') if ok_time((new Date).getTime() + 100)
+            # alert((new Date).getTime()) if ok_time((new Date).getTime())
+            $("#slide_plane").carousel('prev') if ok_time((new Date()).getTime())
 
 
           $("#slide_plane").on 'swipeleft',  ->
-            alert((new Date).getTime()) if ok_time((new Date).getTime())
-            $("#slide_plane").stop().carousel('next') if ok_time((new Date).getTime())
+            # alert((new Date).getTime()) if ok_time((new Date).getTime())
+            $("#slide_plane").carousel('next') if ok_time((new Date()).getTime())
             
 
 
