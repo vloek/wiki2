@@ -41,6 +41,7 @@ $(document).ready ->
   height    = parseInt($(window).height()) - parseInt($('.navbar-inner').height())
   win_width = parseInt($(window).width())
   objects   = $('.to_hide3d')
+  menu_objects = $('.menu_item')
   # $('.menu').css('height', height)
   # animateCascadeTop()
 
@@ -50,6 +51,11 @@ $(document).ready ->
       $(this).removeClass('to_hide3d')
       $(this).closest('.perspectiva').removeClass('to_remove')
       animateCascadeTop(this)
+      # toTop(this)
+  $.each menu_objects, (i, el) ->
+    $(this).click ->
+      $(this).closest('.perspectiva').find('.slide3d').click()
+      # animateCascadeTop($(el).closest('.perspectiva').find('.slide3d').id)
       # toTop(this)
 
       # $(el).off('click')
