@@ -23,7 +23,7 @@
 //= require jscolor
 //= require ckeditor/init
 //= require bootstrap
-//= require ./jquery.mCustomScrollbar.min
+//= require ./jquery.mCustomScrollbar
 
 //= require main_animate
 //= require_tree .
