@@ -19,7 +19,7 @@
 										div id="#{elem.id}" class="drag to_hide slide2d" style="margin-left: #{marg}px;position: relative; z-index: #{elem.id*2 - elem.id*2 + 10}; left:#{190 - elem.id * 90}px;"
 											- page_link = 'page_link' + elem.id.to_s
 											= link_to '', page_path(elem, fullscreen: @fullscreen), remote: true, id: page_link, class: 'block_a'
-											.menu_item style="border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' }; position: relative"
+											.menu_item style="border: 1px solid ##{elem.color|| '#222'};box-shadow: 0 0 10px ##{elem.color || '#222' }; position: relative; top: 30px !important"
 												.title style="margin: auto; display: table-row; height: 69px"
 													span style="color: ##{elem.color||'#567';}; display: table-cell"= elem.title
 												.arrow

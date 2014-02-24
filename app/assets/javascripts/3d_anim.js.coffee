@@ -1,8 +1,11 @@
 jQuery ->
+  $('#btn_return').click ->
+    $(this).animate
+      opacity: 0
+
   $(document).ready ->
     marginSlide = $(document).width() * 0.3
-    marginMenuItem = $(document).width() * 0.1
-    $('.menu_item').css('margin-left', marginMenuItem)
+   
     #$('.slide3d').css('margin-right', marginSlide)
     setProportion('.slide3d')
 
@@ -22,6 +25,7 @@ setProportion = (selector)->
   slide_width  = doc_width  / 3#+ 130
 
   $(selector).width(slide_width).height(slide_height)
+  $('.menu_item').css('top', doc_height * 0.3)
 
 
 display_return = (title, parent_id) ->

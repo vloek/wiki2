@@ -64,7 +64,7 @@ html lang="en"
       script src="/js/drag.js" type="text/javascript"
     script src="/js/draggable_slides.js" type="text/javascript"
   coffee:
-    if (1.7 / ($(document).width() / $(document).height())) == 1 
+    if ((1.7 / ($(document).width() / $(document).height())) == 1) || ((1.7 / ($(document).width() / $(document).height())) <= 1.1) && ((1.7 / ($(document).width() / $(document).height())) >= 0.9)  
       zoom_coefficient = 1
     else 
       zoom_coefficient = (1.7 / ($(document).width() / $(document).height())) - 0.2
